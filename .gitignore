@@ -1,0 +1,26 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.class
+
+# Large Media files (video / audio caches)
+*.mp4
+*.mkv
+*.wav
+*.mp3
+*.incomplete
+*.pt
+*.pth
+*.onnx
+*.plan
+*.safetensors
+
+# Local scratch / test files
+swertres_*.csv
+swertres_*.json
+next_draw_*.txt
+*.db
+.deliberate/
+audit_output.txt
+kokoro_samples/
+thumbnails/
