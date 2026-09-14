@@ -302,6 +302,16 @@
     max-width: 320px;
     clear: both;
 }
+.octane-mobile-search-wrapper {
+    display: none;
+    margin: 10px 0 20px 0;
+    width: 100%;
+}
+@media (max-width: 767px) {
+    .octane-mobile-search-wrapper {
+        display: block;
+    }
+}
 .octane-topic-search-form .search-input-group {
     position: relative;
     display: flex;
@@ -315,12 +325,12 @@
 }
 .octane-topic-search-form .octane-search-input {
     width: 100%;
-    height: 38px;
-    padding: 0 35px 0 36px;
+    height: 40px;
+    padding: 0 35px 0 38px;
     border: 1px solid #d0d7de;
     border-radius: 6px;
     font-family: Roboto, sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     color: #24292f;
     background-color: #ffffff;
     box-sizing: border-box;
@@ -350,14 +360,66 @@
     font-weight: 600 !important;
     color: #1a1a1a !important;
 }
+.blog-list-page-outer .blog-listing-wrapper .post-item.search-hidden {
+    display: none !important;
+}
+.blog-list-filter .block ul li.topic-search-hidden {
+    display: none !important;
+}
+.octane-search-status-bar {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0 25px 0;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: #24292f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.octane-search-status-bar.no-results {
+    background: #fff8f2;
+    border-color: #ffd8b5;
+    color: #9a4200;
+}
+.octane-search-status-bar a {
+    color: #33a9e1;
+    font-weight: 600;
+    text-decoration: none;
+}
+.octane-search-status-bar a:hover {
+    text-decoration: underline;
+}
 </style>
 
 <script>
 (function() {
-    function initTopicFilterAndSearch() {
+    function createSearchMarkup() {
+        return [
+            '<form class="octane-topic-search-form" action="/hs-search-results" method="GET">',
+            '  <div class="search-input-group">',
+            '    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">',
+            '      <circle cx="11" cy="11" r="8"></circle>',
+            '      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>',
+            '    </svg>',
+            '    <input type="text" name="term" class="octane-search-input" placeholder="Search topics or articles..." autocomplete="off">',
+            '    <button type="button" class="search-clear-btn" style="display: none;">&times;</button>',
+            '  </div>',
+            '</form>'
+        ].join('');
+    }
+
+    function initUnifiedSearchAndFilter() {
         var path = window.location.pathname.replace(/\/+$/, '');
         var listItems = document.querySelectorAll('.blog-list-filter .block ul li');
-        
+        var paginationWrapper = document.querySelector('.blog-pagination-wrapper');
+
         // 1. Maintain Active Topic Checkmark
         listItems.forEach(function(li) {
             var a = li.querySelector('a');
@@ -368,7 +430,6 @@
                 var linkPath = new URL(a.href, window.location.origin).pathname.replace(/\/+$/, '');
                 if (linkPath === path && path !== '' && path !== '/') {
                     li.classList.add('selected');
-                    // Clicking the selected topic again deselects it and returns to main blog
                     a.onclick = function(e) {
                         e.preventDefault();
                         window.location.href = 'https://blog.octanesolutions.com.au';
@@ -379,7 +440,7 @@
             } catch(e) {}
         });
 
-        // 2. Inject Search Bar into Sidebar
+        // 2. Inject Desktop Search Bar into Sidebar
         var block = document.querySelector('.blog-list-filter .block');
         var targetParent = document.querySelector('.blog-list-filter .block .widget-module') || block;
         var ul = document.querySelector('.blog-list-filter .block ul');
@@ -387,58 +448,131 @@
         if (targetParent && !document.querySelector('.octane-topic-search-wrapper')) {
             var searchWrapper = document.createElement('div');
             searchWrapper.className = 'octane-topic-search-wrapper';
-            searchWrapper.innerHTML = [
-                '<form class="octane-topic-search-form" action="/hs-search-results" method="GET">',
-                '  <div class="search-input-group">',
-                '    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">',
-                '      <circle cx="11" cy="11" r="8"></circle>',
-                '      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>',
-                '    </svg>',
-                '    <input type="text" name="term" class="octane-search-input" placeholder="Search topics or articles..." autocomplete="off">',
-                '    <button type="button" class="search-clear-btn" style="display: none;">&times;</button>',
-                '  </div>',
-                '</form>'
-            ].join('');
+            searchWrapper.innerHTML = createSearchMarkup();
 
             if (ul && ul.parentElement) {
                 ul.parentElement.insertBefore(searchWrapper, ul);
             } else {
                 targetParent.appendChild(searchWrapper);
             }
-
-            var input = searchWrapper.querySelector('.octane-search-input');
-            var clearBtn = searchWrapper.querySelector('.search-clear-btn');
-
-            input.addEventListener('input', function(e) {
-                var q = e.target.value.toLowerCase().trim();
-                clearBtn.style.display = q ? 'block' : 'none';
-                listItems.forEach(function(li) {
-                    var text = li.innerText.toLowerCase();
-                    if (!q || text.indexOf(q) !== -1) {
-                        li.style.display = 'inline-block';
-                    } else {
-                        li.style.display = 'none';
-                    }
-                });
-            });
-
-            clearBtn.addEventListener('click', function() {
-                input.value = '';
-                clearBtn.style.display = 'none';
-                listItems.forEach(function(li) {
-                    li.style.display = 'inline-block';
-                });
-                input.focus();
-            });
         }
+
+        // 3. Inject Mobile Search Bar Above Articles
+        var listingWrapper = document.querySelector('.blog-section-inner .blog-listing-wrapper');
+        if (listingWrapper && !document.querySelector('.octane-mobile-search-wrapper')) {
+            var mobileWrapper = document.createElement('div');
+            mobileWrapper.className = 'octane-mobile-search-wrapper';
+            mobileWrapper.innerHTML = createSearchMarkup();
+            listingWrapper.insertBefore(mobileWrapper, listingWrapper.firstChild);
+        }
+
+        // Status bar above articles for real-time feedback
+        function getStatusBar() {
+            var bar = document.querySelector('.octane-search-status-bar');
+            if (!bar) {
+                bar = document.createElement('div');
+                bar.className = 'octane-search-status-bar';
+                var container = document.querySelector('.blog-section-inner .blog-listing-wrapper');
+                var mobileSearch = document.querySelector('.octane-mobile-search-wrapper');
+                if (container) {
+                    if (mobileSearch && mobileSearch.nextSibling) {
+                        container.insertBefore(bar, mobileSearch.nextSibling);
+                    } else if (container.firstChild) {
+                        container.insertBefore(bar, container.firstChild);
+                    }
+                }
+            }
+            return bar;
+        }
+
+        function removeStatusBar() {
+            var bar = document.querySelector('.octane-search-status-bar');
+            if (bar && bar.parentElement) {
+                bar.parentElement.removeChild(bar);
+            }
+        }
+
+        // Unified search handler across both articles and topics
+        function handleSearch(q) {
+            q = (q || '').toLowerCase().trim();
+
+            // Synchronize all inputs
+            document.querySelectorAll('.octane-search-input').forEach(function(inp) {
+                if (inp.value.toLowerCase().trim() !== q) {
+                    inp.value = q;
+                }
+            });
+
+            // Toggle clear buttons
+            document.querySelectorAll('.search-clear-btn').forEach(function(btn) {
+                btn.style.display = q ? 'block' : 'none';
+            });
+
+            // A. Filter topic tags in sidebar
+            listItems.forEach(function(li) {
+                var text = li.innerText.toLowerCase();
+                var match = !q || text.indexOf(q) !== -1;
+                li.classList.toggle('topic-search-hidden', !match);
+            });
+
+            // B. Filter blog post cards on the left
+            var matchCount = 0;
+            var cards = document.querySelectorAll('.blog-listing-wrapper .post-item');
+            cards.forEach(function(card) {
+                var titleEl = card.querySelector('.post-header h2 a, .post-header a, h2 a');
+                var title = titleEl ? titleEl.innerText.toLowerCase() : '';
+                var bodyEl = card.querySelector('.post-listing-body p, .post-body');
+                var body = bodyEl ? bodyEl.innerText.toLowerCase() : '';
+                var tags = card.getAttribute('data-tags') ? card.getAttribute('data-tags').toLowerCase() : '';
+                var authorEl = card.querySelector('.author-name a');
+                var author = authorEl ? authorEl.innerText.toLowerCase() : '';
+                var fullText = title + ' ' + body + ' ' + tags + ' ' + author;
+
+                var isMatch = !q || fullText.indexOf(q) !== -1;
+                card.classList.toggle('search-hidden', !isMatch);
+                if (isMatch) matchCount++;
+            });
+
+            // C. Status bar & Pagination
+            if (q) {
+                if (paginationWrapper) paginationWrapper.style.display = 'none';
+                var bar = getStatusBar();
+                var searchUrl = '/hs-search-results?term=' + encodeURIComponent(q);
+                if (matchCount > 0) {
+                    bar.className = 'octane-search-status-bar';
+                    bar.innerHTML = '<span>Showing <strong>' + matchCount + '</strong> article' + (matchCount === 1 ? '' : 's') + ' matching "<strong>' + q + '</strong>" on this page</span> <a href="' + searchUrl + '">Search all 100+ articles site-wide &rarr;</a>';
+                } else {
+                    bar.className = 'octane-search-status-bar no-results';
+                    bar.innerHTML = '<span>No articles on this page match "<strong>' + q + '</strong>"</span> <a href="' + searchUrl + '">Search all 100+ articles site-wide &rarr;</a>';
+                }
+            } else {
+                removeStatusBar();
+                if (paginationWrapper) paginationWrapper.style.display = 'flex';
+            }
+        }
+
+        // Attach listeners to all inputs and clear buttons
+        document.querySelectorAll('.octane-search-input').forEach(function(input) {
+            input.oninput = function(e) {
+                handleSearch(e.target.value);
+            };
+        });
+
+        document.querySelectorAll('.search-clear-btn').forEach(function(clearBtn) {
+            clearBtn.onclick = function() {
+                handleSearch('');
+                var activeInput = document.querySelector('.octane-search-input');
+                if (activeInput) activeInput.focus();
+            };
+        });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTopicFilterAndSearch);
+        document.addEventListener('DOMContentLoaded', initUnifiedSearchAndFilter);
     } else {
-        initTopicFilterAndSearch();
+        initUnifiedSearchAndFilter();
     }
-    setTimeout(initTopicFilterAndSearch, 300);
-    setTimeout(initTopicFilterAndSearch, 1000);
+    setTimeout(initUnifiedSearchAndFilter, 300);
+    setTimeout(initUnifiedSearchAndFilter, 1000);
 })();
 </script>
