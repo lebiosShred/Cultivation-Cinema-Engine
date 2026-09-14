@@ -304,7 +304,7 @@
 }
 .octane-mobile-search-wrapper {
     display: none;
-    margin: 10px 0 20px 0;
+    margin: 16px 0 20px 0;
     width: 100%;
 }
 @media (max-width: 767px) {
@@ -382,6 +382,7 @@
     gap: 8px;
     width: 100%;
     box-sizing: border-box;
+    scroll-margin-top: 110px;
 }
 .octane-search-status-bar.no-results {
     background: #fff8f2;
@@ -396,10 +397,165 @@
 .octane-search-status-bar a:hover {
     text-decoration: underline;
 }
+
+/* Article Chapters Preview Card (Image 2 style) */
+.octane-article-chapters-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 4px 18px;
+    margin: 16px 0 20px 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+}
+.octane-chapters-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.octane-chapter-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #1e293b;
+    box-sizing: border-box;
+}
+.octane-chapter-item:last-child {
+    border-bottom: none;
+}
+.octane-chapter-item a {
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    transition: color 0.15s ease;
+}
+.octane-chapter-item a:hover {
+    color: #33a9e1;
+}
+.octane-chapter-check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.octane-chapter-bullet-spacer {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+}
+@media (max-width: 767px) {
+    .octane-article-chapters-card {
+        padding: 4px 14px;
+        margin: 14px 0 18px 0;
+    }
+    .octane-chapter-item {
+        padding: 10px 0;
+        font-size: 13.5px;
+    }
+}
 </style>
 
 <script>
 (function() {
+    var chaptersMap = {
+        "moving-tm1-to-the-cloud-what-breaks-what-dies": [
+            "1. What Dies: The Legacy Tech Debt IBM Killed Off",
+            "2. What Breaks: The Ambushes Waiting for You on Day 1",
+            "3. How to Cut Over Without Downtime: The 5-Stage Shadow Pipeline",
+            "4. Production TurboIntegrator Code: From Insecure Shells to REST APIs",
+            "5. Developer-to-Developer FAQ",
+            "The Architect’s Bottom Line"
+        ],
+        "on-demand-tm1-devops-surge-capacity-octane-blue": [
+            "1. The TM1 Developer Capacity Crunch",
+            "2. The Operational Reality: Where TM1 Hours Disappear",
+            "3. The Three Traditional Traps That Fail Finance Leaders",
+            "4. The Strategic Alternative: On-Demand TM1 DevOps (Octane Blue)",
+            "5. Real-World Case Studies: How On-Demand DevOps Protects Delivery"
+        ],
+        "why-your-power-bi-reports-drift-from-tm1": [
+            "1. The Anatomy of Reporting Drift",
+            "2. The Three Hidden Risks of Staged Reporting",
+            "3. Four Ways to Connect TM1 to Power BI: An Architectural Comparison",
+            "4. TM1 v12 and the Natural Shift to Direct REST Integration",
+            "5. Under the Hood: How DataFusion Eliminates Drift",
+            "6. Executive Action Plan: Eliminating Data Drift"
+        ],
+        "ibm-planning-analytics-engine-12-tm1-architecture": [
+            "1. The End of the 30-Year Monolith",
+            "2. Inside Engine 12: Cloud-Native Microservices Architecture",
+            "3. The Retirement of Legacy 32-Bit Tooling",
+            "4. Traditional TM1 (V11) vs. Planning Analytics Engine 12 (V12)",
+            "5. The 2026 TM1 Modernization Playbook",
+            "6. Frequently Asked Questions"
+        ],
+        "the-6-month-glue-code-bottleneck-governed-agent-catalogs": [
+            "1. The 6-Month \"Glue Code\" Bottleneck",
+            "2. The Solution: Governed Agent Catalogs",
+            "3. Deterministic Guardrails & Human-in-the-Loop",
+            "4. Custom API Glue vs. Governed Agent Catalog",
+            "5. The 11.2x Deployment Multiplier",
+            "6. The Leadership Takeaway"
+        ],
+        "tm1-feeder-diagnostic-playbook": [
+            "1. The Silent Killer of TM1 Server Performance",
+            "2. How Sparse Consolidation Works & Why Feeders Exist",
+            "3. The Overfeeding Comparison Matrix",
+            "4. The 3 Most Common Feeder Traps",
+            "5. Feeding from Rule Calculations vs. Stored Leaf Data",
+            "6. The 4-Step Feeder Audit Protocol"
+        ],
+        "mcp-2026-07-28-the-shift-toward-stateless-scalable-ai-agent-infrastructure": [
+            "1. Why This Release Matters",
+            "2. Stateless Protocol Core",
+            "3. Multi Round-Trip Requests (MRTR)",
+            "4. Header-Based Routing",
+            "5. Production Architectural Patterns"
+        ],
+        "tm1-to-power-bi-real-time-integration-datafusion": [
+            "1. Beyond Basic Export: Real-Time TM1 to Power BI Integration",
+            "2. The Shift to Direct Query and Live Integration",
+            "3. Enter the DataFusion TM1 Connector",
+            "4. Under the Hood: Why It Scales",
+            "5. Ready to Upgrade Your Integration Architecture?"
+        ],
+        "why-most-finance-ai-pilots-die-at-the-first-round-of-internal-audit": [
+            "1. The Pattern We Keep Seeing in Enterprise AI",
+            "2. Governance Must Be a Day-One Input, Not a Day-Ninety Gate",
+            "3. The Upside: Why Finance Is Uniquely Positioned to Win",
+            "4. The Internal Audit Readiness Checklist"
+        ],
+        "what-we-heard-from-cfos-in-perth-and-melbourne": [
+            "1. The Format: Show, Don't Tell",
+            "2. The Honest Bit: Most Finance Execs Are Stuck",
+            "3. The Consensus: AI Is Here to Stay, ROI Is the Hard Part",
+            "4. How to Get Started in Enterprise Finance"
+        ],
+        "why-copilot-hits-a-ceiling-inside-finance": [
+            "1. Copilot Works. It Just Isn't Wired into Finance",
+            "2. The Context Boundary Problem in Spreadsheet Models",
+            "3. What's Coming Next: Agents Built into the Tools Themselves",
+            "4. The Three Architectural Preconditions for Autonomous Finance"
+        ],
+        "selector-tiles-in-ibm-planning-analytics-workspace-paw": [
+            "1. Introduction to Selector Tiles in PAW",
+            "2. What Is a Selector Tile and How It Works",
+            "3. How Selector Tiles Improve Client Dashboard Views",
+            "4. Using Virtual Dimensions & Hierarchies with Selector Tiles"
+        ]
+    };
+
     function createSearchMarkup() {
         return [
             '<form class="octane-topic-search-form" action="/hs-search-results" method="GET">',
@@ -415,10 +571,50 @@
         ].join('');
     }
 
+    function renderChaptersCards() {
+        var cards = document.querySelectorAll('.blog-listing-wrapper .post-item');
+        cards.forEach(function(card) {
+            if (card.querySelector('.octane-article-chapters-card')) return;
+            var titleLink = card.querySelector('.post-header h2 a, .post-header a');
+            if (!titleLink) return;
+            var href = titleLink.getAttribute('href') || '';
+            
+            var matchedChapters = null;
+            for (var slug in chaptersMap) {
+                if (href.indexOf(slug) !== -1) {
+                    matchedChapters = chaptersMap[slug];
+                    break;
+                }
+            }
+            if (!matchedChapters || matchedChapters.length === 0) return;
+            
+            var bodyContainer = card.querySelector('.post-listing-body');
+            if (!bodyContainer) return;
+            
+            var itemsHtml = matchedChapters.map(function(item, idx) {
+                var iconHtml = idx === 0 
+                    ? '<span class="octane-chapter-check"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#33a9e1"/><path d="M6 10.2L8.6 12.8L14 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'
+                    : '<span class="octane-chapter-bullet-spacer"></span>';
+                return '<li class="octane-chapter-item"><a href="' + href + '">' + iconHtml + '<span>' + item + '</span></a></li>';
+            }).join('');
+            
+            var cardHtml = '<div class="octane-article-chapters-card"><ul class="octane-chapters-list">' + itemsHtml + '</ul></div>';
+            var oldP = bodyContainer.querySelector('p');
+            if (oldP) {
+                var wrapper = document.createElement('div');
+                wrapper.innerHTML = cardHtml;
+                oldP.replaceWith(wrapper.firstElementChild);
+            }
+        });
+    }
+
     function initUnifiedSearchAndFilter() {
         var path = window.location.pathname.replace(/\/+$/, '');
         var listItems = document.querySelectorAll('.blog-list-filter .block ul li');
         var paginationWrapper = document.querySelector('.blog-pagination-wrapper');
+
+        // Transform cards to chapter preview list
+        renderChaptersCards();
 
         // 1. Maintain Active Topic Checkmark
         listItems.forEach(function(li) {
@@ -492,36 +688,32 @@
             }
         }
 
-        // Unified search handler across both articles and topics
+        // Unified search handler across both articles, chapters, and topics
         function handleSearch(q) {
             q = (q || '').toLowerCase().trim();
 
-            // Synchronize all inputs
             document.querySelectorAll('.octane-search-input').forEach(function(inp) {
                 if (inp.value.toLowerCase().trim() !== q) {
                     inp.value = q;
                 }
             });
 
-            // Toggle clear buttons
             document.querySelectorAll('.search-clear-btn').forEach(function(btn) {
                 btn.style.display = q ? 'block' : 'none';
             });
 
-            // A. Filter topic tags in sidebar
             listItems.forEach(function(li) {
                 var text = li.innerText.toLowerCase();
                 var match = !q || text.indexOf(q) !== -1;
                 li.classList.toggle('topic-search-hidden', !match);
             });
 
-            // B. Filter blog post cards on the left
             var matchCount = 0;
             var cards = document.querySelectorAll('.blog-listing-wrapper .post-item');
             cards.forEach(function(card) {
                 var titleEl = card.querySelector('.post-header h2 a, .post-header a, h2 a');
                 var title = titleEl ? titleEl.innerText.toLowerCase() : '';
-                var bodyEl = card.querySelector('.post-listing-body p, .post-body');
+                var bodyEl = card.querySelector('.post-listing-body, .octane-article-chapters-card');
                 var body = bodyEl ? bodyEl.innerText.toLowerCase() : '';
                 var tags = card.getAttribute('data-tags') ? card.getAttribute('data-tags').toLowerCase() : '';
                 var authorEl = card.querySelector('.author-name a');
@@ -533,7 +725,6 @@
                 if (isMatch) matchCount++;
             });
 
-            // C. Status bar & Pagination
             if (q) {
                 if (paginationWrapper) paginationWrapper.style.display = 'none';
                 var bar = getStatusBar();
@@ -551,7 +742,6 @@
             }
         }
 
-        // Attach listeners to all inputs and clear buttons
         document.querySelectorAll('.octane-search-input').forEach(function(input) {
             input.oninput = function(e) {
                 handleSearch(e.target.value);
