@@ -1,0 +1,290 @@
+{#<div class="blog-section">
+    <div class="blog-listing-wrapper cell-wrapper">
+        <div class="blog-section">
+            <div class="blog-listing-wrapper cell-wrapper">
+        {# simple_list_page indicates the "blog/all" page, which is a list of links to every blog post #}
+                {#<div class="post-listing{% if simple_list_page %}-simple{% endif %}">
+                    {% if blog_author %}
+                        <div class="hs-author-profile">
+                            <h2 class="hs-author-name">{{ blog_author.display_name }}</h2>
+                            {% if blog_author.avatar %} <div class="hs-author-avatar"> <img src="{{ blog_author.avatar }}" alt="{{ blog_author.display_name }}"> </div> {% endif %}
+                            <div class="hs-author-bio">{{ blog_author.bio }}</div>
+                            {% if blog_author.has_social_profiles %}
+                                <div class="hs-author-social-section">
+                                    <span class="hs-author-social-label">Find me on:</span>
+                                    <div class="hs-author-social-links">
+                                        {% if blog_author.facebook %}
+                                            <a href="{{ blog_author.facebook }}" target="_blank" class="hs-author-social-link hs-social-facebook">&nbsp;</a>
+                                        {% endif %}
+                                        {% if blog_author.linkedin %}
+                                            <a href="{{ blog_author.linkedin }}" target="_blank" class="hs-author-social-link hs-social-linkedin">&nbsp;</a>
+                                        {% endif %}
+                                        {% if blog_author.twitter %}
+                                            <a href="{{ blog_author.twitter }}" target="_blank" class="hs-author-social-link hs-social-twitter">&nbsp;</a>
+                                        {% endif %}
+                                        {% if blog_author.google_plus %}
+                                            <a href="{{ blog_author.google_plus }}?rel=author" target="_blank" class="hs-author-social-link hs-social-google-plus">&nbsp;</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% for content in contents %}
+                     <div class="post-item" data-tags="{% for topic in content.topic_list %}{{ topic|escape|lower|replace(' ','')|replace('&','')|replace('-','')|replace('/','') }} {% endfor %}">
+                       <div class="post-item-inner">
+                         <div class="post-author-details">
+                           <div class="post-author-inner">
+                             <div class="author-image">
+                               <img src="{{ content.blog_post_author.avatar }}" alt="{{ blog_author.display_name }}">
+                             </div>
+                             <div class="author-name">
+                               <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a>
+                             </div>
+                           </div>
+                         </div>
+                         <div class="post-content-details">
+                           <div class="post-body">
+                             <div class="post-header">
+                               <h2 class="post-listing-simple"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                             </div>
+                             <div class="post-details">
+                               <div class="post-date">
+                                 <img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Calendar_Regular_Icon_1.png" ><span>{{ content.publish_date_localized }}</span>
+                               </div>
+                               <div class="post-readtime">
+                                 <img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Alarm_Icon_1.png" ><span>{{ content.post_body|wordcount|divide(250) }} min</span>
+                               </div>
+                             </div>
+                             <div class="author-mobile" style="display:none;">
+                               <div class="author-image">
+                                <img src="{{ content.blog_post_author.avatar }}" alt="{{ blog_author.display_name }}">
+                               </div>
+                               <div class="author-name">
+                                 <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a>
+                               </div>
+                             </div>
+                             <div class="post-listing-body">
+                               <p>{{ content.post_body|striptags|truncate(600) }}</p>
+                               <div class="read-more-wrap">
+                                 <a href="{{content.absolute_url}}" class="read-more">MORE ></a>
+                               </div>
+                             </div>
+                           </div>
+                           <div class="bottom-seperator">
+                             <img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Octane-Header/Line%2015.svg" />
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                    {% endfor %}
+                    {#{% for content in contents %}
+                        <div class="post-item">
+                            {% if not simple_list_page %}
+                                <div class="post-header">
+                                    <h2><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                                    <div id="hubspot-author_data" class="hubspot-editable" data-hubspot-form-id="author_data" data-hubspot-name="Blog Author">
+                                        Posted by
+                                        {%if content.blog_post_author %}
+                                            <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a> on {{ content.publish_date_localized }}
+                                        {% endif %}
+                                    </div>
+                                    {% blog_social_sharing "blog_social_sharing" overrideable=False, label='Blog Social Sharing' %}
+                                </div>
+                                <div class="post-body clearfix">
+                                    <!--post summary-->
+                                    {% if content.post_list_summary_featured_image %}
+                                        <div class="hs-featured-image-wrapper">
+                                            <a href="{{content.absolute_url}}" title="" class="hs-featured-image-link">
+                                                <img src="{{ content.post_list_summary_featured_image }}" class="hs-featured-image" alt="{{ content.featured_image_alt_text | escape }}">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                    {{ content.post_list_content|safe }}
+                                </div>
+                                {% if content_group.show_summary_in_listing %}
+                                    <a class="more-link" href="{{ content.absolute_url }}">Read More</a>
+                                {% endif %}
+                                <div class="custom_listing_comments">
+                                    {% set comments_number =  content.comment_list|length %}
+                                    {% set comments_label = "Comment" if comments_number == 1 else "Comments" %}
+                                    {{ comments_number }} {{ comments_label }} <a href="{{content.absolute_url}}#comments-listing">Click here to read/write comments</a>
+                                </div>
+                                {% if content.topic_list %}
+                                     <p id="hubspot-topic_data"> Topics:
+                                        {% for topic in content.topic_list %}
+                                            <a class="topic-link" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>{% if not loop.last %},{% endif %}
+                                        {% endfor %}
+                                     </p>
+                                {% endif %}
+                            {% else %}
+                                <h2 class="post-listing-simple"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                            {% endif %}
+                        </div>
+                    {% endfor %}#}
+                {#</div>
+                {#{% if not simple_list_page %}
+                <div class="blog-pagination">
+                    {% if last_page_num %}
+                        <a class="previous-posts-link" href="{{ blog_page_link(last_page_num) }}">Previous</a>
+                    {% endif %}
+                        <a class="all-posts-link" href="{{ blog_all_posts_url(group.id) }}">All posts</a>
+                    {% if next_page_num %}
+                        <a class="next-posts-link" href="{{ blog_page_link(next_page_num) }}">Next</a>
+                    {% endif %}
+                </div>
+                {% endif %}#}
+            {#</div>
+        </div>
+    </div>
+</div>#}
+<div class="blog-section-outer">
+    <div class="blog-listing-wrapper cell-wrapper">
+        <div class="blog-section-inner">
+            <div class="blog-listing-wrapper cell-wrapper">
+              {% for content in contents %}
+               <div class="post-item" data-tags="{% for topic in content.topic_list %}{{ topic|escape|lower|replace(' ','')|replace('&','')|replace('-','')|replace('/','') }} {% endfor %}">
+                 <div class="post-item-inner">
+                   <div class="post-author-details">
+                     <div class="post-author-inner">
+                       <div class="author-image">
+                         <img src="{{ content.blog_post_author.avatar }}" loading="lazy" alt="{{ content.blog_post_author.display_name }}">
+                       </div>
+                       <div class="author-name">
+                         <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="post-content-details">
+                     <div class="post-body">
+                       <div class="post-header">
+                         <h2 class="post-listing-simple"><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                       </div>
+                       <div class="post-details">
+                         <div class="post-comment-count">
+                            <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Mode_Comment_Icon_black%20(1).webp" alt="Comment_Icon_black"><span>{{ content.comment_count }}</span>
+                         </div>
+                         <div class="post-date">
+                           <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Calendar_Regular_Icon_1%20(1).webp" alt="Comment_Icon_black" ><span>{{ content.publish_date_localized }}</span>
+                         </div>
+                         <div class="post-readtime">
+                           <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Alarm_Icon_1%20(1).webp" alt="Alarm_Icon_1" ><span>{{ content.post_body|wordcount|divide(250) }} min</span>
+                         </div>
+                       </div>
+                       <div class="author-mobile" style="display:none;">
+                         <div class="author-image">
+                          <img src="{{ content.blog_post_author.avatar }}" loading="lazy" alt="{{ blog_author.display_name }}">
+                         </div>
+                         <div class="author-name">
+                           <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a>
+                         </div>
+                       </div>
+                       <div class="post-listing-body">
+                         <p>{{ content.post_body|striptags|truncate(600) }}</p>
+                         <div class="read-more-wrap">
+                           <a href="{{content.absolute_url}}" class="read-more">MORE ></a>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="bottom-seperator">
+                       <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Line%2015-svg%20(1).webp" alt="Line_2015"/>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+              {% endfor %}
+            </div>
+            <div class="show-more-btn">
+                <a class="show-more">show more</a>
+            </div>
+            
+            <style>
+            .blog-pagination-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                margin: 45px 0 35px 0;
+                width: 100%;
+                clear: both;
+                font-family: Roboto, sans-serif;
+            }
+            .blog-pagination-wrapper a, 
+            .blog-pagination-wrapper span {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 42px;
+                height: 42px;
+                padding: 0 14px;
+                border-radius: 6px;
+                font-size: 15px;
+                font-weight: 500;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                box-sizing: border-box;
+            }
+            .blog-pagination-wrapper a {
+                background: #ffffff;
+                color: #1a1a1a;
+                border: 1px solid #d0d7de;
+            }
+            .blog-pagination-wrapper a:hover {
+                background: #33a9e1;
+                color: #ffffff;
+                border-color: #33a9e1;
+                text-decoration: none;
+            }
+            .blog-pagination-wrapper .pagination-number.active {
+                background: #33a9e1;
+                color: #ffffff;
+                border: 1px solid #33a9e1;
+                font-weight: 700;
+                cursor: default;
+            }
+            .blog-pagination-wrapper .pagination-pages {
+                display: inline-flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .blog-pagination-wrapper .pagination-btn {
+                font-weight: 600;
+            }
+            @media (max-width: 767px) {
+                .blog-pagination-wrapper {
+                    flex-wrap: wrap;
+                    gap: 6px;
+                }
+                .blog-pagination-wrapper a, 
+                .blog-pagination-wrapper span {
+                    min-width: 36px;
+                    height: 36px;
+                    padding: 0 10px;
+                    font-size: 14px;
+                }
+            }
+            </style>
+            
+            <div class="blog-pagination-wrapper">
+                {% if last_page_num %}
+                    <a class="pagination-btn pagination-prev" href="{{ blog_page_link(last_page_num) }}">← Prev</a>
+                {% endif %}
+                <div class="pagination-pages">
+                    {% set curr = current_page_num or 1 %}
+                    {% set total_pages = total_page_count or contents.total_page_count or 9 %}
+                    {% for p_num in range(1, (total_pages + 1)|int) %}
+                        {% if p_num == curr %}
+                            <span class="pagination-number active">{{ p_num }}</span>
+                        {% else %}
+                            <a class="pagination-number" href="{{ blog_page_link(p_num) }}">{{ p_num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if next_page_num %}
+                    <a class="pagination-btn pagination-next" href="{{ blog_page_link(next_page_num) }}">Next →</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
