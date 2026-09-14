@@ -126,7 +126,7 @@ a#tweetbutton {
                     {% set url1 = content.absolute_url|split('/',4) %}
                     {% set len = url1|length %}
                     <div class="post-body-content-wrap blog-post-wrapper cell-wrapper" data-url="{{ url1[len-1] }}" id="article-main-body" data-name="{{ page_meta.name }}">
-                      {{ content.post_body }}
+                      {{ content.post_body|replace('<h1', '<h2')|replace('</h1', '</h2')|replace('<H1', '<h2')|replace('</H1', '</h2') }}
                       <div class="social-share-section">
                          <a href="javascript:print();" class="social-icon" style="text-decoration: none;"><img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Print_Icon_1.png" alt="social-print">print</a>
                          {% widget_block social_sharing "my_social_sharing" label='Social Sharing', use_page_url=True, overrideable=True %}
