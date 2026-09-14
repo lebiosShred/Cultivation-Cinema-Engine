@@ -73,6 +73,32 @@ a#tweetbutton {
     font-size: 12px;
     color: #888;
 }
+.post-body-inner .post-body-content {
+    min-width: 0 !important;
+}
+.post-body-content pre, 
+.post-body-content code, 
+.post-body-content table {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+}
+.post-body-inner {
+    align-items: flex-start !important;
+}
+.post-body-inner .post-audio-author {
+    flex: 0 1 18% !important;
+    max-width: 18% !important;
+    position: sticky !important;
+    top: 190px !important;
+    display: block !important;
+    padding-bottom: 40px !important;
+}
+@media (max-width: 991px) {
+    .post-body-inner .post-audio-author {
+        display: none !important;
+    }
+}
 </style>
 <div class="blog-section blog-post-page">
   <div class="blog-post-wrapper cell-wrapper">
