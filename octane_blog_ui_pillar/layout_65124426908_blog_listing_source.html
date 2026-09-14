@@ -194,9 +194,15 @@
                </div>
               {% endfor %}
             </div>
-            <div class="show-more-btn">
-                <a class="show-more">show more</a>
-            </div>
+            {# show-more button removed in favor of clean crawlable pagination #}
+            <style>
+            .blog-list-page-outer .blog-listing-wrapper .post-item {
+                display: block !important;
+            }
+            .show-more-btn {
+                display: none !important;
+            }
+            </style>
             
             <style>
             .blog-pagination-wrapper {
