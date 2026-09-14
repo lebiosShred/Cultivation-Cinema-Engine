@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octane Growth & Search Telemetry | Executive Performance Briefing</title>
+  <meta name="description" content="Executive growth telemetry, Google Search Console search intelligence, and interactive customer journey explorer for Octane Software Solutions.">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Octane Growth & Search Telemetry | Executive Performance Briefing">
+  <meta property="og:description" content="Executive inbound telemetry dashboard and interactive customer journey explorer for Octane Software Solutions.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Octane Software Solutions">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Octane Growth & Search Telemetry">
+  <meta name="twitter:description" content="Verified Google Search Console & GA4 live audience telemetry.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/octane-favicon-larger-1.png">
+
+  <!-- Production Stylesheet -->
+  <link rel="stylesheet" href="./dashboard_enterprise.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. Enterprise SaaS Header Navigation (Sticky & Responsive)
+       ======================================================================== -->
+  <header class="saas-header-wrapper">
+    <div class="saas-header-main">
+      <!-- Left: Verified Brand Lockup -->
+      <div class="header-left">
+        <a href="#" class="brand-lockup-btn" title="Octane Software Solutions">
+          <svg class="brand-svg-logo" viewBox="0 0 467.2 93" fill="#0f172a">
+            <style>.st0{fill:#B28600;}</style>
+            <path d="M121.2,34.7c-0.8,5.8-5,8.7-10,8.7c-5.9,0-10.3-4.7-10.3-11.8c0-7.1,4.4-11.8,10.3-11.8c5,0,9.1,2.6,9.8,7.8h9.9c-0.9-9.9-9.1-16.5-19.7-16.5c-11.4,0-19.8,8.4-19.8,20.5s8.4,20.5,19.8,20.5c11,0,19.3-6.9,19.8-17.3L121.2,34.7z"/>
+            <path class="st0" d="M331.8,70L331.8,70c-0.3,1-1.4,1.7-2.9,1.7c-2.6,0-4.3-1.9-4.3-5.4s1.8-5.4,4.4-5.4c1.9,0,3.1,0.9,3.8,2.3l-1,0.6c-0.5-1.1-1.5-1.8-2.8-1.8c-1.8,0-3.1,1.4-3.1,3.4v1.7c0,2.1,1.2,3.4,3.2,3.4c1.5,0,2.7-0.7,2.7-2.3v-1h-2.3v-1.1h3.5v5.4h-1.2V70z M334.7,67.7c0-2.5,1.4-4,3.5-4s3.5,1.6,3.5,4s-1.4,4-3.5,4S334.7,70.1,334.7,67.7z M340.4,68.2v-1.1c0-1.6-0.9-2.4-2.2-2.4s-2.2,0.8-2.2,2.4v1.1c0,1.6,0.9,2.4,2.2,2.4S340.4,69.8,340.4,68.2z M344.9,71.5c-0.8,0-1.3-0.5-1.3-1.2v-9.8h1.2v10h1.1v1H344.9z"/>
+            <path class="st0" d="M324.5,48.5h19.2v2.7h-19.2V48.5z M324.5,46h19.2v-2.7h-19.2V46z M330,40.7h8.2V38H330V40.7z M330,35.5h8.2v-2.7H330V35.5z M330,30.3h8.2v-2.8H330V30.3z M338.2,22.3H330V25h8.2V22.3z M324.5,19.8h19.2v-2.7h-19.2V19.8z M324.5,14.5h19.2v-2.7h-19.2V14.5z"/>
+            <path d="M67.6,11c-11.5,0-20.1,8.4-20.1,20.5S56.1,52,67.6,52s20.1-8.5,20.1-20.5S79.1,11,67.6,11z M67.6,43.3c-6.1,0-10.7-4.7-10.7-11.8s4.6-11.8,10.7-11.8s10.7,4.7,10.7,11.8S73.7,43.3,67.6,43.3z"/>
+            <path d="M137.7,0v11c5.3-0.1,9.5-4.4,9.5-9.7V0H137.7z M157.5,20.1v-8.3h-26v8.3h6.3v18.3c0,10.6,5.7,13.7,13.5,13.7c2.1,0,4.2-0.3,6.2-0.9v-8.4c-1.4,0.5-2.9,0.7-4.3,0.7c-4.1,0-5.9-1.7-5.9-5.6V20.2L157.5,20.1z"/>
+            <path d="M179.3,11c-8.8,0-17.2,4-17.2,14.2h9.9c0-4.4,3-6.7,7.3-6.7c4.1,0,7.3,1.8,7.3,4.9c0,7.9-25.6,0.3-25.6,17.3c0,8,6.5,11.4,13.3,11.4c5.4,0,10-2,12.5-6.6v5.8h9.3V23.9C196,14.6,187.9,11,179.3,11z"/>
+            <path d="M223.2,11c-4.7-0.1-9.1,2.4-11.4,6.5v-5.7h-9.5v39.4h9.5V29.5c0-6.6,3.1-10.2,8.3-10.2c5.1,0,8.3,3.6,8.3,10.2v21.7h9.5V27.6C237.9,16.5,231.6,11,223.2,11z"/>
+            <path d="M281.3,31.5c0-12.1-8.3-20.5-19.6-20.5s-19.5,8.4-19.5,20.5S250.5,52,261.7,52c9.3,0,16.2-4.4,18.5-12.6H270c-1.3,2.8-3.7,4.3-7.9,4.3c-5.8,0-9.6-3.3-10.6-9.1h29.7C281.3,33.6,281.3,32.6,281.3,31.5z"/>
+          </svg>
+        </a>
+        <div class="brand-divider"></div>
+        <span class="domain-badge">🌐 octanesolutions.com.au</span>
+      </div>
+
+      <!-- Center: View Mode Switcher & Timeframe Pills -->
+      <div class="header-center">
+        <div class="segmented-nav">
+          <button class="segmented-nav-btn active" id="btn-mode-exec" onclick="switchViewMode('executive', this)">
+            💼 Executive Briefing
+          </button>
+          <button class="segmented-nav-btn" id="btn-mode-explore" onclick="switchViewMode('explorer', this)">
+            🗺️ Journey Explorer
+          </button>
+        </div>
+
+        <div class="timeframe-group">
+          <button class="timeframe-btn" onclick="setTimeframe('24h', this)">24h</button>
+          <button class="timeframe-btn" onclick="setTimeframe('7d', this)">7d</button>
+          <button class="timeframe-btn" onclick="setTimeframe('30d', this)">30d</button>
+          <button class="timeframe-btn active" onclick="setTimeframe('90d', this)">90d</button>
+        </div>
+      </div>
+
+      <!-- Right: Header Actions & Theme Toggle -->
+      <div class="header-right">
+        <button class="btn-header-action" id="btn-save-cloud" onclick="saveStateToCloud()">
+          💾 Save & Sync
+        </button>
+        <button class="btn-header-action" onclick="copySnapshot()">
+          📋 Share
+        </button>
+        <button class="btn-header-action btn-header-primary" onclick="addNewStickyNote()">
+          + Sticky Note
+        </button>
+        <button class="btn-theme-toggle" id="btn-theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+          🌙
+        </button>
+        <a href="/api/logout" class="btn-header-action" style="text-decoration:none;" title="Sign out of Dashboard">
+          🔒 Logout
+        </a>
+      </div>
+    </div>
+
+    <!-- Secondary Telemetry Strip (Responsive Horizontal Scroll) -->
+    <div class="saas-telemetry-strip">
+      <div class="telemetry-pills-row">
+        <span class="telemetry-pill live-active" id="status-tag-active">
+          <span class="pulse-dot idle"></span> Active Visitors: 0 Right Now
+        </span>
+        <span class="telemetry-reading-badge">
+          📖 Reading: <strong id="reading-page-name">Awaiting Inbound Visits</strong>
+        </span>
+        <span class="telemetry-pill live-active" id="status-tag-sync">
+          ⚡ Live Sync: Just now
+        </span>
+        <span class="telemetry-pill" id="status-tag-ga4">
+          ✓ GA4 Live (2,704 Sessions)
+        </span>
+        <span class="telemetry-pill gsc-pill" id="status-tag-gsc" onclick="openGscModal()">
+          🔍 Search Console Live (21 Top 3 Ranks)
+        </span>
+        <span class="telemetry-pill hubspot-pill" id="status-tag-hubspot" onclick="openLeadModal()">
+          🏆 HubSpot CRM Live (19 Marketing Leads)
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. Executive Briefing Main Section (Default Mode)
+       ======================================================================== -->
+  <main id="executive-view" class="executive-view-container">
+    
+    <!-- Top 4 Hero KPI Cards -->
+    <section class="kpi-scorecard-grid">
+      <div class="kpi-card" onclick="switchViewMode('explorer', document.getElementById('btn-mode-explore'))">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Active Visitors Right Now</span>
+          <span class="pulse-dot idle" id="status-pulse-dot"></span>
+        </div>
+        <div class="kpi-value" id="active-visitors-count">0 Live Visitors</div>
+        <div class="kpi-subtext">🟢 Realtime GA4 Stream Active</div>
+      </div>
+
+      <div class="kpi-card" onclick="openGscModal()">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Live Active Reading Page</span>
+          <span class="kpi-badge">GA4 Stream</span>
+        </div>
+        <div class="kpi-value" style="font-size: 1.15rem; line-height: 1.35;" id="hero-reading-title">
+          Awaiting Live Traffic
+        </div>
+        <div class="kpi-subtext" id="reading-geo-text">Listening for visits 🌐</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card-header">
+          <span class="kpi-label">30-Day Verified Users</span>
+          <span class="kpi-badge">GA4 Core</span>
+        </div>
+        <div class="kpi-value">449</div>
+        <div class="kpi-subtext">2,440 Total Page Views</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Engagement Rate</span>
+          <span class="kpi-badge">GA4 Core</span>
+        </div>
+        <div class="kpi-value">59.0%</div>
+        <div class="kpi-subtext">Verified User Session Rate</div>
+      </div>
+    </section>
+
+    <!-- Realtime Audience Radar Panel -->
+    <section class="radar-card">
+      <div class="radar-header">
+        <div class="radar-title-area">
+          <span class="pulse-dot idle" id="radar-pulse-dot"></span>
+          <h2 class="radar-title">Live Realtime Telemetry Radar</h2>
+          <span class="telemetry-pill live-active">🟢 LIVE STREAM (GA4)</span>
+          <span class="domain-badge">octanesolutions.com.au</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);" id="radar-live-count">0 Online</span>
+          <span class="telemetry-pill" id="radar-device-split">Listening...</span>
+        </div>
+      </div>
+
+      <div class="radar-grid">
+        <div class="radar-panel">
+          <div class="radar-panel-title">
+            <span>Live Active Reading Pages</span>
+            <span id="radar-pages-count">0 Active Pages</span>
+          </div>
+          <div id="radar-live-pages-list">
+            <div style="padding: 1.25rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+              No concurrent readers on site right now. Listening for new visits...
+            </div>
+          </div>
+        </div>
+
+        <div class="radar-panel">
+          <div class="radar-panel-title">
+            <span>Live Geographic Activity</span>
+            <span id="radar-geo-count">0 Locations</span>
+          </div>
+          <div id="radar-live-geo-list">
+            <div style="padding: 1.25rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+              No geographic sessions active in the past 30 minutes.
+            </div>
+          </div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: auto; padding-top: 0.5rem;">
+            ⚡ GA4 Realtime stream refreshes every 20s
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Inbound Performance Benchmark Cards -->
+    <section class="kpi-scorecard-grid">
+      <div class="kpi-card" onclick="openLeadModal()">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Marketing Inbound Leads</span>
+          <span class="kpi-badge">🎯 Marketing Attributed</span>
+        </div>
+        <div class="kpi-value" id="kpi-leads-val">19 Marketing Leads</div>
+        <div class="kpi-subtext" id="kpi-demos-val">6 Demos Booked · (79 Direct CRM excluded)</div>
+        <div class="kpi-footer-action">🎯 Click to inspect verified marketing leads ➔</div>
+      </div>
+
+      <div class="kpi-card" onclick="openGscModal()">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Free Google Traffic</span>
+          <span class="kpi-badge">🏛️ GSC Snapshot</span>
+        </div>
+        <div class="kpi-value" id="kpi-search-val">43.0% of All Visitors</div>
+        <div class="kpi-subtext" id="kpi-sessions-val">1,185 Free Visits ($0 Spent on Ads)</div>
+        <div class="kpi-footer-action">🔍 Click to inspect how buyers find us ➔</div>
+      </div>
+
+      <div class="kpi-card" onclick="openBlogPerformanceModal()">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Total Blog Traffic</span>
+          <span class="kpi-badge">📊 GSC Content Audit</span>
+        </div>
+        <div class="kpi-value" id="kpi-blog-val">902 Total Visits</div>
+        <div class="kpi-subtext" id="kpi-blog-imp-val">309.7K Impressions (269 Active Blogs)</div>
+        <div class="kpi-footer-action">📊 Click to inspect top ranked articles ➔</div>
+      </div>
+
+      <div class="kpi-card" onclick="openCompetitorModal()">
+        <div class="kpi-card-header">
+          <span class="kpi-label">Google Search Rankings</span>
+          <span class="kpi-badge">📋 Curated Benchmark</span>
+        </div>
+        <div class="kpi-value" id="kpi-top3-val">21 Top 3 Keywords</div>
+        <div class="kpi-subtext">APAC Market Benchmark Model</div>
+        <div class="kpi-footer-action">⚔️ Click to view market benchmark ➔</div>
+      </div>
+    </section>
+
+    <!-- Google Search Console Multi-Metric Performance Deck -->
+    <section class="gsc-performance-card">
+      <div class="gsc-header">
+        <div>
+          <h2 class="gsc-title">Performance on Search Results</h2>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+            Search type: <strong>Web</strong> · Source: <strong>Google Search Console API</strong> · Date Range: <strong id="gsc-date-label">Last 90 days (Snapshot)</strong>
+          </div>
+        </div>
+        <button class="btn-header-action" onclick="openGscModal()">
+          Export GSC Data
+        </button>
+      </div>
+
+      <!-- 4 Interactive GSC Metric Toggles -->
+      <div class="gsc-metric-cards-grid">
+        <div class="gsc-metric-card active-clicks" id="gsc-card-clicks" onclick="toggleGscMetric('clicks')">
+          <div class="gsc-card-top">
+            <span class="gsc-card-title">Total Clicks</span>
+            <input type="checkbox" checked id="chk-metric-clicks" style="accent-color: var(--metric-clicks);">
+          </div>
+          <div class="gsc-card-num clicks" id="gsc-val-clicks">1,213</div>
+        </div>
+
+        <div class="gsc-metric-card active-impressions" id="gsc-card-impressions" onclick="toggleGscMetric('impressions')">
+          <div class="gsc-card-top">
+            <span class="gsc-card-title">Total Impressions</span>
+            <input type="checkbox" checked id="chk-metric-impressions" style="accent-color: var(--metric-impressions);">
+          </div>
+          <div class="gsc-card-num impressions" id="gsc-val-impressions">248.0K</div>
+        </div>
+
+        <div class="gsc-metric-card active-ctr" id="gsc-card-ctr" onclick="toggleGscMetric('ctr')">
+          <div class="gsc-card-top">
+            <span class="gsc-card-title">Average CTR</span>
+            <input type="checkbox" checked id="chk-metric-ctr" style="accent-color: var(--metric-ctr);">
+          </div>
+          <div class="gsc-card-num ctr" id="gsc-val-ctr">0.49%</div>
+        </div>
+
+        <div class="gsc-metric-card active-position" id="gsc-card-position" onclick="toggleGscMetric('position')">
+          <div class="gsc-card-top">
+            <span class="gsc-card-title">Average Position</span>
+            <input type="checkbox" checked id="chk-metric-position" style="accent-color: var(--metric-position);">
+          </div>
+          <div class="gsc-card-num position" id="gsc-val-position">12.2</div>
+        </div>
+      </div>
+
+      <!-- Interactive SVG Spline Chart -->
+      <div class="gsc-chart-wrapper">
+        <svg id="gsc-perf-chart-svg" class="gsc-svg-chart"></svg>
+      </div>
+    </section>
+
+    <!-- CTR Surge Action Checklist (Forensic Audit Deliverables) -->
+    <section class="checklist-card">
+      <div class="checklist-header">
+        <div class="checklist-title-area">
+          <span style="font-size: 1.25rem;">⚡</span>
+          <div>
+            <h2 class="checklist-title">CTR Surge Action Checklist (Forensic Audit Deliverables)</h2>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">
+              7 audited high-impact actions to fix the 96.3K impression ghost block, eliminate cannibalization, and deploy rich FAQ schemas.
+            </div>
+          </div>
+        </div>
+        <div class="checklist-progress-bar-wrap">
+          <div class="progress-track">
+            <div class="progress-fill" id="checklist-progress-fill"></div>
+          </div>
+          <span id="checklist-progress-txt">0 of 7 (0%)</span>
+        </div>
+      </div>
+
+      <div class="checklist-grid">
+        <!-- Action 1 -->
+        <div class="action-card" id="action-card-1">
+          <div class="action-card-top">
+            <input type="checkbox" class="action-checkbox" id="chk-action-1">
+            <div class="action-title-group">
+              <div style="font-size: 0.72rem; font-weight: 700; color: var(--brand-primary);">Action #1 · 22.2K Imp · Pos 8.1</div>
+              <h3 class="action-title">Fix 0.00% CTR on Decision Optimization Article</h3>
+              <span class="action-url">/predictive-prescriptive-analytics...</span>
+            </div>
+          </div>
+          <div class="action-meta-box">
+            <span class="action-meta-label">OPTIMIZED META TITLE (57 CHARS)</span>
+            <div class="action-meta-text">Descriptive vs Predictive vs Prescriptive Analytics Guide</div>
+            <span class="action-meta-label" style="margin-top: 0.25rem;">OPTIMIZED META DESCRIPTION (151 CHARS)</span>
+            <div class="action-meta-text">Learn the core differences between descriptive, predictive, and prescriptive analytics in IBM Planning Analytics.</div>
+          </div>
+          <div class="action-card-footer">
+            <span style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Target: +750 to +1,300 Clicks</span>
+            <div style="display: flex; gap: 0.35rem;">
+              <button class="action-btn-sm" onclick="copySurgeMeta('Descriptive vs Predictive vs Prescriptive Analytics Guide', 'Learn the core differences in IBM Planning Analytics.')">📋 Copy</button>
+              <button class="action-btn-sm" onclick="openSurgeSchemaModal(1)">⚡ Schema</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action 2 -->
+        <div class="action-card" id="action-card-2">
+          <div class="action-card-top">
+            <input type="checkbox" class="action-checkbox" id="chk-action-2">
+            <div class="action-title-group">
+              <div style="font-size: 0.72rem; font-weight: 700; color: var(--brand-primary);">Action #2 · 27.0K Imp · Pos 8.4</div>
+              <h3 class="action-title">Reposition IBM Project Bob AI for Compliance</h3>
+              <span class="action-url">/ibm-project-bob-the-beginning...</span>
+            </div>
+          </div>
+          <div class="action-meta-box">
+            <span class="action-meta-label">OPTIMIZED META TITLE (53 CHARS)</span>
+            <div class="action-meta-text">IBM Project Bob AI: Enterprise Compliance & Workflows</div>
+            <span class="action-meta-label" style="margin-top: 0.25rem;">OPTIMIZED META DESCRIPTION (152 CHARS)</span>
+            <div class="action-meta-text">Explore how IBM Project Bob automates regulatory compliance, reduces manual data entry errors, and accelerates software development.</div>
+          </div>
+          <div class="action-card-footer">
+            <span style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Target: +1,000 to +2,000 Clicks</span>
+            <div style="display: flex; gap: 0.35rem;">
+              <button class="action-btn-sm" onclick="copySurgeMeta('IBM Project Bob AI: Enterprise Compliance & Workflows', 'Automates regulatory compliance and accelerates software development.')">📋 Copy</button>
+              <button class="action-btn-sm" onclick="openSurgeSchemaModal(2)">⚡ Schema</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action 3 -->
+        <div class="action-card" id="action-card-3">
+          <div class="action-card-top">
+            <input type="checkbox" class="action-checkbox" id="chk-action-3">
+            <div class="action-title-group">
+              <div style="font-size: 0.72rem; font-weight: 700; color: var(--brand-primary);">Action #3 · 29.8K Imp · Pos 2.5 on [tm1 system]</div>
+              <h3 class="action-title">Replace 'For Dummies' Title on High-Volume Guide</h3>
+              <span class="action-url">/a-tm1-guide-on-how-to-for-dummies</span>
+            </div>
+          </div>
+          <div class="action-meta-box">
+            <span class="action-meta-label">OPTIMIZED META TITLE (50 CHARS)</span>
+            <div class="action-meta-text">IBM TM1 System Architecture & Model Guide | Octane</div>
+            <span class="action-meta-label" style="margin-top: 0.25rem;">OPTIMIZED META DESCRIPTION (149 CHARS)</span>
+            <div class="action-meta-text">Explore IBM TM1 system architecture, cube calculation rules, and enterprise data models. Learn best practices for model optimization.</div>
+          </div>
+          <div class="action-card-footer">
+            <span style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Target: +700 to +1,200 Clicks</span>
+            <div style="display: flex; gap: 0.35rem;">
+              <button class="action-btn-sm" onclick="copySurgeMeta('IBM TM1 System Architecture & Model Guide | Octane', 'Explore IBM TM1 architecture, cube calculation rules, and data models.')">📋 Copy</button>
+              <button class="action-btn-sm" onclick="openSurgeSchemaModal(3)">⚡ Schema</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         Critical Blog SEO Architecture Audit (Continuous-Scroll Breakdown)
+         ======================================================================== -->
+    <section class="seo-flaws-card" id="seo-architecture-audit">
+      <div class="seo-flaws-header">
+        <div class="seo-flaws-title-area">
+          <span class="seo-flaws-icon">🚨</span>
+          <div>
+            <div class="seo-flaws-tag">Critical Architecture Audit · Live Telemetry Scan</div>
+            <h2 class="seo-flaws-title">Continuous Scroll SEO Flaws & Failure Explanations</h2>
+            <div class="seo-flaws-subtitle">
+              Why the current infinite scroll setup breaks Google indexing, burns crawl budget, and stops blog traffic from growing.
+            </div>
+          </div>
+        </div>
+        <div class="seo-flaws-actions">
+          <button class="btn-header-action" onclick="copySeoAuditReport()">
+            📋 Copy Full Audit Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Telemetry Badges Strip -->
+      <div class="seo-telemetry-badge-grid">
+        <div class="seo-badge-item">
+          <span class="seo-badge-label">HTML Payload Size</span>
+          <span class="seo-badge-val danger">784 KB</span>
+          <span class="seo-badge-sub">Normal: 30-50 KB (15x over limit)</span>
+        </div>
+        <div class="seo-badge-item">
+          <span class="seo-badge-label">Full Posts in Single DOM</span>
+          <span class="seo-badge-val danger">78 Articles</span>
+          <span class="seo-badge-sub">Dumped into initial page load</span>
+        </div>
+        <div class="seo-badge-item">
+          <span class="seo-badge-label">Headings on One URL</span>
+          <span class="seo-badge-val danger">11 H1s · 191 H2s</span>
+          <span class="seo-badge-sub">Semantic hierarchy completely broken</span>
+        </div>
+        <div class="seo-badge-item">
+          <span class="seo-badge-label">Duplicated Word Count</span>
+          <span class="seo-badge-val danger">30,465 Words</span>
+          <span class="seo-badge-sub">Copied across every single blog URL</span>
+        </div>
+      </div>
+
+      <!-- Grid of 6 Detailed Issue Cards -->
+      <div class="seo-issues-grid">
+        
+        <!-- Issue 1 -->
+        <div class="seo-issue-card">
+          <div class="seo-issue-top">
+            <span class="seo-issue-num">Issue #1</span>
+            <span class="seo-severity-badge danger">Severe Crawl Bloat</span>
+          </div>
+          <h3 class="seo-issue-heading">78 Full Blog Articles Dumped Into One HTML Page</h3>
+          <div class="seo-issue-block">
+            <div class="seo-issue-label">WHAT IS HAPPENING</div>
+            <p class="seo-issue-desc">
+              When a visitor or search bot opens any single blog post, HubSpot runs a server-side loop that outputs the full text and images of 78 other blog posts into the exact same HTML page.
+            </p>
+          </div>
+          <div class="seo-issue-block mistake-block">
+            <div class="seo-issue-label mistake-label">WHY IT IS A MISTAKE</div>
+            <p class="seo-issue-desc">
+              The page file size balloons to 784 KB. Googlebot sets strict crawl time limits on every domain. When each page takes massive memory and bandwidth to download, Google stops crawling deeper pages and leaves newer posts unindexed.
+            </p>
+          </div>
+        </div>
+
+        <!-- Issue 2 -->
+        <div class="seo-issue-card">
+          <div class="seo-issue-top">
+            <span class="seo-issue-num">Issue #2</span>
+            <span class="seo-severity-badge danger">Internal Cannibalization</span>
+          </div>
+          <h3 class="seo-issue-heading">Site-Wide Duplicate Content Across All Blog Posts</h3>
+          <div class="seo-issue-block">
+            <div class="seo-issue-label">WHAT IS HAPPENING</div>
+            <p class="seo-issue-desc">
+              Because every blog post renders the exact same 78 related stories, the same 30,000 words of content appear identically across dozens of separate URLs on blog.octanesolutions.com.au.
+            </p>
+          </div>
+          <div class="seo-issue-block mistake-block">
+            <div class="seo-issue-label mistake-label">WHY IT IS A MISTAKE</div>
+            <p class="seo-issue-desc">
+              Google algorithms filter out duplicate content. When Google sees 50 URLs with 80% identical text, it treats them as low-value duplicates instead of unique expert guides, suppressing search rankings across your entire domain.
+            </p>
+          </div>
+        </div>
+
+        <!-- Issue 3 -->
+        <div class="seo-issue-card">
+          <div class="seo-issue-top">
+            <span class="seo-issue-num">Issue #3</span>
+            <span class="seo-severity-badge warning">Diluted Relevance</span>
+          </div>
+          <h3 class="seo-issue-heading">Heading Hierarchy Broken (11 H1s & 191 H2s)</h3>
+          <div class="seo-issue-block">
+            <div class="seo-issue-label">WHAT IS HAPPENING</div>
+            <p class="seo-issue-desc">
+              Each embedded post brings along its own main H1 heading and dozens of H2 subheadings. A single article page ends up with 11 different H1s and nearly 200 H2s scattered down the page.
+            </p>
+          </div>
+          <div class="seo-issue-block mistake-block">
+            <div class="seo-issue-label mistake-label">WHY IT IS A MISTAKE</div>
+            <p class="seo-issue-desc">
+              The H1 tag tells Google the primary topic of the page. Mixing topics like Cloud Migration, Power BI Drift, and Agentic AI under multiple H1s confuses search parsers, destroying topic authority for every keyword.
+            </p>
+          </div>
+        </div>
+
+        <!-- Issue 4 -->
+        <div class="seo-issue-card">
+          <div class="seo-issue-top">
+            <span class="seo-issue-num">Issue #4</span>
+            <span class="seo-severity-badge danger">Invisible to Crawlers</span>
+          </div>
+          <h3 class="seo-issue-heading">Googlebot Never Triggers the Scroll URL Change</h3>
+          <div class="seo-issue-block">
+            <div class="seo-issue-label">WHAT IS HAPPENING</div>
+            <p class="seo-issue-desc">
+              The continuous scroll uses JavaScript (replaceState) that only runs when a user physically moves the mouse wheel down the screen.
+            </p>
+          </div>
+          <div class="seo-issue-block mistake-block">
+            <div class="seo-issue-label mistake-label">WHY IT IS A MISTAKE</div>
+            <p class="seo-issue-desc">
+              Googlebot does not scroll. It downloads the initial server HTML without triggering scroll listeners. To search engines, the other 77 articles are never seen as separate URLs, only as bloated text glued to the first post.
+            </p>
+          </div>
+        </div>
+
+        <!-- Issue 5 -->
+        <div class="seo-issue-card">
+          <div class="seo-issue-top">
+            <span class="seo-issue-num">Issue #5</span>
+            <span class="seo-severity-badge warning">Canonical Conflict</span>
+          </div>
+          <h3 class="seo-issue-heading">Canonical Tag Conflicts With 77 Stolen Post Bodies</h3>
+          <div class="seo-issue-block">
+            <div class="seo-issue-label">WHAT IS HAPPENING</div>
+            <p class="seo-issue-desc">
+              The head contains a canonical link pointing to post #1 (such as Modernising TM1), but the page body contains the full text of Moving to the Cloud, Power BI Drift, and 75 others.
+            </p>
+          </div>
+          <div class="seo-issue-block mistake-block">
+            <div class="seo-issue-label mistake-label">WHY IT IS A MISTAKE</div>
+            <p class="seo-issue-desc">
+              Google considers a canonical tag a hint, not a directive. When the content of a page diverges wildly from what the canonical URL represents, Google completely ignores the canonical tag and indexes mismatched snippets.
+            </p>
+          </div>
+        </div>
+
+        <!-- Issue 6 -->
+        <div class="seo-issue-card solution-card">
+          <div class="seo-issue-top">
+            <span class="seo-issue-num">Solution</span>
+            <span class="seo-severity-badge success">Google Approved Fix</span>
+          </div>
+          <h3 class="seo-issue-heading">Recommended Clean Architecture</h3>
+          <div class="seo-issue-block">
+            <div class="seo-issue-label" style="color: var(--brand-primary);">HOW TO FIX IT RIGHT</div>
+            <ul class="seo-solution-list">
+              <li><strong>1. Clean Single-Post HTML:</strong> Deliver only the single requested article in the initial server response (under 50 KB, exactly 1 H1).</li>
+              <li><strong>2. Client-Side Lazy Load:</strong> If continuous reading is desired, fetch subsequent articles dynamically via JavaScript Fetch on scroll instead of server-dumping 78 articles at once.</li>
+              <li><strong>3. Explicit Next Article Navigation:</strong> Keep a clear "Read Next Story" link with standard anchor tags so crawlers easily index each post on its own clean URL.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       3. Interactive Journey Explorer Canvas (Figma/Miro Viewport)
+       ======================================================================== -->
+  <div id="canvas-viewport" class="hidden">
+    <div id="canvas-world">
+      <!-- Global SVG Vector Edge Overlay -->
+      <svg id="canvas-edges-svg" class="canvas-edges-svg"></svg>
+
+      <!-- 5-Tier Journey Columns Layout -->
+      <div class="canvas-layout">
+        <!-- Tier 1 -->
+        <div class="tier-column">
+          <h3 class="tier-column-title">1. Traffic Channels (Last 90 Days)</h3>
+          <div class="tier-nodes-list" id="stage-1-list"></div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="tier-column">
+          <h3 class="tier-column-title">2. Origin Referrer Engine & Queries</h3>
+          <div class="tier-nodes-list" id="stage-2-list"></div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="tier-column">
+          <h3 class="tier-column-title">3. Destination Landing Pages</h3>
+          <div class="tier-nodes-list" id="stage-3-list"></div>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="tier-column">
+          <h3 class="tier-column-title">4. Subsequent Navigation Flows</h3>
+          <div class="tier-nodes-list" id="stage-4-list"></div>
+        </div>
+
+        <!-- Tier 5 -->
+        <div class="tier-column">
+          <h3 class="tier-column-title">5. Landing Page Performance & Leads</h3>
+          <div class="tier-nodes-list" id="stage-5-list"></div>
+        </div>
+      </div>
+
+      <!-- Sticky Notes Floating Layer -->
+      <div id="sticky-notes-layer"></div>
+    </div>
+  </div>
+
+  <!-- Floating Zoom HUD -->
+  <div class="canvas-zoom-hud" id="canvas-zoom-hud" style="display: none;">
+    <button class="zoom-btn" onclick="zoomCanvas(0.9)">−</button>
+    <span class="zoom-level-text" id="zoom-hud-level">100%</span>
+    <button class="zoom-btn" onclick="zoomCanvas(1.1)">+</button>
+    <button class="zoom-reset-btn" onclick="resetCanvasView()">↺ Reset</button>
+  </div>
+
+  <!-- ========================================================================
+       4. JIT Virtualized Accessible Modals Root
+       ======================================================================== -->
+  <div id="modal-root">
+    <!-- HubSpot Leads Modal -->
+    <div class="modal-backdrop hidden" id="modal-hubspot-leads" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal('modal-hubspot-leads')">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-area">
+            <span style="font-size: 1.2rem;">🏆</span>
+            <h3 class="modal-title">HubSpot Verified Inbound Pipeline Inspector</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-hubspot-leads')">✕</button>
+        </div>
+        <div class="modal-body" id="lead-modal-content"></div>
+        <div class="modal-footer">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">100 Genuine Verified Inbound Contacts</span>
+          <button class="btn-header-action btn-header-primary" onclick="closeModal('modal-hubspot-leads')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GSC Queries Modal -->
+    <div class="modal-backdrop hidden" id="modal-gsc-queries" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal('modal-gsc-queries')">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-area">
+            <span style="font-size: 1.2rem;">🔍</span>
+            <h3 class="modal-title">Google Search Console (GSC) Search Intelligence</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-gsc-queries')">✕</button>
+        </div>
+        <div class="modal-body" id="gsc-modal-content"></div>
+        <div class="modal-footer">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">100 Verified Search Keywords & Ranking Positions</span>
+          <button class="btn-header-action btn-header-primary" onclick="closeModal('modal-gsc-queries')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitor Dominance Matrix Modal -->
+    <div class="modal-backdrop hidden" id="modal-competitor-matrix" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal('modal-competitor-matrix')">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-area">
+            <span style="font-size: 1.2rem;">⚔️</span>
+            <h3 class="modal-title">Competitor Search Dominance Intelligence</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-competitor-matrix')">✕</button>
+        </div>
+        <div class="modal-body" id="competitor-modal-content"></div>
+        <div class="modal-footer">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Octane leads in 83.3% of head-to-head queries against Cubewise</span>
+          <button class="btn-header-action btn-header-primary" onclick="closeModal('modal-competitor-matrix')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Performance Modal -->
+    <div class="modal-backdrop hidden" id="modal-blog-performance" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal('modal-blog-performance')">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-area">
+            <span style="font-size: 1.2rem;">📊</span>
+            <h3 class="modal-title">Blog Traffic & Content Intelligence</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-blog-performance')">✕</button>
+        </div>
+        <div class="modal-body" id="blog-modal-content"></div>
+        <div class="modal-footer">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">269 Active Articles Indexed in Google SERPs</span>
+          <button class="btn-header-action btn-header-primary" onclick="closeModal('modal-blog-performance')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQPage Schema Modal -->
+    <div class="modal-backdrop hidden" id="modal-surge-schema" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal('modal-surge-schema')">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-area">
+            <span style="font-size: 1.2rem;">⚡</span>
+            <h3 class="modal-title" id="schema-modal-title">FAQPage JSON-LD Rich Schema</h3>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-surge-schema')">✕</button>
+        </div>
+        <div class="modal-body">
+          <pre id="schema-modal-code" style="background: var(--bg-surface-subtle); padding: 1rem; border-radius: var(--radius-md); font-size: 0.78rem; overflow-x: auto; color: var(--text-primary); border: 1px solid var(--border-subtle);"></pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-header-action btn-header-primary" onclick="copyActiveSurgeSchema()">📋 Copy JSON-LD Code</button>
+          <button class="btn-header-action" onclick="closeModal('modal-surge-schema')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" style="display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #0f172a; color: #ffffff; padding: 0.6rem 1.2rem; border-radius: var(--radius-pill); font-size: 0.82rem; font-weight: 600; box-shadow: var(--shadow-lg); z-index: 9999;"></div>
+
+  <!-- Production Telemetry Engine Script -->
+  <script src="./dashboard_enterprise.js"></script>
+</body>
+</html>

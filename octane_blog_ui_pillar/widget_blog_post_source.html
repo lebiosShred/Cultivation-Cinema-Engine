@@ -1,0 +1,441 @@
+{#<div class="blog-section">
+    <div class="blog-post-wrapper cell-wrapper">
+       <div class="blog-section">
+            <div class="blog-post-wrapper cell-wrapper">
+                <div class="section post-header">
+                    <h1>{{ content.name }}</h1>
+                    <div id="hubspot-author_data" class="hubspot-editable" data-hubspot-form-id="author_data" data-hubspot-name="Blog Author" >
+                        <span class="hs-author-label">Posted by</span>
+                        {% if content.blog_post_author %}
+                            <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a> on {{ content.publish_date_localized }}
+                            {% if content.blog_post_author.avatar %} <div class="hs-author-avatar"> <img src="{{ content.blog_post_author.avatar }}" alt="{{ content.blog_post_author.display_name }}"> </div> {% endif %}
+                            {% if content.blog_post_author.has_social_profiles %}
+                                <div class="hs-author-social-section">
+                                    <span class="hs-author-social-label">Find me on:</span>
+                                    <div class="hs-author-social-links">
+                                        {% if content.blog_post_author.facebook %}
+                                            <a href="{{ content.blog_post_author.facebook }}" target="_blank" class="hs-author-social-link hs-social-facebook">Facebook </a>
+                                        {% endif %}
+                                        {% if content.blog_post_author.linkedin %}
+                                            <a href="{{ content.blog_post_author.linkedin }}" target="_blank" class="hs-author-social-link hs-social-linkedin">LinkedIn</a>
+                                        {% endif %}
+                                        {% if content.blog_post_author.twitter %}
+                                            <a href="{{ content.blog_post_author.twitter }}" target="_blank" class="hs-author-social-link hs-social-twitter">Twitter </a>
+                                        {% endif %}
+                                        {% if content.blog_post_author.google_plus %}
+                                            <a href="{{ content.blog_post_author.google_plus }}?rel=author" target="_blank" class="hs-author-social-link hs-social-google-plus">Google+</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% blog_social_sharing "blog_social_sharing" overrideable=False, label='Blog Social Sharing' %}
+                <div class="section post-body">
+                    {{ content.post_body }}
+                </div>
+                {% if content.topic_list %}
+                     <p id="hubspot-topic_data" > Topics:
+                        {% for topic in content.topic_list %}
+                            <a class="topic-link" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                     </p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Optional: Blog Author Bio Box -->
+        {#<div class="about-author-sec row-fluid">
+            <div class="span2">
+                <img alt="{{ content.blog_post_author.display_name }}" src="{{ content.blog_post_author.avatar }}">
+            </div>
+            <div class="span10">
+                <h3>Written by <a class="author-link" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a></h3>
+                <p>{{ content.blog_post_author.bio }}</p>
+                {% if content.blog_post_author.has_social_profiles %}
+                    <div class="hs-author-social-section">
+                        <div class="hs-author-social-links">
+                            {% if content.blog_post_author.facebook %}
+                                <a href="{{ content.blog_post_author.facebook }}" target="_blank" class="hs-author-social-link hs-social-facebook">Facebook</a>
+                            {% endif %}
+                            {% if content.blog_post_author.linkedin %}
+                                <a href="{{ content.blog_post_author.linkedin }}" target="_blank" class="hs-author-social-link hs-social-linkedin">LinkedIn</a>
+                            {% endif %}
+                            {% if content.blog_post_author.twitter %}
+                                <a href="{{ content.blog_post_author.twitter }}" target="_blank" class="hs-author-social-link hs-social-twitter">Twitter</a>
+                            {% endif %}
+                            {% if content.blog_post_author.google_plus %}
+                                <a href="{{ content.blog_post_author.google_plus }}?rel=author" target="_blank" class="hs-author-social-link hs-social-google-plus">Google+</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>#}
+<!--     </div>
+</div>-->
+<div class="copy-tweet-icons">
+  <a id="copybutton"><img src = "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Content_Cut_Icon_2.png" alt="Content_Cut_Icon"/></a>
+  <a id="tweetbutton"><img src = "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Twitter_Brands_Icon_1.png" alt="Twitter_Brands_Icon"/></a>
+</div>
+<style>
+.copy-tweet-icons {
+    display: none;
+    position: absolute;
+    z-index: 1010;
+    padding: 0px 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background: #33a9e1;
+    /*margin-top: -50px;*/
+    border-radius: 26px;
+    box-sizing: border-box;
+}
+a#copybutton {
+    padding: 8px 10px 8px 0;
+    border-right: 2px solid #fff;
+    box-sizing: border-box;
+    display: inline-block;
+}
+a#tweetbutton {
+    display: inline-block;
+    padding: 8px 0 8px 10px;
+    box-sizing: border-box;
+}
+.copy-tweet-icons img {
+    max-width: 18px;
+    height: auto;
+    margin: 0 auto;
+}
+</style>
+<div class="blog-section blog-post-page">
+  <div class="blog-post-wrapper cell-wrapper">
+      <div class="blog-section">
+         <div class="blog-post-wrapper cell-wrapper">
+           {% set url1 = content.absolute_url|split('/',4) %}
+           {% set len = url1|length %}
+            <div class="post-header-outer post-body-content-wrap" data-url="{{ url1[len-1] }}" data-name="{{ page_meta.name }}">
+              <div class="page-center">
+                <div class="post-header-inner">
+                  <div class="post-header">
+                    <h1>{{ content.name }}</h1>
+                  </div>
+                  <div class="post-details">
+                    <div class="post-comment-count">
+                       {#{% set comments_number =  content.comment_list|length %}
+                       {{ comments_number }}#}
+                       <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Mode_Comment_Icon_1-1.webp" alt="Mode_Comment_Icon_white"><span>{{ content.comment_count }}</span>
+                    </div>
+                    <div class="post-date">
+                       <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Calendar_Regular_Icon_1_white.webp" alt="Calendar_Regular_Icon_1_white"><span>{{ content.publish_date_localized }}</span>
+                    </div>
+                    <div class="post-readtime">
+                       <img src="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/Imported_Blog_Media/Alarm_Icon_1_white.webp" alt="Alarm_Icon_1_white" ><span>{{ content.post_body|wordcount|divide(250) }} min</span>
+                    </div>
+                  </div>
+                  <div class="post-listing-body post-page">
+                     <p>{{ content.post_body|striptags|truncate(400) }}</p>
+                     {#<p>{{ content.post_list_content }}</p>#}
+                  </div>
+                  <div class="slide-down-arrow">
+                    <img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Home-Page/arr.svg" alt="down-arrow-blue" >
+                  </div>
+                </div>
+              </div>
+              <div class="svg-slant-outer"> 
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 132">
+                    <polygon class="cls-1" points="1920 0 1920 35 0 100 0 0 1920 0" style="fill: #000;"/>
+                  </svg>
+              </div>
+            </div>
+            <div class="post-body-outer">
+              <div class="page-center">
+                <div class="post-body-inner">
+                  <div class="related-post-pillar">
+                    <div class="blog-post-pillar-section"> 
+                      <span class="header"><img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Book_Open_Solid_Icon_1.png" alt="Book_Open_Solid_Icon"/></span>
+                      <ul>
+                        {% set url1 = content.absolute_url|split('/',4) %}
+                        {% set len = url1|length %}
+                         <li class="current-page-link pillar-active"><span class="progress-bar"></span><a href="#{{ url1[len-1]|replace('.','') }}" data-url="{{ url1[len-1] }}" data-name="{{ page_meta.name }}"><span>{{ page_meta.name }}</span></a></li>
+                        {% if content.topic_list %}
+                           {% set max_posts = 5 %}<!-- Set the max number of related posts to be output to the page here -->
+                           {% set post_list = [] %}
+                           {% for topic in content.topic_list %}
+                           {% set post_list = post_list + blog_recent_topic_posts(group.id, topic.slug, max_posts + 1 ) %}
+                           {% if loop.last %}
+                           {% set post_list = post_list|sort(true, false, 'publish_date')|unique('name') %}
+                             {% set i = 0 %}
+                               {% for post in post_list %}
+                                {% if content.absolute_url != post.absolute_url and post.name != content.name and i < max_posts %}
+                                   {% set url1 = post.absolute_url|split('/',4) %}
+                                   {% set len = url1|length %}
+                                   <li class="realted-page-link"><span class="progress-bar"></span><a href="#{{ url1[len-1]|replace('.','') }}" data-url="{{ url1[len-1] }}" data-name="{{ post.name }}"><span>{{ post.name }}</span></a></li>
+                                {% set i = i + 1 %}
+                                {% endif %}
+                               {% endfor %}
+                           {% endif %}
+                           {% endfor %}
+                         {% endif %} 
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="post-body-content">
+                    {% set url1 = content.absolute_url|split('/',4) %}
+                    {% set len = url1|length %}
+                    <div class="post-body-content-wrap blog-post-wrapper cell-wrapper"  data-url="{{ url1[len-1] }}"  id="{{ url1[len-1]|replace('.','') }}" data-name="{{ page_meta.name }}">
+                      {{ content.post_body }}
+                      <div class="social-share-section">
+                         <a href="javascript:print();" class="social-icon" style="text-decoration: none;"><img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Print_Icon_1.png" alt="social-print">print</a>
+                         {% widget_block social_sharing "my_social_sharing" label='Social Sharing', use_page_url=True, overrideable=True  %}
+                             {% widget_attribute "pinterest" is_json=True %}
+                                     {"custom_link_format": "", "pinterest_media": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/pint.svg", "enabled": true, "network": "pinterest", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/pint.svg"}
+                             {% end_widget_attribute %}
+                             {% widget_attribute "twitter" is_json=True %}
+                                     {"custom_link_format": "", "enabled": true, "network": "twitter", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/twt.svg"}
+                             {% end_widget_attribute %}
+                             {% widget_attribute "google_plus" is_json=True %}
+                                     {"custom_link_format": "", "enabled": true, "network": "google_plus", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/gp.svg"}
+                             {% end_widget_attribute %}
+                             {% widget_attribute "linkedin" is_json=True %}
+                                     {"custom_link_format": "", "enabled": true, "network": "linkedin", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/in.svg"}
+                             {% end_widget_attribute %}
+                             {% widget_attribute "facebook" is_json=True %}
+                                     {"custom_link_format": "", "enabled": true, "network": "facebook", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/fb.svg"}
+                             {% end_widget_attribute %}
+                             {% widget_attribute "email" is_json=True %}
+                                     {"custom_link_format": "", "enabled": true, "network": "email", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Markunread_Icon_1.png"}
+                             {% end_widget_attribute %}
+                          {% end_widget_block %}
+                        </div>
+                      <div class="post-tags">
+                        {% for topic in content.tag_list %}
+                          <a class="blog-post__tag-link" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic }}</a>
+                        {% endfor %}
+                      </div>
+                      {% boolean "blog_contact_form" label='Contact Form Enable/Disable', value='false', no_wrapper=True, export_to_template_context=True %}
+                      {% if widget_data.blog_contact_form.value == true %} 
+                        <div class="blog-contact-form-wrap">
+                          {% module "module_1653905667952495" path="/Octane-2022/Custom Modules/Demo Form Module", label="Blog Contact Form" %}
+                        </div>
+                      {% endif %}
+                      <div class="blog-post-comments">
+                        <h3>Leave a comment</h3>
+                        {% blog_comments "blog_comments" limit=10000 %}
+                      </div>
+                    </div>
+                      {% if content.topic_list %}
+                      {% set max_posts = 1000 %}<!-- Set the max number of related posts to be output to the page here -->
+                      {% set post_list = [] %}
+                        {% for topic in content.topic_list %}
+                        {% set post_list = post_list + blog_recent_topic_posts(group.id, topic.slug, max_posts + 1 ) %}
+                          {% if loop.last %}
+                          {% set post_list = post_list|sort(true, false, 'publish_date')|unique('name') %}
+                          {% set i = 0 %}
+                            {% for post in post_list %}
+                             {% if content.absolute_url != post.absolute_url and post.name != content.name and i < max_posts %}
+                               {% set url1 = post.absolute_url|split('/',4) %}
+                                {% set len = url1|length %}
+                               <div class="post-body-content-wrap tag-releated-post" data-url="{{ url1[len-1] }}" data-name="{{ post.name }}" id="{{ url1[len-1]|replace('.','') }}">
+                                    <div class="top-seperator">
+                                       <img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Octane-Header/Line%2015.svg" alt="Line"/>
+                                    </div>      
+                                    <div class="tag-releated-post-header-outer">
+                                         <div class="tag-releated-post-header-inner">
+                                                <div class="post-header">
+                                                 <a class="post-header-link" href="{{ post.absolute_url }}"><h2>{{ post.name }}</h2></a> 
+                                                </div>
+                                                <div class="post-details">
+                                                  <div class="post-comment-count">
+                                                     <img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Mode_Comment_Icon_black.png" alt="Mode_Comment_Icon_black"><span>{{ post.comment_count }}</span>
+                                                  </div>
+                                                  <div class="post-date">
+                                                     <img src="https://blog.octanesolutions.com.au/hubfs/Octane-website-2022/Blog-content/Calendar_Regular_Icon_1.png" alt="Calendar_Regular_Icon_1" ><span>{{ post.publish_date_localized }}</span>
+                                                  </div>
+                                                  <div class="post-readtime">
+                                                     <img src="https://blog.octanesolutions.com.au/hubfs/Octane-website-2022/Blog-content/Alarm_Icon_1.png" alt="Alarm_Icon_1" ><span>{{ post.post_body|wordcount|divide(250) }} min</span>
+                                                  </div>
+                                                </div>
+                                                <div class="author-mobile" style="display: none;">
+                                                    <img src="{{ post.blog_post_author.avatar }}" alt=" {{ content.blog_post_author.display_name }}">
+                                                    <a class="author-link" data-url="{{ url1[len-1] }}" href="{{ blog_author_url(group.id, post.blog_post_author.slug) }}">{{ post.blog_post_author.display_name }}</a>
+                                               </div>
+                                             </div>
+                                          </div>
+                                       <div class="section post-body-content">
+                                          {{ post.post_body }}
+                                          <div class="social-share-section">
+                                              <a href="javascript:print();" class="social-icon" style="text-decoration: none;"><img src="https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Print_Icon_1.png" alt="social-print">print</a>
+                                              {% widget_block social_sharing "my_social_sharing" label='Social Sharing', use_page_url=True, overrideable=True  %}
+                                                  {% widget_attribute "email" is_json=True %}
+                                                      {"custom_link_format": "", "enabled": true, "network": "email", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/Markunread_Icon_1.png"}
+                                                  {% end_widget_attribute %}     
+                                                  {#{% widget_attribute "pinterest" is_json=True %}
+                                                      {"custom_link_format": "", "pinterest_media": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/pint.svg", "enabled": true, "network": "pinterest", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/pint.svg"}
+                                                  {% end_widget_attribute %}#}
+                                                  {% widget_attribute "twitter" is_json=True %}
+                                                      {"custom_link_format": "", "enabled": true, "network": "twitter", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/twt.svg"}
+                                                  {% end_widget_attribute %}
+                                                  {% widget_attribute "google_plus" is_json=True %}
+                                                      {"custom_link_format": "", "enabled": true, "network": "google_plus", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/gp.svg"}
+                                                  {% end_widget_attribute %}
+                                                  {% widget_attribute "linkedin" is_json=True %}
+                                                      {"custom_link_format": "", "enabled": true, "network": "linkedin", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/in.svg"}
+                                                  {% end_widget_attribute %}
+                                                  {% widget_attribute "facebook" is_json=True %}
+                                                      {"custom_link_format": "", "enabled": true, "network": "facebook", "img_src": "https://fs.hubspotusercontent00.net/hubfs/2926400/Octane-website-2022/Blog-content/fb.svg"}
+                                                  {% end_widget_attribute %}
+                                                  
+                                              {% end_widget_block %}
+                                            </div>
+                                          <div class="post-tags">
+                                            {% for topic in post.tag_list %}
+                                              <a class="blog-post__tag-link" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic }}</a>
+                                            {% endfor %}
+                                          </div>
+                                         {#<div class="blog-post-comments">
+                                            {% blog_comments "blog_comments" limit=10000 %}
+                                         </div>#}
+                                       </div>
+                                 </div>
+                                {% set i = i + 1 %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    {#<div class="blog-post-comments">
+                      {% blog_comments "blog_comments" limit=10000 %}
+                    </div>#}
+                  </div>
+                  <div class="post-audio-author">
+                     {% set url1 = content.absolute_url|split('/',4) %}
+                    {% set len = url1|length %}
+                       <div class="post-audio-author-wrap pillar-active">
+                          <div class="post-audio-wrap">
+                          </div>
+                          <div class="post-author-details">
+                             <div class="author-image">
+                                <img src="{{ content.blog_post_author.avatar }}" loading="lazy" alt="{{ content.blog_post_author.display_name }}">
+                             </div>
+                             <div class="author-name">
+                                <a class="author-link" data-url="{{ url1[len-1] }}" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a>
+                             </div>
+                           </div>
+                          </div>
+                  {% if content.topic_list %}
+                    {% set max_posts = 1000 %}<!-- Set the max number of related posts to be output to the page here -->
+                    {% set post_list = [] %}
+                    {% for topic in content.topic_list %}
+                    {% set post_list = post_list + blog_recent_topic_posts(group.id, topic.slug, max_posts + 1 ) %}
+                    {% if loop.last %}
+                    {% set post_list = post_list|sort(true, false, 'publish_date')|unique('name') %}
+                      
+                         {% set i = 0 %}
+                         {% for post in post_list %}
+                            {% if content.absolute_url != post.absolute_url and post.name != content.name and i < max_posts %}
+                              {% set url1 = post.absolute_url|split('/',4) %}
+                              {% set len = url1|length %}
+                               <div class="post-audio-author-wrap">
+                                  <div class="post-audio-wrap">
+                                  </div>
+                                  <div class="post-author-details">
+                                    <div class="author-image">
+                                       <img src="{{ post.blog_post_author.avatar }}" loading="lazy" alt="{{ post.blog_post_author.display_name }}">
+                                     </div>
+                                     <div class="author-name">
+                                        <a class="author-link" data-url="{{ url1[len-1] }}" href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}">{{ post.blog_post_author.display_name }}</a>
+                                     </div>
+                                   </div>
+                                 </div>
+                                {% set i = i + 1 %}
+                              {% endif %}
+                            {% endfor %}
+                         {% endif %}
+                       {% endfor %}
+                     {% endif %}
+                 </div>
+                </div>
+              </div>
+            </div>
+         </div>
+      </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  var scrollpos,url,newurl,dataurl,lastItem,wh,data_name,top,offset_val=0,next_val,parent_top;
+  console.log('url change disabled newurl 2');
+  
+  wh = $(window).height()-100;
+  
+  $(window).scroll(function(){
+    scrollpos = $(this).scrollTop() + wh;
+    url = document.location.pathname+ '';
+    $('.post-body-content-wrap').map(function (){
+      if(scrollpos>$(this).offset().top && scrollpos<$(this).offset().top + $(this).height()){
+         lastItem = $(this).data('url');
+      }
+    });
+    Addactive($('.post-audio-author-wrap'),lastItem);
+    if(lastItem){  
+       newurl = url.split('/').slice(0,-1).join('/')+'/'+lastItem;
+    }else{
+      {% set url1 = content.absolute_url|split('/',4) %}
+      {% set len = url1|length %}
+      newurl = '{{ url1[len-1] }}';
+    }
+    window.history.replaceState({},null,newurl);
+    onScroll();
+  });
+  
+  function Addactive(element,val){
+    element.map(function (){
+      data_name = $(this).find('a').data('url');
+      if(val === data_name){
+          $(this).addClass('pillar-active');
+      }else{
+          $(this).removeClass('pillar-active');
+      }
+    });
+  }
+  
+//   $('.blog-post-pillar-section ul li a').on('click', function(event){     
+//     event.preventDefault();
+//     $('html,body').animate({scrollTop:$(this.hash).offset().top - 200}, 1000);
+//   });
+  
+//   $('.post-body-content-wrap a').on('click', function(event){     
+//     event.preventDefault();
+//     $('html,body').animate({scrollTop:$(this.hash).offset().top - 180}, 1000);
+//   });
+  
+   function onScroll(){
+    var scrollPos = $(document).scrollTop() + wh; 
+    $('.blog-post-pillar-section ul li').each(function () {
+        var currLink = $(this).children('a');
+        var refElement = $(currLink.attr("href"));
+        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+            var temp = ((scrollPos - refElement.position().top)/refElement.height())*100;
+            $(this).prevAll('li').addClass('pillar-active');
+            $(this).find('span.progress-bar').css('width',temp+"%");
+            $(this).next('li').find('span.progress-bar').css('width',"0%");
+           }
+       else{
+            var temp = ((scrollPos - refElement.position().top)/refElement.height())*100;
+            top = $('.blog-section.blog-post-page .post-body-outer').offset().top + $('.blog-section.blog-post-page .post-body-outer').height();
+            if(scrollPos<top-200){
+               $(this).prev('li').removeClass('pillar-active');
+               $(".blog-post-pillar-section ul li:last-child").removeClass("pillar-active");
+            }
+            $(this).find('span.progress-bar').css('width',temp+"%");
+            $(this).next('li').find('span.progress-bar').css('width',"0%");
+            $(".blog-post-pillar-section ul li:last-child").removeClass("pillar-active");
+        }
+        
+    });
+   }
+  
+
+});
+</script>

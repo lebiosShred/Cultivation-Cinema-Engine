@@ -1,0 +1,9 @@
+*.mp4
+*.mp3
+*.srt
+*.db
+*.xlsx
+*.png
+*.jpg
+.git
+.worktrees

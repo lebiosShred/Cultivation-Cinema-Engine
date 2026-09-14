@@ -24,3 +24,4 @@ next_draw_*.txt
 audit_output.txt
 kokoro_samples/
 thumbnails/
+.vercel

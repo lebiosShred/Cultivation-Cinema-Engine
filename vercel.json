@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/", "destination": "/dashboard_enterprise.html" }
+  ]
+}
