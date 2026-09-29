@@ -1,9 +1,9 @@
-*.mp4
+media/a_record_of_a_mortal_s_journey_to_immortality_ep189_4k.mp4
+media/rmji_ep189_teaser_4k.mp4
 *.mp3
+*.wav
 *.srt
 *.db
 *.xlsx
-*.png
-*.jpg
 .git
 .worktrees

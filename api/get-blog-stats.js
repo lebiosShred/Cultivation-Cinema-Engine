@@ -1038,7 +1038,18 @@ module.exports = async function handler(req, res) {
   }
 
   const cookies = parseCookies(req.headers.cookie);
-  const sessionToken = cookies['octane_session'];
+  let sessionToken = cookies['octane_session'];
+
+  if (!sessionToken && req.headers.authorization) {
+    const authHeader = req.headers.authorization;
+    if (authHeader.toLowerCase().startsWith('bearer ')) {
+      sessionToken = authHeader.slice(7).trim();
+    }
+  }
+
+  if (!sessionToken && req.query && req.query.token) {
+    sessionToken = req.query.token;
+  }
 
   // Support internal API calls with session or local development
   if (sessionToken && !verifySessionToken(sessionToken)) {

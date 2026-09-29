@@ -1,0 +1,185 @@
+[
+  {
+    "pillar_id": "P-01",
+    "title": "The Ultimate IBM Planning Analytics TM1 Training Roadmap for Beginners",
+    "url": "https://blog.octanesolutions.com.au/the-ultimate-ibm-planning-analytics-tm1-training-roadmap-for-beginners",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does it take to learn IBM Planning Analytics (TM1) from scratch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most finance professionals and analysts can grasp TM1 fundamentals, cube concepts, and basic cube views in 2 to 4 weeks of structured study. Mastering TurboIntegrator (TI) processes, rule writing, and feeder optimization typically takes 3 to 6 months of hands-on model development."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between TM1 Rules and TurboIntegrator (TI) processes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TM1 Rules calculate data dynamically in memory on request, ideal for real-time currency conversions, allocations, and variance calculations. TurboIntegrator processes are batch scripts that import, export, transform, and physically write data to cubes and dimensions on a schedule."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need programming experience to become a TM1 developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No prior software engineering background is required, but strong financial modeling skills, Excel formula fluency, and an understanding of multi-dimensional data models are essential prerequisites."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are dynamic parameters in TM1 and why are they used?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dynamic parameters allow TurboIntegrator processes to adapt automatically based on current date, control cubes, or user selections, eliminating hardcoded dates and manual monthly script maintenance."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "pillar_id": "P-02",
+    "title": "Enterprise AI for Australian Finance Teams: What Actually Works in 2026",
+    "url": "https://blog.octanesolutions.com.au/enterprise-ai-for-australian-finance-teams-what-actually-works-in-2026",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why do most finance AI pilots fail to make it to production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most finance AI pilots stall because they treat AI as an ungrounded chatbot rather than an audited workflow agent. Without strict data lineage, deterministic mathematical verification, and internal audit approval, CFOs cannot trust raw language model outputs for financial reporting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can generative AI integrate directly with IBM Planning Analytics (TM1)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Governed AI assistants connect via the TM1 REST API to retrieve cell values, explain monthly budget variances, and draft board commentary while maintaining TM1 user security and row-level permissions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Agentic AI differ from standard Microsoft Copilot in finance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard Copilot assists individual users with document drafting and basic formula suggestions. Agentic AI executes multi-step operational tasks autonomously, such as reconciling subledgers, flagging variance anomalies, and orchestrating month-end approvals across ERP and planning systems."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "pillar_id": "P-03",
+    "title": "Moving TM1 to the Cloud: What Breaks, What Dies, and How to Cut Over Without Downtime",
+    "url": "https://blog.octanesolutions.com.au/moving-tm1-to-the-cloud-what-breaks-what-dies",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What breaks when migrating on-premises TM1 models to Planning Analytics Cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common migration failure points are local Windows file paths in TI scripts, deprecated ODBC drivers, external batch files and CMD executions, and hardcoded server ports replaced by Secure Gateway or Satellite Connectors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you achieve zero downtime during a TM1 cloud migration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Zero-downtime cutover requires dual-running the on-premises and cloud instances during parallel testing, using transaction log replay to sync delta changes right before switching user DNS endpoints over the weekend."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is TM1 on Cloud faster than on-premises servers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, primarily because IBM Planning Analytics on Cloud runs on modern high-clock-speed CPU architectures and containerized microservices (Engine 12), reducing calculation times on large feeder-heavy cubes."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "pillar_id": "P-04",
+    "title": "The TM1 Feeder Diagnostic Playbook: Eliminating Overfeeding and Memory Bloat",
+    "url": "https://blog.octanesolutions.com.au/tm1-feeder-diagnostic-playbook",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is overfeeding in IBM TM1 and why does it crash servers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Overfeeding occurs when TM1 calculation rules flag millions of empty, zero-value cells as containing data. This causes RAM usage to explode exponentially, slows cube load times to hours, and eventually causes out-of-memory crashes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you identify overfed cells in Planning Analytics?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enable rule and feeder tracing in Planning Analytics Workspace (PAW), inspect memory allocation per cube using Performance Monitor control cubes, and audit feeder statements where consolidated elements feed detailed cells without conditional checks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the alternative to feeding large calculated cubes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "High-volume transactional cubes can utilize batch TI calculation processes to physically store computed results, completely eliminating the memory overhead and calculation latency of dynamic rules and feeders."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "pillar_id": "P-05",
+    "title": "What's New in Cognos Analytics 12.1.x: Download, Feature & Upgrade Guide",
+    "url": "https://blog.octanesolutions.com.au/whats-new-in-cognos-analytics-12.1.x",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is IBM Cognos Analytics 11.0.11 still supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. IBM Cognos Analytics 11.0.x reached official End of Support (EOS). Enterprises must upgrade to Cognos Analytics 12.0 or 12.1 to receive security patches, modern browser support, and AI-assisted dashboard capabilities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the major new features in Cognos Analytics 12.1?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cognos 12.1 introduces conversational natural language query generation powered by watsonx, enhanced dashboard self-service visualizations, automated forecasting models, and streamlined direct integration with Planning Analytics cubes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can licensed enterprise users download Cognos Analytics 12.1 installers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Official installers, fix packs, and container images must be downloaded directly from IBM Passport Advantage or My IBM Software Downloads using active enterprise customer credentials."
+          }
+        }
+      ]
+    }
+  }
+]

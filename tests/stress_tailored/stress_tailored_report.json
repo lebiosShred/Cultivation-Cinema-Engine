@@ -1,0 +1,78 @@
+{
+  "campaign_name": "Tier-5 Tailored Astra Extreme Enterprise Stress Campaign",
+  "architecture_version": "v3.6.0-Astra",
+  "campaign_timestamp": 1789091341.674318,
+  "vectors": {
+    "vector1_hybrid_soak": {
+      "passed": true,
+      "total_milestones": 300,
+      "completed_milestones": 300,
+      "faults_injected": 12,
+      "recoveries_succeeded": 12,
+      "mttr_per_fault_s": 0.177,
+      "rss_start_mb": 34.61,
+      "rss_end_mb": 37.96,
+      "rss_delta_mb": 3.35,
+      "debris_isolated": true,
+      "elapsed_seconds": 186.33
+    },
+    "vector2_wal_byzantine": {
+      "passed": true,
+      "workers": 48,
+      "target_operations": 14976,
+      "completed_operations": 14208,
+      "simulated_aborts": 768,
+      "lock_collision_errors": 0,
+      "schema_parse_errors": 0,
+      "b_tree_integrity": "ok",
+      "persisted_rows": 9457,
+      "elapsed_seconds": 57.53,
+      "throughput_ops_per_sec": 247.0
+    },
+    "vector3_polyglot_monorepo": {
+      "passed": true,
+      "total_files_generated": 14950,
+      "symlink_diamonds_tested": 3,
+      "minified_traps_pruned": true,
+      "generated_tokens": 1526,
+      "token_budget_cap": 1500,
+      "indexing_time_s": 0.196,
+      "throughput_files_per_sec": 76376.4
+    },
+    "vector4_operator_zero_subprocess": {
+      "passed": true,
+      "total_iterations": 500,
+      "wireframe_syntheses": 100,
+      "subprocesses_spawned": 0,
+      "mean_discovery_latency_ms": 0.027,
+      "mean_wireframe_latency_ms": 49.677,
+      "total_elapsed_s": 4.98
+    },
+    "vector5_citation_si_gauntlet": {
+      "passed": true,
+      "total_probes": 990,
+      "true_positives": 405,
+      "true_negatives": 585,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_acceptance_rate": 0.0,
+      "mean_probe_latency_ms": 0.049
+    },
+    "vector6_grammar_fuzzer": {
+      "passed": true,
+      "total_payloads": 2000,
+      "unhandled_crashes": 0,
+      "clean_parses": 400,
+      "heuristic_repairs": 400,
+      "epsilon_escapes": 1200,
+      "mean_latency_ms": 0.038,
+      "p95_latency_ms": 0.141,
+      "p99_latency_ms": 0.159,
+      "total_elapsed_s": 0.08
+    }
+  },
+  "campaign_passed": true,
+  "total_elapsed_seconds": 256.28
+}

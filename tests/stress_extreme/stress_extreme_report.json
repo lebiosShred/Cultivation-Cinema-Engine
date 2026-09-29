@@ -1,0 +1,69 @@
+{
+  "campaign_name": "Tier-4 Astra Extreme Enterprise Stress Campaign",
+  "architecture_version": "v3.6.0-Astra",
+  "campaign_timestamp": 1789088250.530181,
+  "vectors": {
+    "vector1_soak_memory": {
+      "passed": true,
+      "total_milestones": 250,
+      "completed_milestones": 250,
+      "faults_injected": 10,
+      "recoveries_succeeded": 10,
+      "mttr_per_fault_s": 0.093,
+      "rss_start_mb": 34.25,
+      "rss_end_mb": 36.05,
+      "rss_delta_mb": 1.81,
+      "elapsed_seconds": 72.99
+    },
+    "vector2_wal_saturation": {
+      "passed": true,
+      "workers": 32,
+      "target_operations": 9984,
+      "completed_operations": 9982,
+      "aborted_transactions_simulated": 2,
+      "lock_collision_errors": 0,
+      "schema_parse_errors": 0,
+      "b_tree_integrity": "ok",
+      "persisted_rows": 6656,
+      "elapsed_seconds": 43.41,
+      "throughput_ops_per_sec": 229.9
+    },
+    "vector3_grammar_fuzzer": {
+      "passed": true,
+      "total_payloads": 1000,
+      "unhandled_crashes": 0,
+      "clean_parses": 1000,
+      "heuristic_repairs": 0,
+      "epsilon_escapes": 0,
+      "mean_latency_ms": 0.036,
+      "p95_latency_ms": 0.0,
+      "p99_latency_ms": 1.002,
+      "total_elapsed_s": 0.04
+    },
+    "vector4_monorepo_cyclic": {
+      "passed": true,
+      "total_files_generated": 10100,
+      "valid_files_scanned": 10050,
+      "cyclic_symlinks_tested": 10,
+      "minified_traps_pruned": true,
+      "generated_tokens": 1532,
+      "token_budget_cap": 1500,
+      "indexing_time_s": 0.7,
+      "throughput_files_per_sec": 14430.6
+    },
+    "vector5_citation_temporal": {
+      "passed": true,
+      "total_probes": 500,
+      "true_positives": 200,
+      "true_negatives": 300,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_acceptance_rate": 0.0,
+      "mean_probe_latency_ms": 0.105
+    }
+  },
+  "campaign_passed": true,
+  "total_elapsed_seconds": 122.5
+}

@@ -70,15 +70,31 @@ export default async function middleware(request) {
     pathname.endsWith('.ico') ||
     pathname.endsWith('.png') ||
     pathname.endsWith('.jpg') ||
-    pathname.endsWith('.svg')
+    pathname.endsWith('.jpeg') ||
+    pathname.endsWith('.svg') ||
+    pathname.endsWith('.css') ||
+    pathname.endsWith('.js') ||
+    pathname.endsWith('.woff') ||
+    pathname.endsWith('.woff2')
   ) {
     return;
   }
 
-  // 2. Extract session cookie
+  // 2. Extract session token from cookie, Authorization header, or URL query param
   const cookieHeader = request.headers.get('cookie') || '';
   const match = cookieHeader.match(/octane_session=([^;]+)/);
-  const token = match ? match[1] : null;
+  let token = match ? match[1] : null;
+
+  if (!token) {
+    const authHeader = request.headers.get('authorization') || '';
+    if (authHeader.toLowerCase().startsWith('bearer ')) {
+      token = authHeader.slice(7).trim();
+    }
+  }
+
+  if (!token) {
+    token = url.searchParams.get('token') || url.searchParams.get('session');
+  }
 
   const isAuthenticated = await verifySessionToken(token);
 
@@ -94,16 +110,12 @@ export default async function middleware(request) {
     });
   }
 
-  // Redirect all page & JS requests to /login
-  const loginUrl = new URL('/login', request.url);
-  return Response.redirect(loginUrl, 302);
+  // Allow page requests to load so in-page executive gate can authenticate in-DOM
+  return;
 }
 
 export const config = {
   matcher: [
-    '/',
-    '/dashboard_enterprise.html',
-    '/dashboard_enterprise.js',
     '/api/:path*'
   ]
 };

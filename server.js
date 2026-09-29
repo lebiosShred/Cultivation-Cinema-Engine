@@ -189,17 +189,36 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 3.5 Meta Ads Report Route (Public Executive Landing Page)
+  if (pathname === '/meta-ads-report' || pathname === '/meta-ads-report.html') {
+    const filePath = path.join(__dirname, 'meta-ads-report.html');
+    if (fs.existsSync(filePath)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return fs.createReadStream(filePath).pipe(res);
+    }
+  }
+
   // 4. Public Assets Whitelist
   if (
     pathname.endsWith('.ico') ||
     pathname.endsWith('.png') ||
     pathname.endsWith('.jpg') ||
-    pathname.endsWith('.svg')
+    pathname.endsWith('.jpeg') ||
+    pathname.endsWith('.svg') ||
+    pathname.endsWith('.mp4') ||
+    pathname.endsWith('.webm') ||
+    pathname.startsWith('/media/')
   ) {
     const filePath = path.join(__dirname, pathname.replace(/^\//, ''));
-    if (fs.existsSync(filePath)) {
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
       const ext = path.extname(filePath).toLowerCase();
-      const mime = ext === '.png' ? 'image/png' : ext === '.svg' ? 'image/svg+xml' : 'image/x-icon';
+      let mime = 'application/octet-stream';
+      if (ext === '.png') mime = 'image/png';
+      else if (ext === '.svg') mime = 'image/svg+xml';
+      else if (ext === '.ico') mime = 'image/x-icon';
+      else if (ext === '.jpg' || ext === '.jpeg') mime = 'image/jpeg';
+      else if (ext === '.mp4') mime = 'video/mp4';
+      else if (ext === '.webm') mime = 'video/webm';
       res.writeHead(200, { 'Content-Type': mime });
       return fs.createReadStream(filePath).pipe(res);
     }
@@ -221,7 +240,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 6. Authenticated Requests: Serve Application Assets
-  let targetFile = pathname === '/' ? 'dashboard_enterprise.html' : pathname.replace(/^\//, '');
+  let targetFile = (pathname === '/' || pathname === '/report' || pathname.startsWith('/report/')) ? 'dashboard_enterprise.html' : pathname.replace(/^\//, '');
   const filePath = path.join(__dirname, targetFile);
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {

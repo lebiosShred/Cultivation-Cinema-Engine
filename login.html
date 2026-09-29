@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Executive Access Authentication | Octane Software Solutions</title>
-  <link rel="icon" type="image/png" href="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/octane-favicon-larger-1.png">
+  <link rel="icon" type="image/png" href="/media/octane_favicon.png">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -251,7 +251,7 @@
         <span id="error-text">Invalid access key. Please verify and retry.</span>
       </div>
 
-      <form id="auth-form" class="auth-form" onsubmit="handleAuthSubmit(event)">
+      <div id="auth-form" class="auth-form">
         <div class="form-group">
           <label for="password-input" class="form-label">Executive Access Key</label>
           <div class="input-wrapper">
@@ -263,6 +263,7 @@
               required 
               autofocus 
               autocomplete="current-password"
+              onkeydown="if (event.key === 'Enter') { event.preventDefault(); handleAuthSubmit(event); }"
             >
             <button 
               type="button" 
@@ -274,11 +275,11 @@
           </div>
         </div>
 
-        <button type="submit" id="submit-btn" class="auth-btn-submit">
+        <button type="button" id="submit-btn" class="auth-btn-submit" onclick="handleAuthSubmit(event)">
           <span id="btn-text">Unlock Dashboard</span>
           <span id="btn-arrow">→</span>
         </button>
-      </form>
+      </div>
     </div>
 
     <div class="auth-footer">
@@ -326,8 +327,15 @@
 
         if (res.ok && data.success) {
           btnText.textContent = 'Access Granted ✓';
-          // Navigate to dashboard
-          window.location.href = data.redirect || '/';
+          if (data.token) {
+            try {
+              localStorage.setItem('octane_session_token', data.token);
+              sessionStorage.setItem('octane_session_token', data.token);
+            } catch (storageErr) {}
+          }
+          // Navigate to dashboard with token for iframe resilience
+          const targetUrl = data.redirect || (data.token ? ('/?token=' + encodeURIComponent(data.token)) : '/');
+          window.location.href = targetUrl;
         } else {
           errorText.textContent = data.error || 'Invalid access key. Access denied.';
           errorBanner.classList.add('show');
@@ -343,6 +351,23 @@
         }
       }
     }
+
+    // Auto-login check if already authenticated in this browser
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const storedToken = sessionStorage.getItem('octane_session_token') || localStorage.getItem('octane_session_token');
+        if (storedToken) {
+          // Verify token quickly
+          fetch('/api/telemetry', {
+            headers: { 'Authorization': 'Bearer ' + storedToken }
+          }).then(res => {
+            if (res.ok) {
+              window.location.href = '/?token=' + encodeURIComponent(storedToken);
+            }
+          }).catch(() => {});
+        }
+      } catch (e) {}
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+{
+  "notes": [
+    {
+      "id": "note-1789313830378",
+      "x": 80,
+      "y": 840,
+      "width": 240,
+      "height": 140,
+      "color": "yellow",
+      "text": "New Strategic Task"
+    },
+    {
+      "id": "note-1789316517869",
+      "x": 80,
+      "y": 840,
+      "width": 240,
+      "height": 140,
+      "color": "yellow",
+      "text": "New Strategic Task"
+    }
+  ],
+  "connections": [],
+  "checklist": {},
+  "updatedAt": 1789316517870
+}

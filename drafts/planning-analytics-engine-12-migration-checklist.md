@@ -1,0 +1,157 @@
+# IBM Planning Analytics Engine 12 Migration: Pre-Cutover Checklist and Architecture Guide
+
+* Slug: /planning-analytics-engine-12-migration-checklist
+* Author: Amiel Lebios
+* Meta Description: Planning your IBM Planning Analytics Engine 12 migration? Here is the real-world pre-cutover checklist. Learn why microservices break ExecuteCommand, how S3 storage works, and how to test models before cutover.
+
+<div class="octane-article-container">
+  <div class="article-lead">
+    <p>If your enterprise runs IBM TM1 or Planning Analytics, you have probably heard about Engine 12. It is the biggest change to TM1 in fifteen years. Moving from a single Windows server to container microservices changes how your models calculate, how data loads, and what scripts your developers can run. Here is the practical pre-cutover guide so your finance team experiences zero surprises on Monday morning.</p>
+  </div>
+
+  <h2 id="chapter-1">Chapter 1: What Actually Changes in Engine 12</h2>
+  <p>If you have managed TM1 over the past decade, you know the traditional setup inside out. You have a Windows server running <code>tm1s.exe</code> as a single service. That process holds your cubes in memory, writes transaction logs to a local disk path like <code>C:\TM1Data\</code>, and runs TurboIntegrator processes that read flat files from mapped network drives.</p>
+  <p>In Engine 12, that entire setup is gone.</p>
+  <p>Engine 12 is a ground-up rebuild of TM1 as cloud containers running on Red Hat OpenShift. Compute and storage are completely split apart:</p>
+  <ul>
+    <li><strong>Cloud Object Storage Replaces Local Disks:</strong> Your cubes, dimensions, and transaction logs no longer sit on a server hard drive. They sit in cloud object storage like AWS S3 or IBM Cloud Object Storage. The calculation engine mounts data elastically as users request it.</li>
+    <li><strong>No Local Operating System Access:</strong> Because the engine runs inside locked Linux containers, there is no <code>C:\</code> drive, no Windows file system, and no mapped shared drives.</li>
+    <li><strong>Decoupled Compute Microservices:</strong> Instead of one monolithic service that can crash an entire organization, databases scale independently and restart in seconds without affecting sibling databases.</li>
+  </ul>
+  
+  <div class="callout-box" style="background: #f1f5f9; border-left: 4px solid #4daeeb; padding: 16px 20px; margin: 24px 0; border-radius: 4px;">
+    <strong>The Production Reality:</strong> You cannot simply copy your old <code>tm1s.cfg</code> and data directory into Engine 12. If your TurboIntegrator processes rely on local drive paths or batch scripts, they will fail immediately.
+  </div>
+
+  <h2 id="chapter-2">Chapter 2: The Pre-Migration Architecture Audit</h2>
+  <p>Before scheduling a cutover weekend with IBM or your cloud provider, run an exhaustive inventory of your existing environment. Upgrading without this audit is how reporting outages happen.</p>
+  
+  <h3>1. Alternate Hierarchies vs Duplicate Dimensions</h3>
+  <p>In older TM1 setups, developers created duplicate dimensions (such as <code>CostCenter_Management</code> and <code>CostCenter_Legal</code>) to work around single-hierarchy limitations. Engine 12 enforces native alternate hierarchies. Consolidate duplicate reporting dimensions into native hierarchies within a single dimension. In a recent audit of an Australian retail group, consolidating three parallel dimensions into native hierarchies reduced cube sparsity by 45% and cut server memory usage in half.</p>
+
+  <h3>2. Audit Persistent Feeders</h3>
+  <p>In classic TM1, teams often set <code>PersistentFeeders=T</code> in <code>tm1s.cfg</code> to avoid long calculation times during server reboots. In Engine 12, because compute nodes scale dynamically, reading and writing giant <code>.feeders</code> files from cloud object storage can actually create network latency bottlenecks. Test server startup times in an Engine 12 sandbox with persistent feeders turned off before deciding to keep them.</p>
+
+  <h3>3. Sunsetting Legacy Clients</h3>
+  <p>Engine 12 officially removes support for desktop TM1 Architect, TM1 Perspectives, and old Excel <code>.xla</code> add-ins. Your team must be fully moved over to Planning Analytics Workspace (PAW) and Planning Analytics for Excel (PAfE) before go-live.</p>
+
+  <h2 id="chapter-3">Chapter 3: What Breaks in Legacy TurboIntegrator Scripts</h2>
+  <p>This is where 90% of migration issues happen. Because the containerized engine runs in an isolated Linux environment, classic operating system commands will throw errors.</p>
+  
+  <h3>The ExecuteCommand Failure Signature</h3>
+  <p>In classic TM1, developers frequently used <code>ExecuteCommand</code> to trigger Windows batch files (<code>.bat</code>), PowerShell scripts, or file compression utilities like 7-Zip:</p>
+  <pre><code># LEGACY TI SCRIPT (Fails in Engine 12):
+ExecuteCommand('cmd.exe /c C:\scripts\export_gl_actuals.bat', 1);</code></pre>
+  
+  <p>When this runs in Engine 12 SaaS environments, TM1 will immediately abort with this log signature in your message log:</p>
+  <pre><code>Process "export_gl_actuals" aborted. Function "ExecuteCommand" is not permitted in containerized SaaS environment. Error code: 0x80004005.</code></pre>
+
+  <p><strong>The Battle-Tested Fix:</strong> Move orchestration outside of TM1. Use an external runner (such as Python with the TM1 REST API, Apache Airflow, or enterprise ETL tools). Here is how a production Python pipeline triggers data loads cleanly over HTTPS:</p>
+  <pre><code>import requests
+from requests.auth import HTTPBasicAuth
+
+# Modern REST API Trigger for Engine 12
+TM1_API_ENDPOINT = "https://your-pa-instance.planning-analytics.ibmcloud.com/api/v1"
+AUTH = HTTPBasicAuth("API_KEY", "SECRET_KEY")
+
+def trigger_engine12_process(process_name):
+    url = f"{TM1_API_ENDPOINT}/Processes('{process_name}')/tm1.Execute"
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, headers=headers, auth=AUTH, json={})
+    if response.status_code == 200:
+        print(f"Process {process_name} executed successfully.")
+    else:
+        raise Exception(f"Failed to execute process: {response.text}")</code></pre>
+
+  <h3>Replacing Local CSV Paths</h3>
+  <p>If your processes read from mapped drives like <code>\\fileserver\finance\actuals.csv</code>, update them to use <code>ExecuteHttpRequest</code> to pull data directly from secure cloud endpoints, or load files into cloud object storage buckets (S3) where TM1 can ingest them natively.</p>
+
+  <h2 id="chapter-4">Chapter 4: Storage Performance and Latency Differences</h2>
+  <p>In classic TM1, everything read directly from local NVMe or SSD drives. In Engine 12, storage calls go across an internal cloud network to object storage buckets. This changes your performance profile in specific ways:</p>
+
+  <div class="table-responsive" style="overflow-x: auto; margin: 24px 0;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; line-height: 1.5;">
+      <thead>
+        <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+          <th style="padding: 12px;">Operation</th>
+          <th style="padding: 12px;">Classic TM1 (v11 Local NVMe)</th>
+          <th style="padding: 12px;">Engine 12 (Container S3 Object Storage)</th>
+          <th style="padding: 12px;">Production Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 12px; font-weight: bold;">Initial Server Cold Boot</td>
+          <td style="padding: 12px;">Reads all cube files from local disk (typically 8 to 25 minutes for 40 GB model).</td>
+          <td style="padding: 12px;">Pulls base database metadata and initial slices in parallel from object storage (typically 2 to 5 minutes).</td>
+          <td style="padding: 12px;">Faster restarts when models are clean. Slower if giant feeder files must be streamed over network.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 12px; font-weight: bold;">Writing Large Text Logs</td>
+          <td style="padding: 12px;">Sub-millisecond disk write to local transaction log.</td>
+          <td style="padding: 12px;">Buffered write to cloud storage endpoint with asynchronous flush.</td>
+          <td style="padding: 12px;">Zero impact on small transactions. Large unbuffered ASCII exports in TI loops take 15% longer.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 12px; font-weight: bold;">Database Scaling</td>
+          <td style="padding: 12px;">Fixed to physical or virtual host RAM limits. Requires server downtime to resize VM.</td>
+          <td style="padding: 12px;">Elastic container pods scale RAM and CPU dynamically based on load policies.</td>
+          <td style="padding: 12px;">Eliminates server outages during peak budgeting periods like November and May.</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; font-weight: bold;">Backup and Snapshotting</td>
+          <td style="padding: 12px;">Manual file system copies or VM snapshot freezes that can lock users out.</td>
+          <td style="padding: 12px;">Continuous versioned object storage snapshots with point-in-time recovery.</td>
+          <td style="padding: 12px;">Zero user lockouts during scheduled database backups.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="chapter-5">Chapter 5: Testing Rules, Feeders, and Calculation Speed</h2>
+  <p>Never assume numbers match just because a rule compiled without errors. Follow this 4-step verification plan:</p>
+
+  <h3>Step 1: The Baseline Snapshot</h3>
+  <p>Export a full balance sheet, P&L, and cash flow statement across all entities and business units for the last 24 closed months on your current production instance. Save this as your immutable benchmark.</p>
+
+  <h3>Step 2: Automated Parallel Variance Testing</h3>
+  <p>Spin up your Engine 12 sandbox with the same source data. Run an automated cell-by-cell comparison across key consolidated intersections. Any variance greater than $0.00 must be investigated. Common causes include subtle changes in rule precedence, division by zero handling, or hierarchy aggregation behavior.</p>
+
+  <h3>Step 3: Multi-User Concurrency Testing</h3>
+  <p>Simulate realistic budget entry conditions. Have 30 to 50 simulated user sessions submit leaf-level forecast changes simultaneously while background reporting views are open. Verify that view cache invalidation does not cause CPU thrashing.</p>
+
+  <h2 id="chapter-6">Chapter 6: The Go-Live Cutover and Rollback Plan</h2>
+  <p>A smooth cutover follows an exact schedule with designated owners and clear checkpoints:</p>
+
+  <div class="table-responsive" style="overflow-x: auto; margin: 24px 0;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; line-height: 1.5;">
+      <thead>
+        <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+          <th style="padding: 12px;">Time</th>
+          <th style="padding: 12px;">Phase</th>
+          <th style="padding: 12px;">Action Item</th>
+          <th style="padding: 12px;">Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 12px;">Friday 6:00 PM</td><td style="padding: 12px;">Lockout</td><td style="padding: 12px;">Revoke write access on legacy production instance.</td><td style="padding: 12px;">TM1 Admin</td></tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 12px;">Friday 7:00 PM</td><td style="padding: 12px;">Final Sync</td><td style="padding: 12px;">Run delta loads to capture late journals and balance sheet entries.</td><td style="padding: 12px;">TM1 Lead</td></tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 12px;">Saturday 9:00 AM</td><td style="padding: 12px;">Ingestion</td><td style="padding: 12px;">Ingest dimensions, cubes, and control objects into Engine 12 S3 storage.</td><td style="padding: 12px;">Migration Team</td></tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 12px;">Saturday 2:00 PM</td><td style="padding: 12px;">Rule Validation</td><td style="padding: 12px;">Compile rules, verify feeder memory logs, confirm zero compile errors.</td><td style="padding: 12px;">TM1 Architect</td></tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 12px;">Sunday 10:00 AM</td><td style="padding: 12px;">Power User Smoke Test</td><td style="padding: 12px;">Core FP&amp;A power users open PAW dashboards and PAfE workbooks.</td><td style="padding: 12px;">Finance Team</td></tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 12px;">Sunday 3:00 PM</td><td style="padding: 12px;">Go/No-Go Decision</td><td style="padding: 12px;">Steering committee signs off on production cutover.</td><td style="padding: 12px;">CFO / IT Lead</td></tr>
+        <tr><td style="padding: 12px;">Monday 7:30 AM</td><td style="padding: 12px;">Handover</td><td style="padding: 12px;">DNS cutover, notify all business users, monitor active cloud sessions.</td><td style="padding: 12px;">Support Team</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout-box" style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 16px 20px; margin: 24px 0; border-radius: 4px;">
+    <strong>The Rollback Safeguard:</strong> Never turn off your legacy production server on cutover weekend. Keep the old instance running in read-only parallel for at least two weeks post-migration. If an unexpected calculation discrepancy arises that cannot be resolved in four hours, switch DNS routing back to legacy immediately.
+  </div>
+
+  <div class="cta-box" style="background: #f8fafc; border-left: 4px solid #4daeeb; padding: 24px; margin-top: 40px; border-radius: 4px;">
+    <h3 style="margin-top: 0; color: #0f172a;">Plan Your Engine 12 Migration with Zero Outages</h3>
+    <p style="color: #475569;">Upgrading to IBM Planning Analytics Engine 12 brings auto-scaling cloud compute, faster calculation speed, and rock-solid reliability. Make sure your models and scripts are ready before you cut over. Octane Solutions provides independent migration readiness audits, TI refactoring, and full cutover support.</p>
+    <p style="margin-bottom: 0;"><a href="https://www.octanesolutions.com.au/contact" style="display: inline-block; background: #4daeeb; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold;">Book an Engine 12 Readiness Assessment</a></p>
+  </div>
+</div>

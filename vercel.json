@@ -2,6 +2,10 @@
   "version": 2,
   "rewrites": [
     { "source": "/login", "destination": "/login.html" },
+    { "source": "/meta-ads-report", "destination": "/meta-ads-report.html" },
+    { "source": "/report", "destination": "/dashboard_enterprise.html" },
+    { "source": "/report/(.*)", "destination": "/dashboard_enterprise.html" },
     { "source": "/", "destination": "/dashboard_enterprise.html" }
   ]
 }
+

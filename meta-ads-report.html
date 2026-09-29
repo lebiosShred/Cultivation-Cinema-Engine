@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Ads Executive Report | Octane Software Solutions</title>
+  <link rel="icon" type="image/svg+xml" href="https://files.catbox.moe/iaauu1.svg">
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-dark: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --octane-blue: #4daeeb;
+      --octane-blue-hover: #2ba0e3;
+      --octane-blue-subtle: #f0f9ff;
+      --octane-blue-border: #bae6fd;
+      --border: #e2e8f0;
+      --border-card: #e2e8f0;
+      --green: #10b981;
+      --green-bg: #ecfdf5;
+      --green-border: #a7f3d0;
+      --red: #ef4444;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* HEADER */
+    .executive-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .header-logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 24px;
+      background-color: var(--border);
+    }
+
+    .header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--octane-blue-subtle);
+      border: 1px solid var(--octane-blue-border);
+      color: #0369a1;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 9999px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--octane-blue);
+    }
+
+    /* MAIN CONTAINER */
+    .page-wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* BIG SUMMARY BANNER */
+    .summary-banner {
+      background: #ffffff;
+      border: 1px solid var(--octane-blue-border);
+      border-left: 6px solid var(--octane-blue);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .banner-badge {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #0284c7;
+      background: var(--octane-blue-subtle);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .banner-headline {
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .banner-subtext {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 3 BIG NUMBER CARDS */
+    .metrics-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .pill-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .pill-badge.green {
+      background: var(--green-bg);
+      color: #047857;
+      border: 1px solid var(--green-border);
+    }
+
+    .pill-badge.blue {
+      background: var(--octane-blue-subtle);
+      color: #0369a1;
+      border: 1px solid var(--octane-blue-border);
+    }
+
+    .pill-badge.leak {
+      background: var(--red-bg);
+      color: #b91c1c;
+      border: 1px solid var(--red-border);
+      font-weight: 800;
+    }
+
+    .metric-number-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .metric-number {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .metric-unit {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .metric-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .metric-card.leak-accent {
+      border-color: #fca5a5;
+      background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
+    }
+
+    .metric-card.leak-accent .metric-number {
+      color: var(--red);
+    }
+
+    /* STORY SECTION HEADER */
+    .story-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .story-head {
+      margin-bottom: 4px;
+    }
+
+    .story-subtitle {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--octane-blue);
+      margin-bottom: 6px;
+    }
+
+    .story-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+    }
+
+    /* 4-STEP STACK */
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      gap: 24px;
+    }
+
+    .step-badge-col {
+      flex-shrink: 0;
+    }
+
+    .step-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .step-circle.blue-circle {
+      background: var(--octane-blue);
+      color: #ffffff;
+    }
+
+    .step-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step-header-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .step-category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .step-headline {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .step-description {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* STEP 1: VIDEO AD UNIT MOCKUP */
+    .ad-preview-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+      max-width: 580px;
+    }
+
+    .ad-account-bar {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .ad-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .ad-avatar img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    .ad-account-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ad-account-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .ad-sponsored-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .ad-text-body {
+      padding: 16px 18px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    .ad-text-body p {
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .ad-steps-list {
+      padding-left: 20px;
+      margin-top: 6px;
+      color: var(--text-secondary);
+    }
+
+    .ad-steps-list li {
+      margin-bottom: 4px;
+    }
+
+    .video-viewport {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .video-viewport video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ad-action-bar {
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .ad-action-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ad-site-url {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .ad-headline-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .ad-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--octane-blue);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.2s ease;
+    }
+
+    .ad-button:hover {
+      background-color: var(--octane-blue-hover);
+    }
+
+    /* STEP 2: AUDIENCE GRID */
+    .audience-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .audience-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .audience-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .audience-info strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .audience-info p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* STEP 3: WEBSITE FUNNEL */
+    .funnel-container {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .funnel-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .funnel-block {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .funnel-block.highlight-red {
+      border-color: #fca5a5;
+      background: #fffafa;
+    }
+
+    .funnel-metric {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .funnel-block.highlight-red .funnel-metric {
+      color: var(--red);
+    }
+
+    .funnel-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-top: 4px;
+    }
+
+    .funnel-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .funnel-arrow {
+      font-size: 1.5rem;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .funnel-takeaway {
+      background: #ffffff;
+      border: 1px solid var(--octane-blue-border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .funnel-takeaway strong {
+      color: var(--text-dark);
+    }
+
+    /* STEP 4: SOLUTION COMPARISON */
+    .comparison-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .comparison-box {
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .comparison-box.barrier {
+      background: #fffafa;
+      border: 1px solid #fecaca;
+    }
+
+    .comparison-box.solution {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+
+    .comparison-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      align-self: flex-start;
+    }
+
+    .comparison-box.barrier .comparison-tag {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .comparison-box.solution .comparison-tag {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .comparison-box h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .comparison-list {
+      padding-left: 20px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .comparison-list li {
+      margin-bottom: 6px;
+    }
+
+    .comparison-outcome {
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .comparison-box.barrier .comparison-outcome {
+      color: #b91c1c;
+    }
+
+    .comparison-box.solution .comparison-outcome {
+      color: #15803d;
+    }
+
+    /* FOOTER */
+    .executive-footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      margin-top: 20px;
+    }
+
+    .footer-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-logo {
+      height: 26px;
+      width: auto;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--octane-blue);
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .page-wrapper {
+        padding: 24px 16px 60px;
+        gap: 32px;
+      }
+      .summary-banner {
+        padding: 24px 20px;
+      }
+      .banner-headline {
+        font-size: 1.35rem;
+      }
+      .metrics-section {
+        grid-template-columns: 1fr;
+      }
+      .step-card {
+        flex-direction: column;
+        padding: 24px 20px;
+      }
+      .audience-cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .funnel-row {
+        flex-direction: column;
+      }
+      .funnel-arrow {
+        transform: rotate(90deg);
+      }
+      .comparison-container {
+        grid-template-columns: 1fr;
+      }
+      .ad-action-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .ad-button {
+        width: 100%;
+        min-height: 44px;
+        text-align: center;
+      }
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="executive-header">
+    <div class="header-container">
+      <div class="header-brand">
+        <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Logo" class="header-logo">
+        <div class="header-divider"></div>
+        <h1 class="header-title">Meta Ads Executive Report</h1>
+      </div>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>Campaign Complete &bull; Executive Brief</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+
+    <!-- BIG PLAIN-ENGLISH SUMMARY BANNER -->
+    <section class="summary-banner">
+      <div class="banner-badge">Executive Summary</div>
+      <h2 class="banner-headline">
+        We spent $84 AUD to show our DataFusion video ad to 2,664 finance leaders. 74 clicked to our website, but none booked a sales call yet.
+      </h2>
+      <p class="banner-subtext">
+        The video ad successfully captured high-intent finance executives at low cost. The issue is on our landing page: the current booking form asks too many questions upfront, causing interested visitors to leave before choosing a meeting time.
+      </p>
+    </section>
+
+    <!-- 3 BIG NUMBER CARDS -->
+    <section class="metrics-section">
+      <!-- Card 1: Money Spent -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">Money Spent</span>
+          <span class="pill-badge green">Under Budget</span>
+        </div>
+        <div class="metric-number-wrap">
+          <span class="metric-number">$84</span>
+          <span class="metric-unit">AUD</span>
+        </div>
+        <p class="metric-sub">Total ad investment deployed across Facebook and Instagram feeds.</p>
+      </div>
+
+      <!-- Card 2: People Who Clicked -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title">People Who Clicked</span>
+          <span class="pill-badge blue">$1.14 per click</span>
+        </div>
+        <div class="metric-number-wrap">
+          <span class="metric-number">74</span>
+          <span class="metric-unit">Clicks</span>
+        </div>
+        <p class="metric-sub">Qualified finance professionals who tapped our ad and landed on our site.</p>
+      </div>
+
+      <!-- Card 3: Demos Booked -->
+      <div class="metric-card leak-accent">
+        <div class="metric-header">
+          <span class="metric-title">Demos Booked</span>
+          <span class="pill-badge leak">The Leak to Fix</span>
+        </div>
+        <div class="metric-number-wrap">
+          <span class="metric-number">0</span>
+          <span class="metric-unit">Calls</span>
+        </div>
+        <p class="metric-sub">Zero calls booked because the long form created immediate friction.</p>
+      </div>
+    </section>
+
+    <!-- THE 4-STEP STORY (VERTICAL CLEAN STACK) -->
+    <section class="story-section">
+      <div class="story-head">
+        <div class="story-subtitle">Campaign Breakdown</div>
+        <h2 class="story-title">The 4-Step Story</h2>
+      </div>
+
+      <!-- STEP 1: THE VIDEO AD -->
+      <article class="step-card">
+        <div class="step-badge-col">
+          <div class="step-circle">1</div>
+        </div>
+        <div class="step-content">
+          <div class="step-header-wrap">
+            <span class="step-category">Step 1</span>
+            <h3 class="step-headline">The Video Ad</h3>
+            <p class="step-description">
+              Watch the exact 1:1 video ad that played on Facebook and Instagram. Include real video player with controls, muted, playsinline, and fallback poster. Show ad text and 'Book Live Demo' button.
+            </p>
+          </div>
+
+          <!-- Video Ad Unit Showcase -->
+          <div class="ad-preview-box">
+            <div class="ad-account-bar">
+              <div class="ad-avatar">
+                <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Logo">
+              </div>
+              <div class="ad-account-details">
+                <span class="ad-account-name">Octane Software Solutions</span>
+                <span class="ad-sponsored-label">Sponsored &bull; Feed Placement</span>
+              </div>
+            </div>
+
+            <div class="ad-text-body">
+              <p>Five steps to eliminate manual TM1-to-Power BI data pipelines:</p>
+              <ol class="ad-steps-list">
+                <li>Download and authorize DataFusion</li>
+                <li>Select your TM1 dataset</li>
+                <li>Generate a secure connection code</li>
+                <li>Paste directly into Power BI</li>
+                <li>Scheduled sync begins automatically</li>
+              </ol>
+            </div>
+
+            <div class="video-viewport">
+              <video 
+                controls 
+                muted 
+                playsinline 
+                preload="metadata"
+                poster="/media/real_campaign_creative_graphic_2x.png"
+              >
+                <source src="/media/real_campaign_creative_player.mp4" type="video/mp4">
+                <source src="/media/real_campaign_creative.mp4" type="video/mp4">
+                <img src="/media/real_campaign_creative_with_cta.png" alt="Video ad fallback graphic">
+              </video>
+            </div>
+
+            <div class="ad-action-bar">
+              <div class="ad-action-text">
+                <span class="ad-site-url">OCTANESOLUTIONS.COM.AU</span>
+                <span class="ad-headline-text">Automate TM1 to Power BI in 5 Minutes</span>
+              </div>
+              <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="ad-button">
+                Book Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STEP 2: WHO SAW IT -->
+      <article class="step-card">
+        <div class="step-badge-col">
+          <div class="step-circle">2</div>
+        </div>
+        <div class="step-content">
+          <div class="step-header-wrap">
+            <span class="step-category">Step 2</span>
+            <h3 class="step-headline">Who Saw It</h3>
+            <p class="step-description">
+              CFOs, Finance Directors, and Controllers in Australia and New Zealand who already use IBM TM1 and Power BI. No random junior workers.
+            </p>
+          </div>
+
+          <div class="audience-cards-grid">
+            <div class="audience-card">
+              <div class="audience-icon-wrap">👔</div>
+              <div class="audience-info">
+                <strong>Senior Finance Roles Only</strong>
+                <p>Targeted Chief Financial Officers, Finance Directors, Financial Controllers, and FP&amp;A Leaders with purchasing authority.</p>
+              </div>
+            </div>
+
+            <div class="audience-card">
+              <div class="audience-icon-wrap">🌏</div>
+              <div class="audience-info">
+                <strong>Australia &amp; New Zealand</strong>
+                <p>Focused exclusively on major business centers across AU and NZ where enterprise finance teams operate.</p>
+              </div>
+            </div>
+
+            <div class="audience-card">
+              <div class="audience-icon-wrap">📊</div>
+              <div class="audience-info">
+                <strong>Specific Software Stack</strong>
+                <p>Pre-screened organizations actively using IBM Planning Analytics / TM1 together with Microsoft Power BI.</p>
+              </div>
+            </div>
+
+            <div class="audience-card">
+              <div class="audience-icon-wrap">🎯</div>
+              <div class="audience-info">
+                <strong>No Random Junior Workers</strong>
+                <p>Audience networks, interns, students, and unrelated roles were strictly filtered out to avoid wasted ad spend.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STEP 3: WHAT HAPPENED ON THE WEBSITE -->
+      <article class="step-card">
+        <div class="step-badge-col">
+          <div class="step-circle">3</div>
+        </div>
+        <div class="step-content">
+          <div class="step-header-wrap">
+            <span class="step-category">Step 3</span>
+            <h3 class="step-headline">What Happened on the Website</h3>
+            <p class="step-description">
+              74 people clicked the ad and landed on our page. They stayed an average of 42 seconds reading, but left before picking a meeting time.
+            </p>
+          </div>
+
+          <div class="funnel-container">
+            <div class="funnel-row">
+              <div class="funnel-block">
+                <div class="funnel-metric">74</div>
+                <div class="funnel-label">Landed on Page</div>
+                <div class="funnel-sub">From Facebook &amp; Instagram</div>
+              </div>
+              <div class="funnel-arrow">&rarr;</div>
+              <div class="funnel-block">
+                <div class="funnel-metric">42s</div>
+                <div class="funnel-label">Average Time Spent</div>
+                <div class="funnel-sub">Carefully read the solution</div>
+              </div>
+              <div class="funnel-arrow">&rarr;</div>
+              <div class="funnel-block highlight-red">
+                <div class="funnel-metric">0</div>
+                <div class="funnel-label">Completed Bookings</div>
+                <div class="funnel-sub">Abandoned at long form</div>
+              </div>
+            </div>
+
+            <div class="funnel-takeaway">
+              <strong>Key Finding:</strong> A 42-second visit proves strong interest. Finance executives understood the proposition, but when faced with an extensive questionnaire instead of an instant schedule, they abandoned the page.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STEP 4: WHAT WE NEED TO FIX -->
+      <article class="step-card">
+        <div class="step-badge-col">
+          <div class="step-circle blue-circle">4</div>
+        </div>
+        <div class="step-content">
+          <div class="step-header-wrap">
+            <span class="step-category" style="color: var(--octane-blue);">Step 4 &bull; Immediate Action</span>
+            <h3 class="step-headline">What We Need to Fix</h3>
+            <p class="step-description">
+              The booking form has too many steps. Replace it with a simple 2-click calendar so those 74 visitors can easily pick a time.
+            </p>
+          </div>
+
+          <div class="comparison-container">
+            <!-- Current Problem -->
+            <div class="comparison-box barrier">
+              <div>
+                <span class="comparison-tag">Current Barrier</span>
+                <h4 style="margin-top: 10px;">Complicated Multi-Question Form</h4>
+              </div>
+              <ul class="comparison-list">
+                <li>Requires typing first name, last name, and job title</li>
+                <li>Asks for company size, annual budget, and team structure</li>
+                <li>Requires typing existing software versions</li>
+                <li>Forces visitors to wait for a manual email reply</li>
+              </ul>
+              <div class="comparison-outcome">Outcome: High friction causes 100% drop-off.</div>
+            </div>
+
+            <!-- The Solution -->
+            <div class="comparison-box solution">
+              <div>
+                <span class="comparison-tag">The Solution</span>
+                <h4 style="margin-top: 10px;">Simple 2-Click Calendar</h4>
+              </div>
+              <ul class="comparison-list">
+                <li>Click 1: Select a day on the calendar</li>
+                <li>Click 2: Pick a 15-minute consultation slot</li>
+                <li>Enter business email to confirm</li>
+                <li>Calendar invite lands directly in their Outlook or Google Calendar</li>
+              </ul>
+              <div class="comparison-outcome">Outcome: Friction removed, allowing interested leaders to book instantly.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- CLEAN FOOTER -->
+  <footer class="executive-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Logo" class="footer-logo">
+        <span class="footer-copy">&copy; 2026 Octane Software Solutions Pty Ltd. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://octanesolutions.com.au" target="_blank" rel="noopener noreferrer" class="footer-link">Octane Solutions</a>
+        <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="footer-link">TM1 Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -11,18 +11,29 @@ except ImportError:
     get_authenticated_service = None
     upload_video = None
 
+def check_nvenc_available():
+    """Checks if NVIDIA NVENC hardware acceleration is supported by FFmpeg."""
+    try:
+        res = subprocess.run(["ffmpeg", "-encoders"], capture_output=True, text=True)
+        return "hevc_nvenc" in res.stdout or "h264_nvenc" in res.stdout
+    except Exception:
+        return False
+
 def extract_keyframes(video_path, output_dir, timestamps=[60, 180, 360, 540]):
     """
     Extracts high-resolution 4K keyframe snapshots from the video for thumbnail creation.
     """
     os.makedirs(output_dir, exist_ok=True)
     generated_frames = []
+    has_nvenc = check_nvenc_available()
     
-    print(f"\n🖼️ Extracting 4K keyframes from {os.path.basename(video_path)}...")
+    print(f"\n🖼️ Extracting 4K keyframes from {os.path.basename(video_path)} (CUDA HWAccel: {has_nvenc})...")
     for ts in timestamps:
         out_file = os.path.join(output_dir, f"thumbnail_frame_{ts:04d}s.jpg")
-        cmd = [
-            "ffmpeg", "-y",
+        cmd = ["ffmpeg", "-y"]
+        if has_nvenc:
+            cmd += ["-hwaccel", "cuda"]
+        cmd += [
             "-ss", str(ts),
             "-i", video_path,
             "-vframes", "1",
@@ -56,6 +67,54 @@ def generate_highlight_teaser(video_path, output_path, start_time="00:03:00", du
         return output_path
     else:
         print(f"❌ Teaser extraction error: {res.stderr.decode('utf-8', errors='ignore')}")
+        return None
+
+def encode_4k_nvenc_master(input_video, output_video, audio_path=None, crf_cq=18, bitrate="45M"):
+    """
+    Renders theater-grade 4K 60FPS master video using NVIDIA NVENC hardware acceleration.
+    """
+    has_nvenc = check_nvenc_available()
+    print(f"\n🚀 Rendering 4K Master Video (NVENC GPU Acceleration: {has_nvenc})...")
+    
+    cmd = ["ffmpeg", "-y"]
+    if has_nvenc:
+        cmd += ["-hwaccel", "cuda"]
+        
+    cmd += ["-i", input_video]
+    if audio_path and os.path.exists(audio_path):
+        cmd += ["-i", audio_path, "-map", "0:v:0", "-map", "1:a:0", "-c:a", "aac", "-b:a", "320k"]
+        
+    if has_nvenc:
+        cmd += [
+            "-c:v", "hevc_nvenc",
+            "-preset", "p5",
+            "-tune", "hq",
+            "-rc", "vbr",
+            "-cq", str(crf_cq),
+            "-b:v", bitrate,
+            "-maxrate", "60M",
+            "-bufsize", "120M",
+            "-spatial-aq", "1",
+            "-temporal-aq", "1"
+        ]
+    else:
+        cmd += [
+            "-c:v", "libx264",
+            "-crf", str(crf_cq),
+            "-preset", "fast"
+        ]
+        
+    cmd += [output_video]
+    
+    t0 = time.time()
+    res = subprocess.run(cmd, capture_output=True)
+    if res.returncode == 0 and os.path.exists(output_video):
+        elapsed = time.time() - t0
+        sz_mb = os.path.getsize(output_video) / (1024 * 1024)
+        print(f"✅ 4K NVENC Master Rendered: {output_video} ({sz_mb:.2f} MB in {elapsed:.1f}s)")
+        return output_video
+    else:
+        print(f"⚠️ NVENC render error: {res.stderr.decode('utf-8', errors='ignore')[:300]}")
         return None
 
 def build_metadata(episode_num=189, series_title="A Record of a Mortal's Journey to Immortality"):

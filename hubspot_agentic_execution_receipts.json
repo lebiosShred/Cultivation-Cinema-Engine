@@ -1,0 +1,191 @@
+{
+  "timestamp": "2026-09-14T06:27:28Z",
+  "totalPostsInPortal": 305,
+  "unpublishedToDraftCount": 163,
+  "alreadyDraftCount": 0,
+  "redirectsCreated": 54,
+  "redirectsExisting": 113,
+  "pillarSchemasInjected": 5,
+  "sampleDraftedPosts": [
+    {
+      "id": "5599196874",
+      "title": "A TM1 Guide on How To for Dummies",
+      "slug": "a-tm1-guide-on-how-to-for-dummies",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5771327325",
+      "title": "Cognos Analytics 11.0.11.0 is now available for download",
+      "slug": "cognos-analytics-11.0.11.0-is-now-available-for-download",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5471570952",
+      "title": "Impacts to Accounting & Finance by Artificial Intelligence Automation",
+      "slug": "impacts-to-accounting-finance-by-ai-automation",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "188824623027",
+      "title": "How can an AI assistant help in your business?",
+      "slug": "how-can-an-ai-assistant-help-in-your-business",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "147699445141",
+      "title": "ChatGPT for Enterprise: Reimagine how works gets done with AI powered automation",
+      "slug": "chatgpt-for-enterprise-reimagine",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "187247037787",
+      "title": "IBM Planning Analytics AI assistant - revolutionising business planning with artificial intelligence",
+      "slug": "revolutionising-business-planning-with-artificial-intelligence",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "32404787252",
+      "title": "TM1: Feeder-Less Feeding",
+      "slug": "tm1-feeder-less-feeding",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "10009062272",
+      "title": "Journey to the Mysterious \u201cFeeder\u201dland",
+      "slug": "journey-to-the-mysterious-feederland",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "9587660687",
+      "title": "Planning Analytics and PowerBI",
+      "slug": "power-bi-and-tm1",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "30262210325",
+      "title": "6 Reasons why you should get DataFusion - a TM1 connector",
+      "slug": "6-reasons-why-you-should-get-datafusion-a-tm1-connector",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "127819865213",
+      "title": "Is it time to move to Planning Analytics on the Cloud?",
+      "slug": "is-it-time-to-move-to-planning-analytics-on-the-cloud",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "15088171154",
+      "title": "Moving from on-premise TM1 10.X.X to Planning Analytics on Cloud",
+      "slug": "moving-from-on-premises-tm1-10.x.x-to-planning-analytics-on-cloud",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5471618704",
+      "title": "IBM TM1 10.2 vs IBM Planning Analytics",
+      "slug": "ibm-tm1-10.2-vs-ibm-planning-analytics",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5210632894",
+      "title": "What is IBM Planning Analytics Local",
+      "slug": "ibm-planning-analytics-local",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "8570759825",
+      "title": "Expand your Business Value with intelligence and Analytics",
+      "slug": "expand-your-business-value-with-intelligence-and-analytics",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "8404946639",
+      "title": "Business Intelligence \u2013 Business Analytics",
+      "slug": "business-intelligence-business-analytics",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "10323338511",
+      "title": "Leveraging the Benefits of Business Intelligence Software",
+      "slug": "leveraging-the-benefits-of-business-intelligence-software",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "89330933035",
+      "title": "How does Octane TM1 Support services work and why is it so popular?",
+      "slug": "how-do-you-get-tm1-support-and-development-24/7-0",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "20771721966",
+      "title": "Planning Analytics Secure Gateway: Token Expiry",
+      "slug": "planning-analytics-secure-gateway-token-expiry",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5215230119",
+      "title": "TM1 upgrade to Planning Analytics, and Planning Analytics Workspace",
+      "slug": "thinking-about-a-tm1-upgrade-to-planning-analytics-and-planning-analytics-workspace",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "12258370374",
+      "title": "IBM Planning Analytics Workspace (Paw) Full Backup and Restore",
+      "slug": "ibm-planning-analytics-workspace-paw-full-backup-and-restore",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "28552837572",
+      "title": "Adding images in PAW",
+      "slug": "adding-images-in-paw",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "20561724801",
+      "title": "TM1 object extensions",
+      "slug": "tm1-object-extensions",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "12593349569",
+      "title": "Pax-PMHub-less",
+      "slug": "pax-pmhub-less",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "9875469591",
+      "title": "Self Service: How Big Data Analytics is Empowering Users",
+      "slug": "self-service-how-big-data-analytics-is-empowering-users",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5475791002",
+      "title": "A junior developers journey: The next step",
+      "slug": "junior-developer-blog-the-next-step",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5224596768",
+      "title": "Have You Considered Outsourcing Your TM1 Support? Great!",
+      "slug": "5-benefits-of-outsourcing-your-tm1-support",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "5775658743",
+      "title": "My latest adventures in Planning Analytics",
+      "slug": "my-latest-adventures-in-planning-analytics",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "49502304863",
+      "title": "Octane Software Solution Partner With QUBEdocs to Deliver Cutting Edge",
+      "slug": "octane-software-solutions-partner-with-qubedocs-to-deliver-cutting-edge-document-automation",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    },
+    {
+      "id": "6445348505",
+      "title": "Unravelling TM1: Lesser Known Facets \u2013 Part C",
+      "slug": "unravelling-tm1-lesser-known-facets-part-c",
+      "status": "UNPUBLISHED_TO_DRAFT"
+    }
+  ]
+}

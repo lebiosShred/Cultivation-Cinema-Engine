@@ -16,12 +16,72 @@
   <meta name="twitter:description" content="Verified Google Search Console & GA4 live audience telemetry.">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://2926400.fs1.hubspotusercontent-na1.net/hubfs/2926400/octane-favicon-larger-1.png">
+  <link rel="icon" type="image/png" href="/media/octane_favicon.png">
 
   <!-- Production Stylesheet -->
   <link rel="stylesheet" href="./dashboard_enterprise.css">
+
+  <!-- Chart.js Engine for Time-Series Social Telemetry -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+  <!-- ========================================================================
+       Executive Access Key Gate (In-Page Auth for Iframe Resilience)
+       ======================================================================== -->
+  <div id="exec-gate-overlay" class="exec-gate-backdrop hidden">
+    <div class="exec-gate-card">
+      <div class="auth-header" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+        <div class="brand-logo-wrap" style="margin-bottom:0.4rem;">
+          <svg class="brand-svg-logo" viewBox="0 0 467.2 93" fill="#0f172a" style="max-height:34px; width:auto;">
+            <style>.st0{fill:#B28600;}</style>
+            <path d="M121.2,34.7c-0.8,5.8-5,8.7-10,8.7c-5.9,0-10.3-4.7-10.3-11.8c0-7.1,4.4-11.8,10.3-11.8c5,0,9.1,2.6,9.8,7.8h9.9c-0.9-9.9-9.1-16.5-19.7-16.5c-11.4,0-19.8,8.4-19.8,20.5s8.4,20.5,19.8,20.5c11,0,19.3-6.9,19.8-17.3L121.2,34.7z"/>
+            <path class="st0" d="M331.8,70L331.8,70c-0.3,1-1.4,1.7-2.9,1.7c-2.6,0-4.3-1.9-4.3-5.4s1.8-5.4,4.4-5.4c1.9,0,3.1,0.9,3.8,2.3l-1,0.6c-0.5-1.1-1.5-1.8-2.8-1.8c-1.8,0-3.1,1.4-3.1,3.4v1.7c0,2.1,1.2,3.4,3.2,3.4c1.5,0,2.7-0.7,2.7-2.3v-1h-2.3v-1.1h3.5v5.4h-1.2V70z M334.7,67.7c0-2.5,1.4-4,3.5-4s3.5,1.6,3.5,4s-1.4,4-3.5,4S334.7,70.1,334.7,67.7z M340.4,68.2v-1.1c0-1.6-0.9-2.4-2.2-2.4s-2.2,0.8-2.2,2.4v1.1c0,1.6,0.9,2.4,2.2,2.4S340.4,69.8,340.4,68.2z M344.9,71.5c-0.8,0-1.3-0.5-1.3-1.2v-9.8h1.2v10h1.1v1H344.9z"/>
+            <path class="st0" d="M324.5,48.5h19.2v2.7h-19.2V48.5z M324.5,46h19.2v-2.7h-19.2V46z M330,40.7h8.2V38H330V40.7z M330,35.5h8.2v-2.7H330V35.5z M330,30.3h8.2v-2.8H330V30.3z M338.2,22.3H330V25h8.2V22.3z M324.5,19.8h19.2v-2.7h-19.2V19.8z M324.5,14.5h19.2v-2.7h-19.2V14.5z"/>
+            <path d="M67.6,11c-11.5,0-20.1,8.4-20.1,20.5S56.1,52,67.6,52s20.1-8.5,20.1-20.5S79.1,11,67.6,11z M67.6,43.3c-6.1,0-10.7-4.7-10.7-11.8s4.6-11.8,10.7-11.8s10.7,4.7,10.7,11.8S73.7,43.3,67.6,43.3z"/>
+            <path d="M137.7,0v11c5.3-0.1,9.5-4.4,9.5-9.7V0H137.7z M157.5,20.1v-8.3h-26v8.3h6.3v18.3c0,10.6,5.7,13.7,13.5,13.7c2.1,0,4.2-0.3,6.2-0.9v-8.4c-1.4,0.5-2.9,0.7-4.3,0.7c-4.1,0-5.9-1.7-5.9-5.6V20.2L157.5,20.1z"/>
+            <path d="M179.3,11c-8.8,0-17.2,4-17.2,14.2h9.9c0-4.4,3-6.7,7.3-6.7c4.1,0,7.3,1.8,7.3,4.9c0,7.9-25.6,0.3-25.6,17.3c0,8,6.5,11.4,13.3,11.4c5.4,0,10-2,12.5-6.6v5.8h9.3V23.9C196,14.6,187.9,11,179.3,11z"/>
+            <path d="M223.2,11c-4.7-0.1-9.1,2.4-11.4,6.5v-5.7h-9.5v39.4h9.5V29.5c0-6.6,3.1-10.2,8.3-10.2c5.1,0,8.3,3.6,8.3,10.2v21.7h9.5V27.6C237.9,16.5,231.6,11,223.2,11z"/>
+            <path d="M281.3,31.5c0-12.1-8.3-20.5-19.6-20.5s-19.5,8.4-19.5,20.5S250.5,52,261.7,52c9.3,0,16.2-4.4,18.5-12.6H270c-1.3,2.8-3.7,4.3-7.9,4.3c-5.8,0-9.6-3.3-10.6-9.1h29.7C281.3,33.6,281.3,32.6,281.3,31.5z"/>
+          </svg>
+        </div>
+        <div class="brand-eyebrow" style="font-size:0.75rem; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-top:0.4rem; display:flex; align-items:center; gap:0.4rem;">
+          <span class="pulse-dot"></span> Executive Growth Intelligence
+        </div>
+        <h2 style="font-size:1.35rem; font-weight:800; color:#0f172a; margin-top:0.6rem;">Access Key Required</h2>
+        <p style="font-size:0.84rem; color:#64748b; margin-top:0.3rem;">Enter your authorized credential to decrypt live search console telemetry and pipeline intelligence.</p>
+      </div>
+
+      <div id="gate-error-banner" style="display:none; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:0.65rem 0.85rem; font-size:0.8rem; color:#b91c1c; font-weight:600; margin-top:1rem; text-align:center;">
+        ⚠️ <span id="gate-error-text">Invalid access key. Please verify and retry.</span>
+      </div>
+
+      <div class="auth-form" style="margin-top:1.25rem; display:flex; flex-direction:column; gap:0.9rem;">
+        <div class="form-group" style="display:flex; flex-direction:column; gap:0.4rem; text-align:left;">
+          <label for="gate-password-input" style="font-size:0.8rem; font-weight:700; color:#1e293b;">Executive Access Key</label>
+          <div style="position:relative; display:flex; align-items:center;">
+            <input 
+              type="password" 
+              id="gate-password-input" 
+              style="width:100%; height:44px; padding:0 2.5rem 0 0.85rem; font-size:0.92rem; border:1.5px solid #cbd5e1; border-radius:8px; outline:none; background:#ffffff; color:#000000;" 
+              placeholder="Enter password..." 
+              onkeydown="if (event.key === 'Enter') { event.preventDefault(); unlockInPageGate(); }"
+            >
+            <button type="button" onclick="toggleGatePasswordVisibility()" style="position:absolute; right:0.75rem; background:transparent; border:none; cursor:pointer; font-size:1rem;" id="gate-vis-btn">👁️</button>
+          </div>
+        </div>
+
+        <button type="button" id="gate-submit-btn" onclick="unlockInPageGate()" style="width:100%; height:44px; background:#4daeeb; color:#fff; border:none; border-radius:8px; font-weight:700; font-size:0.92rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.2s;">
+          <span id="gate-btn-text">Unlock Dashboard</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      <div style="margin-top:1.25rem; font-size:0.75rem; color:#64748b; text-align:center;">
+        Protected by <strong>Vercel Edge Security Gate</strong> · Octane Software Solutions Pty Ltd
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================================================
        1. Enterprise SaaS Header Navigation (Sticky & Responsive)
@@ -107,6 +167,9 @@
         <span class="telemetry-pill hubspot-pill" id="status-tag-hubspot" onclick="openLeadModal()">
           🏆 HubSpot CRM Live (19 Marketing Leads)
         </span>
+        <a href="#socials-telemetry" class="telemetry-pill socials-pill" id="status-tag-socials" style="text-decoration:none; color:inherit; cursor:pointer;" title="Jump to Verified Social Media Telemetry">
+          📱 Socials Live (204 Clicks · 93 Posts)
+        </a>
       </div>
     </div>
   </header>
@@ -297,6 +360,271 @@
       <!-- Interactive SVG Spline Chart -->
       <div class="gsc-chart-wrapper">
         <svg id="gsc-perf-chart-svg" class="gsc-svg-chart"></svg>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         HubSpot Organic Social Telemetry & Traffic Intelligence (LinkedIn & Facebook)
+         ======================================================================== -->
+    <section id="socials-telemetry" class="socials-telemetry-card">
+      <div class="socials-header">
+        <div class="socials-title-area">
+          <div class="socials-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a66c2" stroke-width="2.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </div>
+          <div>
+            <div class="socials-tag-eyebrow">HubSpot Social API · Portal ID 2926400 · Verified Telemetry</div>
+            <h2 class="socials-title">Executive Social Media Telemetry · LinkedIn &amp; Facebook Organic</h2>
+            <div class="socials-subtitle">
+              Verified outbound clicks across 93 published broadcasts from official company channels.
+            </div>
+          </div>
+        </div>
+        <div class="socials-header-badges">
+          <span class="telemetry-pill live-active">
+            <span class="pulse-dot"></span> 93 Broadcasts Analyzed
+          </span>
+          <span class="telemetry-pill">
+            ⚡ Synced: 2026-09-21
+          </span>
+        </div>
+      </div>
+
+      <!-- 3 Platform Breakdown Cards -->
+      <div class="socials-cards-grid">
+        <!-- LinkedIn Company Page -->
+        <div class="social-metric-card linkedin-card">
+          <div class="social-card-head">
+            <span class="platform-badge linkedin-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px; margin-right:4px;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              LinkedIn Company Page
+            </span>
+            <span class="share-badge-pill primary">Primary Driver · 93.1%</span>
+          </div>
+          <div class="social-card-val-row">
+            <div class="social-card-num tabular">190</div>
+            <div class="social-card-num-sub">Verified Outbound Clicks</div>
+          </div>
+          <div class="social-card-meta-list">
+            <div class="social-meta-row"><span>Published Posts:</span> <strong class="tabular">42 Broadcasts</strong></div>
+            <div class="social-meta-row"><span>Click Velocity:</span> <strong class="tabular" style="color: #0a66c2;">4.52 Clicks / Post</strong></div>
+            <div class="social-meta-row"><span>Top Topic:</span> <strong>TM1 Feeder Diagnostic (52 clicks)</strong></div>
+          </div>
+          <div class="social-channel-key">
+            Channel Key: <code>LinkedInCompanyPage:10696740</code>
+          </div>
+        </div>
+
+        <!-- Facebook Page -->
+        <div class="social-metric-card facebook-card">
+          <div class="social-card-head">
+            <span class="platform-badge facebook-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px; margin-right:4px;"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+              Facebook Page
+            </span>
+            <span class="share-badge-pill secondary">Secondary · 4.9%</span>
+          </div>
+          <div class="social-card-val-row">
+            <div class="social-card-num tabular">10</div>
+            <div class="social-card-num-sub">Verified Outbound Clicks</div>
+          </div>
+          <div class="social-card-meta-list">
+            <div class="social-meta-row"><span>Published Posts:</span> <strong class="tabular">39 Broadcasts</strong></div>
+            <div class="social-meta-row"><span>Click Velocity:</span> <strong class="tabular" style="color: #64748b;">0.26 Clicks / Post</strong></div>
+            <div class="social-meta-row"><span>Channel Behavior:</span> <strong>Low Organic Engagement</strong></div>
+          </div>
+          <div class="social-channel-key">
+            Channel Key: <code>FacebookPage:627371520780453</code>
+          </div>
+        </div>
+
+        <!-- Cross-Channel Overview -->
+        <div class="social-metric-card overview-card">
+          <div class="social-card-head">
+            <span class="platform-badge overview-badge">🌐 Cross-Channel Total</span>
+            <span class="share-badge-pill neutral">93 Posts Tracked</span>
+          </div>
+          <div class="social-card-val-row">
+            <div class="social-card-num tabular">204</div>
+            <div class="social-card-num-sub">Total Social Outbound Clicks</div>
+          </div>
+          <div class="social-card-meta-list">
+            <div class="social-meta-row"><span>YouTube Clicks:</span> <strong class="tabular">4 Clicks</strong> (3 posts)</div>
+            <div class="social-meta-row"><span>Instagram Clicks:</span> <strong class="tabular" style="color: #64748b;">0 Clicks</strong> (9 posts)</div>
+            <div class="social-meta-row"><span>Core Strategic Finding:</span> <strong style="color: #10b981;">LinkedIn generates 19x more traffic than Facebook</strong></div>
+          </div>
+          <div class="social-channel-key">
+            Data Source: <code>HubSpot Broadcast API (v1)</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Traffic Share Proportion Bar -->
+      <div class="social-share-wrap">
+        <div class="social-share-labels">
+          <span style="color: #0a66c2; font-weight:700;">● LinkedIn: 93.1% (190 Clicks)</span>
+          <span style="color: #1877f2; font-weight:700;">● Facebook: 4.9% (10 Clicks)</span>
+          <span style="color: #ef4444; font-weight:700;">● YouTube: 2.0% (4 Clicks)</span>
+          <span style="color: #64748b; font-weight:600;">Instagram: 0% (0 Clicks)</span>
+        </div>
+        <div class="social-progress-bar">
+          <div class="progress-segment seg-linkedin" style="width: 93.1%;" title="LinkedIn: 190 clicks (93.1%)"></div>
+          <div class="progress-segment seg-facebook" style="width: 4.9%;" title="Facebook: 10 clicks (4.9%)"></div>
+          <div class="progress-segment seg-youtube" style="width: 2.0%;" title="YouTube: 4 clicks (2.0%)"></div>
+        </div>
+      </div>
+
+      <!-- Interactive Outbound Social Clicks Line Chart -->
+      <div class="social-chart-card">
+        <div class="social-chart-top">
+          <div>
+            <h3 class="social-chart-title">Social Clicks Trajectory Over Time (Aug 20 - Sep 21, 2026)</h3>
+            <div class="social-chart-sub">
+              Verified daily traffic spikes driven by technical deep-dives and educational carousel campaigns.
+            </div>
+          </div>
+          <div class="social-chart-controls">
+            <button class="social-chart-btn active" id="btn-chart-daily" onclick="switchSocialChartMode('daily', this)">
+              📈 Daily Outbound Clicks
+            </button>
+            <button class="social-chart-btn" id="btn-chart-cumulative" onclick="switchSocialChartMode('cumulative', this)">
+              🚀 Cumulative Growth (204 Total)
+            </button>
+          </div>
+        </div>
+
+        <div class="social-canvas-wrapper" style="position: relative; height: 280px; width: 100%;">
+          <canvas id="socialClicksChart"></canvas>
+        </div>
+
+        <div class="social-chart-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#0f172a;"></span> <strong>Total Clicks</strong></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#0a66c2;"></span> <strong>LinkedIn (190)</strong></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#1877f2;"></span> <strong>Facebook (10)</strong></div>
+          <div class="legend-item" style="margin-left:auto; font-size:0.75rem; color:var(--text-muted);">
+            💡 <em>Hover over data points to inspect post hooks and click volume</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Performing Inbound Social Posts Table -->
+      <div class="social-table-section">
+        <div class="social-table-header">
+          <div>
+            <h3 class="social-table-title">Top Inbound Traffic-Driving Social Posts</h3>
+            <div class="social-table-sub">Ranked by verified outbound clicks from HubSpot redirect tracking</div>
+          </div>
+          <div class="social-table-counter">
+            Showing Top 8 Broadcasts
+          </div>
+        </div>
+        
+        <div class="social-table-responsive">
+          <table class="social-clean-table">
+            <thead>
+              <tr>
+                <th style="width: 120px;">Platform</th>
+                <th style="width: 110px;">Post Date</th>
+                <th>Post Headline / Core Topic Hook</th>
+                <th style="width: 140px; text-align: right;">Verified Clicks</th>
+                <th style="width: 130px; text-align: right;">Traffic Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-08-25</td>
+                <td>
+                  <strong class="font-primary">The TM1 Feeder Diagnostic Playbook: Eliminating Overfeeding</strong>
+                  <div class="font-subtext">Technical deep-dive on skipcheck rules and memory bloat</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">52</td>
+                <td class="tabular font-success text-right">25.5%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-09-15</td>
+                <td>
+                  <strong class="font-primary">TurboIntegrator REST API Masterclass: How to Automate</strong>
+                  <div class="font-subtext">Automating TM1 processes with Python and TM1py REST direct queries</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">51</td>
+                <td class="tabular font-success text-right">25.0%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-08-31</td>
+                <td>
+                  <strong class="font-primary">TM1 Feeder Optimization &amp; Diagnostic Playbook</strong>
+                  <div class="font-subtext">Diagnosing calculation slowdowns and optimizing models in under 10 minutes</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">26</td>
+                <td class="tabular font-success text-right">12.7%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-09-08</td>
+                <td>
+                  <strong class="font-primary">Moving TM1 to the Cloud Isn't a Version Upgrade</strong>
+                  <div class="font-subtext">Migration pitfalls: legacy TI scripts, ODBC drivers, and batch routines</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">12</td>
+                <td class="tabular font-success text-right">5.9%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-09-08</td>
+                <td>
+                  <strong class="font-primary">If You Use IBM Planning Analytics, You Are Probably...</strong>
+                  <div class="font-subtext">Cloud migration planning guide and infrastructure requirements</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">11</td>
+                <td class="tabular font-success text-right">5.4%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-09-07</td>
+                <td>
+                  <strong class="font-primary">Why 60% of TM1 Developer Bandwidth Is Wasted on BAU</strong>
+                  <div class="font-subtext">DevOps bandwidth unlock and on-demand TM1 administration</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">8</td>
+                <td class="tabular font-success text-right">3.9%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag linkedin">LinkedIn</span></td>
+                <td class="tabular font-muted">2026-08-27</td>
+                <td>
+                  <strong class="font-primary">🤖 AI That Takes Action (watsonx Orchestrate)</strong>
+                  <div class="font-subtext">Autonomous finance workflows and month-end close acceleration</div>
+                </td>
+                <td class="tabular font-bold-primary text-right">6</td>
+                <td class="tabular font-success text-right">2.9%</td>
+              </tr>
+              <tr>
+                <td><span class="table-platform-tag facebook">Facebook</span></td>
+                <td class="tabular font-muted">2026-08-27</td>
+                <td>
+                  <strong class="font-primary">AI That Takes Action (watsonx Orchestrate)</strong>
+                  <div class="font-subtext">Autonomous finance workflows and month-end close acceleration</div>
+                </td>
+                <td class="tabular font-fb text-right">2</td>
+                <td class="tabular font-muted text-right">1.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Data Provenance & Methodological Integrity Footnote -->
+      <div class="social-footnote">
+        <div>
+          🛡️ <strong>Methodological Provenance:</strong> Outbound clicks are verified directly from HubSpot tracking redirect telemetry (Portal ID <code>2926400</code>).
+          Organic post broadcasts are distinct from Paid Meta Ad Spend (<code>act_1637428904605912</code>).
+        </div>
+        <div class="footnote-sync">
+          Last Synced via HubSpot API: <strong>2026-09-21</strong>
+        </div>
       </div>
     </section>
 
@@ -582,36 +910,31 @@
       <!-- Global SVG Vector Edge Overlay -->
       <svg id="canvas-edges-svg" class="canvas-edges-svg"></svg>
 
-      <!-- 5-Tier Journey Columns Layout -->
+      <!-- 6-Tier Sheila Direct-Response Journey Architecture -->
       <div class="canvas-layout">
-        <!-- Tier 1 -->
-        <div class="tier-column">
-          <h3 class="tier-column-title">1. Traffic Channels (Last 90 Days)</h3>
+        <div class="tier-column tier-column-ad">
+          <div class="tier-column-header"><span class="tier-step-num">Step 1</span><h3 class="tier-column-title">1. Real Video Creative & Ad Showcase</h3></div>
           <div class="tier-nodes-list" id="stage-1-list"></div>
         </div>
-
-        <!-- Tier 2 -->
         <div class="tier-column">
-          <h3 class="tier-column-title">2. Origin Referrer Engine & Queries</h3>
+          <div class="tier-column-header"><span class="tier-step-num">Step 2</span><h3 class="tier-column-title">2. Who You Targeted (Decision-Makers)</h3></div>
           <div class="tier-nodes-list" id="stage-2-list"></div>
         </div>
-
-        <!-- Tier 3 -->
         <div class="tier-column">
-          <h3 class="tier-column-title">3. Destination Landing Pages</h3>
+          <div class="tier-column-header"><span class="tier-step-num">Step 3</span><h3 class="tier-column-title">3. How Targeting Works (Boolean Logic)</h3></div>
           <div class="tier-nodes-list" id="stage-3-list"></div>
         </div>
-
-        <!-- Tier 4 -->
         <div class="tier-column">
-          <h3 class="tier-column-title">4. Subsequent Navigation Flows</h3>
+          <div class="tier-column-header"><span class="tier-step-num">Step 4</span><h3 class="tier-column-title">4. Estimated Audience Size</h3></div>
           <div class="tier-nodes-list" id="stage-4-list"></div>
         </div>
-
-        <!-- Tier 5 -->
         <div class="tier-column">
-          <h3 class="tier-column-title">5. Landing Page Performance & Leads</h3>
+          <div class="tier-column-header"><span class="tier-step-num">Step 5</span><h3 class="tier-column-title">5. Reach, Clicks & Ad Spend Results</h3></div>
           <div class="tier-nodes-list" id="stage-5-list"></div>
+        </div>
+        <div class="tier-column tier-column-finish">
+          <div class="tier-column-header"><span class="tier-step-num finish">Finish Line</span><h3 class="tier-column-title">6. Website Flow & Drop-Off Velocity</h3></div>
+          <div class="tier-nodes-list" id="stage-6-list"></div>
         </div>
       </div>
 
@@ -720,6 +1043,54 @@
         <div class="modal-footer">
           <button class="btn-header-action btn-header-primary" onclick="copyActiveSurgeSchema()">📋 Copy JSON-LD Code</button>
           <button class="btn-header-action" onclick="closeModal('modal-surge-schema')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign Ad Showcase Board Modal (Neil's Rule of 3: Authentic 1:1 Meta Feed Ads) -->
+    <div class="modal-backdrop hidden" id="modal-ad-showcase" role="dialog" aria-modal="true" onclick="if(event.target===this) closeModal('modal-ad-showcase')">
+      <div class="modal-dialog" style="max-width: 1240px; width: 96%;">
+        <div class="modal-header">
+          <div class="modal-title-area">
+            <span style="font-size: 1.35rem;">🎬</span>
+            <div>
+              <h3 class="modal-title">Real Campaign Video Ad Creative Showcase (TM1-to-Power BI DataFusion)</h3>
+              <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">
+                Real campaign video creative showcasing TM1-to-Power BI DataFusion sync automation and verified direct response architecture.
+              </p>
+            </div>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-ad-showcase')">✕</button>
+        </div>
+        <div class="modal-body" id="ad-showcase-modal-content"></div>
+        <div class="modal-footer" style="justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: var(--brand-primary); font-weight: 600;">
+            <span>🛡️ Pre-Cleared by Neil & Amandra</span>
+            <span>&bull;</span>
+            <span>🎯 Authentic 1:1 Square Creatives</span>
+            <span>&bull;</span>
+            <span>🌐 octanesolutions.com.au</span>
+          </div>
+          <button class="btn-header-action btn-header-primary" onclick="closeModal('modal-ad-showcase')">Close Showcase</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-Screen Lightbox Preview for 1:1 Ad Creatives -->
+    <div class="modal-backdrop hidden" id="ad-lightbox" role="dialog" aria-modal="true" onclick="if(event.target===this) closeAdLightbox()">
+      <div style="position: relative; max-width: 680px; width: 95%; max-height: 94vh; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: auto;">
+        <button class="modal-close-btn" style="position: absolute; top: -14px; right: -14px; background: rgba(239, 68, 68, 0.95); color: #fff; width: 36px; height: 36px; border-radius: 50%; font-size: 1.15rem; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.6); z-index: 10001;" onclick="closeAdLightbox()">✕</button>
+        <div id="lightbox-creative-container" style="width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius-md); box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9), 0 0 0 1px rgba(77, 174, 235, 0.4); overflow: hidden; background: #070e22; display: flex; align-items: center; justify-content: center;"></div>
+        <div id="lightbox-caption" style="margin-top: 0.85rem; width: 100%; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(77, 174, 235, 0.3); border-radius: var(--radius-md); padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <div id="lightbox-layout" style="font-size: 0.68rem; font-weight: 800; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.05em;"></div>
+            <div id="lightbox-title" style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-top: 2px;"></div>
+            <div id="lightbox-tagline" style="font-size: 0.82rem; color: #94a3b8; font-style: italic; margin-top: 2px;"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700;">🛡️ Neil & Amandra Cleared</span>
+            <a href="https://octanesolutions.com.au/tm1-support" target="_blank" class="ad-cta-pill" style="font-size: 0.8rem; padding: 0.45rem 0.9rem; text-decoration: none; display: inline-flex; align-items: center;">🎯 Book Live Demo</a>
+          </div>
         </div>
       </div>
     </div>
