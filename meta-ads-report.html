@@ -259,49 +259,360 @@
       color: var(--red);
     }
 
-    /* STORY SECTION HEADER */
-    .story-section {
+    /* GA4 PATH EXPLORATION & USER JOURNEY CANVAS */
+    .journey-section {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 32px;
+      width: 100%;
     }
 
-    .story-head {
-      margin-bottom: 4px;
+    .journey-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .story-subtitle {
-      text-transform: uppercase;
+    .journey-header-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 0.75rem;
       font-weight: 800;
+      text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--octane-blue);
-      margin-bottom: 6px;
     }
 
-    .story-title {
-      font-size: 1.75rem;
+    .ga4-badge {
+      background: var(--octane-blue-subtle);
+      border: 1px solid var(--octane-blue-border);
+      color: #0284c7;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 800;
+    }
+
+    .journey-header-title {
+      font-size: 1.85rem;
       font-weight: 800;
       color: var(--text-dark);
       letter-spacing: -0.02em;
+      line-height: 1.25;
     }
 
-    /* 4-STEP STACK */
-    .step-card {
+    .journey-header-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    /* GA4 PATH EXPLORATION FLOW CHART (SANKEY VISUALIZER) */
+    .ga4-flow-card {
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ga4-flow-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ga4-flow-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .flow-chart-icon {
+      font-size: 1.4rem;
+    }
+
+    .ga4-flow-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .ga4-flow-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .ga4-legend {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.green {
+      background-color: var(--green);
+    }
+
+    .legend-dot.red {
+      background-color: var(--red);
+    }
+
+    .legend-dot.blue {
+      background-color: var(--octane-blue);
+    }
+
+    /* HORIZONTAL DESKTOP FLOW MAP (>= 1024px) */
+    .ga4-flow-map {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1.35fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      position: relative;
+    }
+
+    .macro-node {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      min-width: 0;
+    }
+
+    .macro-node:hover {
+      border-color: var(--octane-blue);
+      transform: translateY(-2px);
+    }
+
+    .macro-node-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #0369a1;
+      background: var(--octane-blue-subtle);
+      border: 1px solid var(--octane-blue-border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+
+    .macro-node-badge.blue {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    .macro-node-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .macro-node-metric {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .macro-node-metric.red-text {
+      color: var(--red);
+    }
+
+    .macro-node-sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    .macro-node-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+
+    .macro-node-meta.green-accent {
+      color: #047857;
+      font-weight: 700;
+    }
+
+    /* MACRO FLOW BRIDGES */
+    .macro-flow-bridge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 4px;
+    }
+
+    .flow-ribbon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .flow-pill {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0284c7;
+      background: var(--octane-blue-subtle);
+      border: 1px solid var(--octane-blue-border);
+      padding: 3px 8px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    .flow-pill.green {
+      color: #047857;
+      background: var(--green-bg);
+      border-color: var(--green-border);
+    }
+
+    .flow-subtext {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .flow-arrow-svg {
+      width: 44px;
+      height: 16px;
+      overflow: visible;
+    }
+
+    /* MACRO FORK CONTAINER */
+    .macro-fork-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+    }
+
+    .macro-fork-branch {
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .macro-fork-branch.leak-branch {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+    }
+
+    .macro-fork-branch.fix-branch {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+    }
+
+    .fork-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      padding: 2px 6px;
+      align-self: flex-start;
+    }
+
+    .fork-badge.red {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .fork-badge.green {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .fork-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .fork-desc {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      line-height: 1.25;
+    }
+
+    /* DETAILED JOURNEY NODES CANVAS */
+    .journey-nodes-canvas {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      width: 100%;
+    }
+
+    .journey-node-card {
       background: var(--bg-card);
       border: 1px solid var(--border-card);
       border-radius: 16px;
       padding: 32px;
       box-shadow: var(--shadow-card);
       display: flex;
+      flex-direction: column;
       gap: 24px;
+      width: 100%;
+      position: relative;
     }
 
-    .step-badge-col {
-      flex-shrink: 0;
+    .node-badge-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
-    .step-circle {
+    .node-number-badge {
       width: 48px;
       height: 48px;
       border-radius: 50%;
@@ -312,45 +623,152 @@
       justify-content: center;
       font-size: 1.25rem;
       font-weight: 800;
+      flex-shrink: 0;
     }
 
-    .step-circle.blue-circle {
+    .node-number-badge.blue-badge {
       background: var(--octane-blue);
       color: #ffffff;
     }
 
-    .step-content {
-      flex: 1;
+    .node-title-group {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 4px;
     }
 
-    .step-header-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .step-category {
+    .node-step-tag {
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-muted);
     }
 
-    .step-headline {
-      font-size: 1.35rem;
+    .node-title {
+      font-size: 1.45rem;
       font-weight: 800;
       color: var(--text-dark);
       letter-spacing: -0.01em;
     }
 
-    .step-description {
-      font-size: 1rem;
+    .node-desc {
+      font-size: 1.02rem;
       color: var(--text-secondary);
       line-height: 1.6;
+    }
+
+    .node-stats-chips {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    .stat-chip strong {
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    .stat-chip.accent-chip {
+      background: var(--octane-blue-subtle);
+      border-color: var(--octane-blue-border);
+      color: #0369a1;
+    }
+
+    .stat-chip.accent-chip strong {
+      color: #0284c7;
+    }
+
+    /* CONNECTING FLOW BRIDGES BETWEEN NODES */
+    .journey-connector-bridge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 0;
+      position: relative;
+      width: 100%;
+    }
+
+    .connector-line-left,
+    .connector-line-right {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border), var(--octane-blue));
+    }
+
+    .connector-line-right {
+      background: linear-gradient(90deg, var(--octane-blue), var(--border));
+    }
+
+    .connector-ribbon {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      border: 2px solid var(--octane-blue);
+      border-radius: 9999px;
+      padding: 10px 22px;
+      box-shadow: 0 4px 12px rgba(77, 174, 235, 0.15);
+      z-index: 2;
+    }
+
+    .ribbon-arrow {
+      font-size: 1.25rem;
+      color: var(--octane-blue);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .ribbon-content {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .ribbon-content strong {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-weight: 800;
+    }
+
+    .ribbon-content span {
+      font-size: 0.82rem;
+      color: #0284c7;
+      font-weight: 600;
+    }
+
+    .journey-connector-bridge.green-bridge .connector-line-left {
+      background: linear-gradient(90deg, var(--border), var(--green));
+    }
+
+    .journey-connector-bridge.green-bridge .connector-line-right {
+      background: linear-gradient(90deg, var(--green), var(--border));
+    }
+
+    .journey-connector-bridge.green-bridge .connector-ribbon {
+      border-color: var(--green);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    }
+
+    .journey-connector-bridge.green-bridge .ribbon-arrow {
+      color: var(--green);
+    }
+
+    .journey-connector-bridge.green-bridge .ribbon-content span {
+      color: #047857;
     }
 
     /* STEP 1: VIDEO AD UNIT MOCKUP */
@@ -532,80 +950,156 @@
       line-height: 1.45;
     }
 
-    /* STEP 3: WEBSITE FUNNEL */
-    .funnel-container {
+    /* STEP 3: WEBSITE DWELL & THE FRICTION FORK */
+    .intent-highlight-box {
       background: #f8fafc;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .funnel-row {
+      padding: 20px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .intent-metric-group {
+      display: flex;
+      align-items: baseline;
       gap: 12px;
     }
 
-    .funnel-block {
-      flex: 1;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .funnel-block.highlight-red {
-      border-color: #fca5a5;
-      background: #fffafa;
-    }
-
-    .funnel-metric {
-      font-size: 1.75rem;
+    .intent-metric-number {
+      font-size: 2.25rem;
       font-weight: 800;
       color: var(--text-dark);
-      line-height: 1.2;
+      letter-spacing: -0.02em;
+      line-height: 1;
     }
 
-    .funnel-block.highlight-red .funnel-metric {
-      color: var(--red);
-    }
-
-    .funnel-label {
-      font-size: 0.85rem;
+    .intent-metric-title {
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text-dark);
-      margin-top: 4px;
     }
 
-    .funnel-sub {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .funnel-arrow {
-      font-size: 1.5rem;
-      color: #94a3b8;
-      font-weight: 700;
-    }
-
-    .funnel-takeaway {
-      background: #ffffff;
-      border: 1px solid var(--octane-blue-border);
-      border-radius: 8px;
-      padding: 14px 18px;
+    .intent-desc {
       font-size: 0.92rem;
       color: var(--text-secondary);
+      max-width: 600px;
       line-height: 1.5;
     }
 
-    .funnel-takeaway strong {
+    .friction-fork-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .friction-branch {
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    .friction-branch.leaked-path-box {
+      background: #fffafa;
+      border: 2px solid #fca5a5;
+    }
+
+    .friction-branch.fix-path-box {
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+    }
+
+    .friction-branch-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 6px;
+      align-self: flex-start;
+    }
+
+    .leaked-path-box .friction-branch-tag {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .fix-path-box .friction-branch-tag {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .friction-branch-headline {
+      font-size: 1.15rem;
+      font-weight: 800;
       color: var(--text-dark);
+      line-height: 1.35;
+    }
+
+    .leaked-path-box .friction-branch-headline {
+      color: #991b1b;
+    }
+
+    .fix-path-box .friction-branch-headline {
+      color: #166534;
+    }
+
+    .friction-branch-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .friction-branch-bullet {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* STEP 4: SALES HANDOFF OPPORTUNITY BANNER */
+    .opportunity-banner {
+      background: #f8fafc;
+      border: 1px solid var(--octane-blue-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .opp-status-pill {
+      font-size: 0.8rem;
+      font-weight: 800;
+      background: var(--red-bg);
+      color: #b91c1c;
+      border: 1px solid var(--red-border);
+      padding: 6px 14px;
+      border-radius: 9999px;
+    }
+
+    .opp-headline {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .opp-subtext {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: 700px;
     }
 
     /* STEP 4: SOLUTION COMPARISON */
@@ -740,6 +1234,66 @@
     }
 
     /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 1023px) {
+      .ga4-flow-map {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .macro-flow-bridge {
+        flex-direction: row;
+        padding: 6px 0;
+      }
+      .flow-arrow-svg {
+        transform: rotate(90deg);
+        width: 18px;
+        height: 22px;
+      }
+      .macro-fork-container {
+        grid-template-columns: 1fr;
+      }
+      .friction-fork-grid {
+        grid-template-columns: 1fr;
+      }
+      .journey-nodes-canvas {
+        padding-left: 28px;
+        border-left: 3px solid var(--octane-blue-border);
+        margin-left: 12px;
+        position: relative;
+      }
+      .journey-connector-bridge {
+        flex-direction: column;
+        gap: 6px;
+        padding: 16px 0;
+      }
+      .connector-line-left,
+      .connector-line-right {
+        width: 2px;
+        height: 16px;
+        flex: none;
+      }
+      .connector-line-left {
+        background: linear-gradient(180deg, var(--border), var(--octane-blue));
+      }
+      .connector-line-right {
+        background: linear-gradient(180deg, var(--octane-blue), var(--border));
+      }
+      .journey-connector-bridge.green-bridge .connector-line-left {
+        background: linear-gradient(180deg, var(--border), var(--green));
+      }
+      .journey-connector-bridge.green-bridge .connector-line-right {
+        background: linear-gradient(180deg, var(--green), var(--border));
+      }
+      .ribbon-arrow {
+        transform: rotate(90deg);
+      }
+      .ribbon-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2px;
+      }
+    }
+
     @media (max-width: 768px) {
       .header-container {
         flex-direction: column;
@@ -758,18 +1312,22 @@
       .metrics-section {
         grid-template-columns: 1fr;
       }
-      .step-card {
-        flex-direction: column;
-        padding: 24px 20px;
+      .journey-node-card {
+        padding: 24px 18px;
+      }
+      .node-badge-header {
+        align-items: flex-start;
+      }
+      .node-number-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+      .node-title {
+        font-size: 1.25rem;
       }
       .audience-cards-grid {
         grid-template-columns: 1fr;
-      }
-      .funnel-row {
-        flex-direction: column;
-      }
-      .funnel-arrow {
-        transform: rotate(90deg);
       }
       .comparison-container {
         grid-template-columns: 1fr;
@@ -863,25 +1421,155 @@
       </div>
     </section>
 
-    <!-- THE 4-STEP STORY (VERTICAL CLEAN STACK) -->
-    <section class="story-section">
-      <div class="story-head">
-        <div class="story-subtitle">Campaign Breakdown</div>
-        <h2 class="story-title">The 4-Step Story</h2>
+    <!-- GA4-STYLE PATH EXPLORATION & USER JOURNEY CANVAS -->
+    <section class="journey-section">
+      
+      <!-- JOURNEY HEADER -->
+      <div class="journey-header-block">
+        <div class="journey-header-eyebrow">
+          <span class="ga4-badge">GA4 Path Exploration</span>
+          <span>Full Funnel Analysis</span>
+        </div>
+        <h2 class="journey-header-title">User Journey &amp; Path Exploration: From First Impression to Demo Handoff</h2>
+        <p class="journey-header-desc">
+          Follow the exact path taken by 2,664 finance leaders across our paid campaign. See how 74 clicked to our website, why they stayed 42 seconds, and the simple booking fix that converts interest into qualified sales meetings.
+        </p>
       </div>
 
-      <!-- STEP 1: THE VIDEO AD -->
-      <article class="step-card">
-        <div class="step-badge-col">
-          <div class="step-circle">1</div>
+      <!-- GA4 PATH EXPLORATION FLOW CHART (SANKEY VISUALIZER) -->
+      <div class="ga4-flow-card">
+        <div class="ga4-flow-header">
+          <div class="ga4-flow-title-group">
+            <span class="flow-chart-icon">&#128200;</span>
+            <div>
+              <h3 class="ga4-flow-title">Campaign Path Exploration Flow</h3>
+              <p class="ga4-flow-subtitle">Volume transition and drop-off analysis at each user touchpoint</p>
+            </div>
+          </div>
+          <div class="ga4-legend">
+            <span class="legend-item"><span class="legend-dot green"></span> Active Flow</span>
+            <span class="legend-item"><span class="legend-dot red"></span> Form Drop-Off</span>
+            <span class="legend-item"><span class="legend-dot blue"></span> Recommended Fix</span>
+          </div>
         </div>
-        <div class="step-content">
-          <div class="step-header-wrap">
-            <span class="step-category">Step 1</span>
-            <h3 class="step-headline">The Video Ad</h3>
-            <p class="step-description">
-              Watch the exact 1:1 video ad that played on Facebook and Instagram. Include real video player with controls, muted, playsinline, and fallback poster. Show ad text and 'Book Live Demo' button.
-            </p>
+
+        <div class="ga4-flow-map">
+          <!-- Step 1 Macro Node -->
+          <div class="macro-node node-1">
+            <div class="macro-node-badge">Node 1</div>
+            <div class="macro-node-label">Ad Discovery</div>
+            <div class="macro-node-metric">2,664</div>
+            <div class="macro-node-sub">People Reached</div>
+            <div class="macro-node-meta">5,519 Impressions</div>
+          </div>
+
+          <!-- Flow Bridge 1 -> 2 -->
+          <div class="macro-flow-bridge bridge-1-2">
+            <div class="flow-ribbon">
+              <span class="flow-pill">74 Link Clicks</span>
+              <span class="flow-subtext">2.78% CTR &middot; $1.14 CPC</span>
+            </div>
+            <svg class="flow-arrow-svg" viewBox="0 0 44 16" preserveAspectRatio="none">
+              <path d="M0,8 L36,8 M30,2 L38,8 L30,14" stroke="#4daeeb" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Step 2 Macro Node -->
+          <div class="macro-node node-2">
+            <div class="macro-node-badge">Node 2</div>
+            <div class="macro-node-label">Audience Gate</div>
+            <div class="macro-node-metric">74</div>
+            <div class="macro-node-sub">Finance Leaders</div>
+            <div class="macro-node-meta">AU &amp; NZ CFOs / TM1</div>
+          </div>
+
+          <!-- Flow Bridge 2 -> 3 -->
+          <div class="macro-flow-bridge bridge-2-3">
+            <div class="flow-ribbon">
+              <span class="flow-pill">74 Landings</span>
+              <span class="flow-subtext">100% Qualified</span>
+            </div>
+            <svg class="flow-arrow-svg" viewBox="0 0 44 16" preserveAspectRatio="none">
+              <path d="M0,8 L36,8 M30,2 L38,8 L30,14" stroke="#4daeeb" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Step 3 Macro Node & Friction Fork -->
+          <div class="macro-node node-3">
+            <div class="macro-node-badge">Node 3</div>
+            <div class="macro-node-label">Website Dwell &amp; Fork</div>
+            <div class="macro-node-metric">42s</div>
+            <div class="macro-node-sub">Average Dwell Time</div>
+            
+            <!-- The Visual Split / Fork in Macro View -->
+            <div class="macro-fork-container">
+              <!-- Red Drop-off Branch -->
+              <div class="macro-fork-branch leak-branch">
+                <span class="fork-badge red">Leaked Path</span>
+                <span class="fork-title">74 Dropped (100%)</span>
+                <span class="fork-desc">Multi-step form friction</span>
+              </div>
+              <!-- Green Fix Branch -->
+              <div class="macro-fork-branch fix-branch">
+                <span class="fork-badge green">Fast-Track Fix</span>
+                <span class="fork-title">2-Click Calendar</span>
+                <span class="fork-desc">Instant booking path</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flow Bridge 3 -> 4 -->
+          <div class="macro-flow-bridge bridge-3-4">
+            <div class="flow-ribbon">
+              <span class="flow-pill green">Fix Path</span>
+              <span class="flow-subtext">Sales Handoff</span>
+            </div>
+            <svg class="flow-arrow-svg" viewBox="0 0 44 16" preserveAspectRatio="none">
+              <path d="M0,8 L36,8 M30,2 L38,8 L30,14" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Step 4 Macro Node -->
+          <div class="macro-node node-4">
+            <div class="macro-node-badge blue">Node 4</div>
+            <div class="macro-node-label">Sales Handoff</div>
+            <div class="macro-node-metric red-text">0</div>
+            <div class="macro-node-sub">Booked Demos</div>
+            <div class="macro-node-meta green-accent">Immediate Opportunity</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DETAILED USER JOURNEY NODES CANVAS -->
+      <div class="journey-nodes-canvas">
+        
+        <!-- NODE 1: AD DISCOVERY -->
+        <article class="journey-node-card" id="journey-node-1">
+          <div class="node-badge-header">
+            <div class="node-number-badge">1</div>
+            <div class="node-title-group">
+              <span class="node-step-tag">Node 1 &bull; Ad Discovery</span>
+              <h3 class="node-title">Ad Discovery: 2,664 People Reached (5,519 Impressions)</h3>
+            </div>
+          </div>
+
+          <p class="node-desc">
+            Watch the exact 1:1 video ad that played on Facebook and Instagram feeds across Australia and New Zealand. Finance leaders saw how DataFusion replaces manual TM1 spreadsheets with automated Power BI sync.
+          </p>
+
+          <div class="node-stats-chips">
+            <div class="stat-chip accent-chip">
+              <span>Audience Reached:</span>
+              <strong>2,664 People</strong>
+            </div>
+            <div class="stat-chip">
+              <span>Total Impressions:</span>
+              <strong>5,519 Views</strong>
+            </div>
+            <div class="stat-chip">
+              <span>Ad Spend Deployed:</span>
+              <strong>$84 AUD</strong>
+            </div>
           </div>
 
           <!-- Video Ad Unit Showcase -->
@@ -931,26 +1619,38 @@
               </a>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- STEP 2: WHO SAW IT -->
-      <article class="step-card">
-        <div class="step-badge-col">
-          <div class="step-circle">2</div>
-        </div>
-        <div class="step-content">
-          <div class="step-header-wrap">
-            <span class="step-category">Step 2</span>
-            <h3 class="step-headline">Who Saw It</h3>
-            <p class="step-description">
-              CFOs, Finance Directors, and Controllers in Australia and New Zealand who already use IBM TM1 and Power BI. No random junior workers.
-            </p>
+        <!-- CONNECTING FLOW PATH 1 -> 2 -->
+        <div class="journey-connector-bridge">
+          <div class="connector-line-left"></div>
+          <div class="connector-ribbon">
+            <div class="ribbon-arrow">&rarr;</div>
+            <div class="ribbon-content">
+              <strong>Connecting Flow Path: 74 Link Clicks</strong>
+              <span>(2.78% CTR &middot; $1.14 CPC)</span>
+            </div>
           </div>
+          <div class="connector-line-right"></div>
+        </div>
+
+        <!-- NODE 2: AUDIENCE GATE -->
+        <article class="journey-node-card" id="journey-node-2">
+          <div class="node-badge-header">
+            <div class="node-number-badge">2</div>
+            <div class="node-title-group">
+              <span class="node-step-tag">Node 2 &bull; Audience Gate</span>
+              <h3 class="node-title">Audience Gate: Target Persona</h3>
+            </div>
+          </div>
+
+          <p class="node-desc">
+            Target Persona: AU &amp; NZ CFOs, Finance Directors, Financial Controllers in IBM TM1 ecosystem. Excluded junior staff. Every ad dollar went only to senior finance leaders who make buying choices.
+          </p>
 
           <div class="audience-cards-grid">
             <div class="audience-card">
-              <div class="audience-icon-wrap">👔</div>
+              <div class="audience-icon-wrap">&#128084;</div>
               <div class="audience-info">
                 <strong>Senior Finance Roles Only</strong>
                 <p>Targeted Chief Financial Officers, Finance Directors, Financial Controllers, and FP&amp;A Leaders with purchasing authority.</p>
@@ -958,7 +1658,7 @@
             </div>
 
             <div class="audience-card">
-              <div class="audience-icon-wrap">🌏</div>
+              <div class="audience-icon-wrap">&#127759;</div>
               <div class="audience-info">
                 <strong>Australia &amp; New Zealand</strong>
                 <p>Focused exclusively on major business centers across AU and NZ where enterprise finance teams operate.</p>
@@ -966,7 +1666,7 @@
             </div>
 
             <div class="audience-card">
-              <div class="audience-icon-wrap">📊</div>
+              <div class="audience-icon-wrap">&#128202;</div>
               <div class="audience-info">
                 <strong>Specific Software Stack</strong>
                 <p>Pre-screened organizations actively using IBM Planning Analytics / TM1 together with Microsoft Power BI.</p>
@@ -974,72 +1674,114 @@
             </div>
 
             <div class="audience-card">
-              <div class="audience-icon-wrap">🎯</div>
+              <div class="audience-icon-wrap">&#127919;</div>
               <div class="audience-info">
-                <strong>No Random Junior Workers</strong>
+                <strong>Excluded Junior Staff</strong>
                 <p>Audience networks, interns, students, and unrelated roles were strictly filtered out to avoid wasted ad spend.</p>
               </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- STEP 3: WHAT HAPPENED ON THE WEBSITE -->
-      <article class="step-card">
-        <div class="step-badge-col">
-          <div class="step-circle">3</div>
+        <!-- CONNECTING FLOW PATH 2 -> 3 -->
+        <div class="journey-connector-bridge">
+          <div class="connector-line-left"></div>
+          <div class="connector-ribbon">
+            <div class="ribbon-arrow">&rarr;</div>
+            <div class="ribbon-content">
+              <strong>Connecting Flow Path: 74 Website Landings</strong>
+              <span>(100% Qualified Finance Leaders)</span>
+            </div>
+          </div>
+          <div class="connector-line-right"></div>
         </div>
-        <div class="step-content">
-          <div class="step-header-wrap">
-            <span class="step-category">Step 3</span>
-            <h3 class="step-headline">What Happened on the Website</h3>
-            <p class="step-description">
-              74 people clicked the ad and landed on our page. They stayed an average of 42 seconds reading, but left before picking a meeting time.
+
+        <!-- NODE 3: WEBSITE DWELL & THE FRICTION FORK -->
+        <article class="journey-node-card" id="journey-node-3">
+          <div class="node-badge-header">
+            <div class="node-number-badge">3</div>
+            <div class="node-title-group">
+              <span class="node-step-tag">Node 3 &bull; Engagement &amp; The Friction Fork</span>
+              <h3 class="node-title">Website Dwell &amp; The Friction Fork: 42s Average Dwell Time</h3>
+            </div>
+          </div>
+
+          <p class="node-desc">
+            42s Average Dwell Time (High Buyer Intent). 74 finance leaders landed on our website and stayed an average of 42 seconds reading the product details. However, the journey split into two completely different paths at the booking form.
+          </p>
+
+          <div class="intent-highlight-box">
+            <div class="intent-metric-group">
+              <span class="intent-metric-number">42s</span>
+              <span class="intent-metric-title">Average Dwell Time</span>
+            </div>
+            <p class="intent-desc">
+              Spending 42 seconds reading shows serious interest. Senior finance leaders do not stay that long unless they want to solve their TM1 reporting headache.
             </p>
           </div>
 
-          <div class="funnel-container">
-            <div class="funnel-row">
-              <div class="funnel-block">
-                <div class="funnel-metric">74</div>
-                <div class="funnel-label">Landed on Page</div>
-                <div class="funnel-sub">From Facebook &amp; Instagram</div>
-              </div>
-              <div class="funnel-arrow">&rarr;</div>
-              <div class="funnel-block">
-                <div class="funnel-metric">42s</div>
-                <div class="funnel-label">Average Time Spent</div>
-                <div class="funnel-sub">Carefully read the solution</div>
-              </div>
-              <div class="funnel-arrow">&rarr;</div>
-              <div class="funnel-block highlight-red">
-                <div class="funnel-metric">0</div>
-                <div class="funnel-label">Completed Bookings</div>
-                <div class="funnel-sub">Abandoned at long form</div>
+          <!-- VISUAL SPLIT / FORK -->
+          <div class="friction-fork-grid">
+            <!-- Red Leaked Path (Branching Drop-Off Box) -->
+            <div class="friction-branch leaked-path-box">
+              <span class="friction-branch-tag">Red Leaked Path &bull; Drop-Off</span>
+              <h4 class="friction-branch-headline">74 Visitors Dropped (100% Abandonment) &middot; Long multi-step form friction</h4>
+              <p class="friction-branch-desc">
+                When interested finance leaders clicked to book a demo, they were met with an extensive questionnaire asking for annual budgets, team headcounts, and software versions.
+              </p>
+              <div class="friction-branch-bullet">
+                &#9888;&#65039; Barrier: High friction caused 100% of visitors to close the tab without booking.
               </div>
             </div>
 
-            <div class="funnel-takeaway">
-              <strong>Key Finding:</strong> A 42-second visit proves strong interest. Finance executives understood the proposition, but when faced with an extensive questionnaire instead of an instant schedule, they abandoned the page.
+            <!-- Green Fix Path -->
+            <div class="friction-branch fix-path-box">
+              <span class="friction-branch-tag">Green Fix Path &bull; Recommended Solution</span>
+              <h4 class="friction-branch-headline">Fast-Track Fix &middot; 2-Click Calendar scheduler</h4>
+              <p class="friction-branch-desc">
+                Replace the questionnaire with an interactive calendar embed. Visitors pick a convenient day and time in two quick clicks, locking in the meeting instantly.
+              </p>
+              <div class="friction-branch-bullet">
+                &#9989; Fix: Zero friction lets high-intent finance leaders confirm a call in under 15 seconds.
+              </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- STEP 4: WHAT WE NEED TO FIX -->
-      <article class="step-card">
-        <div class="step-badge-col">
-          <div class="step-circle blue-circle">4</div>
+        <!-- CONNECTING FLOW PATH 3 -> 4 -->
+        <div class="journey-connector-bridge green-bridge">
+          <div class="connector-line-left"></div>
+          <div class="connector-ribbon">
+            <div class="ribbon-arrow">&rarr;</div>
+            <div class="ribbon-content">
+              <strong>Fast-Track Fix Path &rarr; Simple 2-Click Calendar</strong>
+              <span>Immediate Bridge to Booked Sales Meetings</span>
+            </div>
+          </div>
+          <div class="connector-line-right"></div>
         </div>
-        <div class="step-content">
-          <div class="step-header-wrap">
-            <span class="step-category" style="color: var(--octane-blue);">Step 4 &bull; Immediate Action</span>
-            <h3 class="step-headline">What We Need to Fix</h3>
-            <p class="step-description">
-              The booking form has too many steps. Replace it with a simple 2-click calendar so those 74 visitors can easily pick a time.
+
+        <!-- NODE 4: SALES HANDOFF & BOOKING FIX -->
+        <article class="journey-node-card" id="journey-node-4">
+          <div class="node-badge-header">
+            <div class="node-number-badge blue-badge">4</div>
+            <div class="node-title-group">
+              <span class="node-step-tag" style="color: var(--octane-blue);">Node 4 &bull; Conversion Opportunity</span>
+              <h3 class="node-title">Sales Handoff &amp; Booking Fix</h3>
+            </div>
+          </div>
+
+          <div class="opportunity-banner">
+            <div>
+              <span class="opp-status-pill">Status: 0 Booked Demos (The Immediate Opportunity)</span>
+              <h4 class="opp-headline" style="margin-top: 10px;">The traffic is already qualified. We only need to fix the front door.</h4>
+            </div>
+            <p class="opp-subtext">
+              We spent $84 AUD and brought 74 qualified senior finance decision-makers to our site. By fixing the booking barrier, the exact same campaign will generate booked sales calls.
             </p>
           </div>
 
+          <!-- SIDE-BY-SIDE COMPARISON OF FRICTION BARRIER VS 2-CLICK CALENDAR SOLUTION -->
           <div class="comparison-container">
             <!-- Current Problem -->
             <div class="comparison-box barrier">
@@ -1071,8 +1813,9 @@
               <div class="comparison-outcome">Outcome: Friction removed, allowing interested leaders to book instantly.</div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+
+      </div>
     </section>
 
   </main>
