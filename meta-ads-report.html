@@ -180,7 +180,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* Subtle Tape Accent */
+    /* Tape Accent Removed */
     .summary-banner::before,
     .report-section::before,
     .sticky-note::before,
@@ -189,22 +189,8 @@
     .meta-manager-card::before,
     .journey-overview-card::before,
     .comparison-card::before {
-      content: '';
-      position: absolute;
-      top: 0px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 76px;
-      height: 16px;
-      background: var(--yellow-tape-bg);
-      background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(202, 138, 4, 0.12) 5px, rgba(202, 138, 4, 0.12) 10px);
-      border-left: 1.5px dashed var(--yellow-tape-border);
-      border-right: 1.5px dashed var(--yellow-tape-border);
-      border-bottom: 1px solid rgba(202, 138, 4, 0.18);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-      border-radius: 0 0 2px 2px;
-      pointer-events: none;
-      z-index: 10;
+      display: none !important;
+      content: none !important;
     }
 
     /* Contenteditable Universal Rules */
@@ -388,10 +374,10 @@
       border-top: 5px solid var(--yellow-paper-accent);
       border-radius: var(--radius-paper);
       box-shadow: var(--shadow-paper);
-      min-width: 270px;
-      width: 280px;
-      flex: 0 0 280px;
-      min-height: 240px;
+      min-width: 290px;
+      width: 300px;
+      flex: 0 0 300px;
+      min-height: 280px;
       padding: 22px;
       display: flex;
       flex-direction: column;
@@ -450,6 +436,30 @@
     .sticky-body strong {
       color: #0f172a;
       font-weight: 700;
+    }
+
+    .sticky-rationale {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(202, 138, 4, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .rationale-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #92400e;
+    }
+
+    .rationale-text {
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #334155;
+      font-weight: 500;
     }
 
     .note-ibm {
@@ -1668,10 +1678,13 @@
           <!-- Sticky Note 1: IBM -->
           <div class="sticky-note note-ibm">
             <div class="sticky-header" contenteditable="true" data-persist-id="sticky-1-header">IBM</div>
-            <span class="ibm-badge" contenteditable="true" data-persist-id="sticky-1-badge">IBM</span>
             <p class="ibm-subtext" contenteditable="true" data-persist-id="sticky-1-body">
               Target ecosystem base: Organizations using IBM enterprise software, specifically IBM Planning Analytics and TM1 solutions.
             </p>
+            <div class="sticky-rationale" contenteditable="true" data-persist-id="sticky-1-rationale">
+              <span class="rationale-tag">Why we chose this:</span>
+              <p class="rationale-text">We only sell to companies already running IBM TM1. If an organization does not have TM1 installed, DataFusion is useless to them. Filtering by IBM guarantees zero budget is wasted on non-TM1 companies.</p>
+            </div>
           </div>
 
           <!-- Arrow Connector 1 -> 2 -->
@@ -1688,6 +1701,10 @@
             <div class="sticky-body" contenteditable="true" data-persist-id="sticky-2-body">
               Planning, Data Analysis, business analytics, business intelligence, Tableau software, Business and finance, free software.
             </div>
+            <div class="sticky-rationale" contenteditable="true" data-persist-id="sticky-2-rationale">
+              <span class="rationale-tag">Why we chose this:</span>
+              <p class="rationale-text">These are hands-on analysts who build reports and models daily. They feel the painful grind of manual CSV exports firsthand. Adding free software and Tableau catches practitioners actively searching for better connection tools.</p>
+            </div>
           </div>
 
           <!-- Arrow Connector 2 -> 3 -->
@@ -1700,10 +1717,13 @@
 
           <!-- Sticky Note 3: Role/Job title -->
           <div class="sticky-note">
-            <span class="sticky-super-header" contenteditable="true" data-persist-id="sticky-3-super">Who you targeted metrics</span>
             <div class="sticky-header" contenteditable="true" data-persist-id="sticky-3-header">Role/Job title</div>
             <div class="sticky-body" contenteditable="true" data-persist-id="sticky-3-body">
               CFO, CTO, CIO, Finance Manager, Finance Director, Head of Finance, Financial controller, Senior Financial Analyst, Commercial Finance &amp; Insights Manager
+            </div>
+            <div class="sticky-rationale" contenteditable="true" data-persist-id="sticky-3-rationale">
+              <span class="rationale-tag">Why we chose this:</span>
+              <p class="rationale-text">These senior finance leaders hold budget authority. They sign off on software purchases and trials. Targeting decision-makers ensures demo requests convert into real enterprise pipeline instead of tire-kickers.</p>
             </div>
           </div>
 
@@ -1720,6 +1740,10 @@
             <div class="sticky-header" contenteditable="true" data-persist-id="sticky-4-header">Condition</div>
             <div class="sticky-body" contenteditable="true" data-persist-id="sticky-4-body">
               Data modeling, software, database management, Data visualization, Business Planning and Reporting department
+            </div>
+            <div class="sticky-rationale" contenteditable="true" data-persist-id="sticky-4-rationale">
+              <span class="rationale-tag">Why we chose this:</span>
+              <p class="rationale-text">Narrowing to data modeling and financial reporting departments guarantees our ads only reach teams actively managing planning models and data pipelines, filtering out general administrative staff.</p>
             </div>
           </div>
 
