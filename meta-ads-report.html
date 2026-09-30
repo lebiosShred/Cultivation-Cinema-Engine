@@ -257,6 +257,20 @@
       line-height: 1.6;
     }
 
+    .meta-ad-primary-copy p[contenteditable="true"] {
+      font-size: 15px !important;
+      line-height: 1.45 !important;
+      color: #050505 !important;
+    }
+
+    .meta-ad-bottom-headline[contenteditable="true"],
+    .meta-ad-author-name[contenteditable="true"] {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: #050505 !important;
+      line-height: 1.25 !important;
+    }
+
     /* Media isolation on interactive controls */
     [contenteditable="false"] {
       user-select: auto;
@@ -502,234 +516,360 @@
       overflow: visible;
     }
 
-    /* REAL 1:1 VIDEO CREATIVE SHOWCASE IN YELLOW PAPER FRAME */
-    .creative-showcase-grid {
-      display: grid;
-      grid-template-columns: minmax(320px, 380px) 1fr;
-      gap: 28px;
-      align-items: start;
-      background: linear-gradient(180deg, var(--yellow-paper-light) 0%, var(--yellow-paper-dark) 100%);
-      border: 1px solid var(--yellow-paper-border);
-      border-radius: var(--radius-paper);
-      box-shadow: var(--shadow-paper);
-      padding: 28px 24px;
-      position: relative;
-    }
-
-    .creative-video-column {
+    /* ==========================================================================
+       AUTHENTIC META FEED AD SHOWCASE (MATCHING EXACT CAMPAIGN SCREENSHOT)
+       ========================================================================== */
+    .meta-ad-showcase-wrapper {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      max-width: 380px;
-    }
-
-    .creative-video-box {
-      width: 360px;
-      height: 360px;
-      max-width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #0f172a;
-      display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      border-radius: var(--radius-paper);
-      overflow: hidden;
-      border: 2px solid #eab308;
-      box-shadow: var(--shadow-paper);
+      margin-top: 14px;
+      box-sizing: border-box;
     }
 
-    .creative-video-box video {
+    .meta-feed-ad-card {
+      max-width: 520px;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #dadde1;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #050505;
+      text-align: left;
+      box-sizing: border-box;
+      position: relative;
     }
 
-    .creative-cta-bar {
-      padding: 12px 16px;
-      background: #fef08a;
-      border: 1px solid var(--yellow-paper-border);
-      border-radius: var(--radius-paper);
+    .meta-ad-header {
+      padding: 12px 16px 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      flex-wrap: wrap;
+      background: #ffffff;
     }
 
-    .creative-cta-text {
+    .meta-ad-author-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .meta-ad-bullseye-avatar {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .meta-ad-author-meta {
       display: flex;
       flex-direction: column;
+      line-height: 1.25;
+      min-width: 0;
     }
 
-    .creative-site-url {
-      font-size: 13px;
+    .meta-ad-author-name {
+      font-size: 15px;
       font-weight: 700;
-      color: #713f12;
-      letter-spacing: 0.04em;
+      color: #050505;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .creative-cta-headline {
-      font-size: 14px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
-    .creative-cta-btn {
+    .meta-ad-sponsor-sub {
+      font-size: 13px;
+      color: #65676b;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      background-color: var(--octane-blue);
-      color: #ffffff;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background-color 0.2s ease, transform 0.15s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      gap: 4px;
+      margin-top: 2px;
+      font-weight: 400;
     }
 
-    .creative-cta-btn:hover {
-      background-color: #0369a1;
-      transform: translateY(-1px);
+    .meta-ad-globe-icon {
+      width: 12px;
+      height: 12px;
+      fill: #65676b;
+      display: inline-block;
+      vertical-align: middle;
     }
 
-    .creative-notes-pane {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .creative-account-bar {
+    .meta-ad-actions-top {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px dashed var(--yellow-paper-border);
-    }
-
-    .creative-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid var(--yellow-paper-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      gap: 4px;
       flex-shrink: 0;
     }
 
-    .creative-avatar img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-    }
-
-    .creative-account-info {
+    .meta-ad-action-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #65676b;
+      padding: 6px;
+      border-radius: 50%;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s ease;
+      line-height: 1;
     }
 
-    .creative-brand-name {
-      font-size: 16px;
-      font-weight: 800;
-      color: #0f172a;
+    .meta-ad-action-btn:hover {
+      background-color: #f0f2f5;
     }
 
-    .creative-sub-label {
-      font-size: 13px;
-      color: #475569;
-    }
-
-    .creative-post-text {
-      font-size: 16px;
-      color: #0f172a;
-      line-height: 1.6;
-      background: #fefce8;
-      border: 1px solid var(--yellow-paper-border);
-      border-radius: var(--radius-paper);
-      padding: 16px 18px;
-    }
-
-    .creative-post-text p {
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #0f172a;
-      font-size: 16px;
-    }
-
-    .creative-steps-ol {
-      padding-left: 20px;
-      color: #1e293b;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .creative-steps-ol li {
-      margin-bottom: 4px;
-    }
-
-    .creative-meta-details {
+    .meta-ad-primary-copy {
+      padding: 6px 16px 14px;
+      font-size: 15px;
+      line-height: 1.45;
+      color: #050505;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      padding-top: 4px;
+      background: #ffffff;
     }
 
-    .creative-badge-tag {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #713f12;
-      background: #fde68a;
-      border: 1px solid var(--yellow-paper-accent);
-      padding: 4px 10px;
+    .meta-ad-primary-copy p {
+      margin: 0;
+      font-size: 15px !important;
+      line-height: 1.45 !important;
+      color: #050505 !important;
+      word-break: normal;
+    }
+
+    .meta-ad-media-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #000000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .meta-ad-media-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #000000;
+    }
+
+    /* Meta center circular play button overlay */
+    .meta-center-play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.65);
+      border: 2.5px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .meta-center-play-button:hover {
+      transform: translate(-50%, -50%) scale(1.06);
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .meta-center-play-button svg {
+      width: 26px;
+      height: 26px;
+      fill: #ffffff;
+      margin-left: 4px;
+    }
+
+    .meta-center-play-button.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Meta custom bottom video controller bar */
+    .meta-video-control-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 44px;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      z-index: 4;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s ease;
+    }
+
+    .meta-video-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
       border-radius: 4px;
-      align-self: flex-start;
+      line-height: 1;
     }
 
-    .creative-notes-pane h4 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #0f172a;
-      line-height: 1.35;
+    .meta-video-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .creative-notes-pane p {
-      font-size: 16px;
-      color: #1e293b;
-      line-height: 1.6;
+    .meta-video-time {
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      color: #ffffff;
     }
 
-    .creative-feature-list {
-      list-style: none;
+    .meta-video-scrub-container {
+      flex: 1;
+      height: 20px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
     }
 
-    .creative-feature-list li {
+    .meta-video-scrub-track {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: height 0.15s ease;
+    }
+
+    .meta-video-scrub-container:hover .meta-video-scrub-track {
+      height: 5px;
+    }
+
+    .meta-video-scrub-progress {
+      width: 0%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: width 0.08s linear;
+    }
+
+    /* Bottom Link Bar & CTA */
+    .meta-ad-bottom-bar {
+      padding: 12px 16px;
+      background: #f0f2f5;
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 16px;
-      color: #1e293b;
-      line-height: 1.6;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid #f0f2f5;
     }
 
-    .creative-feature-list li span.bullet-icon {
-      color: #15803d;
-      font-weight: 800;
-      font-size: 16px;
-      line-height: 1.6;
+    .meta-ad-bottom-headline {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: #050505 !important;
+      line-height: 1.25 !important;
+      flex: 1;
+      min-width: 0;
+      word-break: normal;
+    }
+
+    .meta-ad-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e4e6eb;
+      color: #050505 !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease;
+    }
+
+    .meta-ad-cta-btn:hover {
+      background-color: #d8dadf;
+      text-decoration: none;
+      color: #050505 !important;
+    }
+
+    /* Social Action Bar */
+    .meta-ad-social-bar {
+      border-top: 1px solid #ced0d4;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+    }
+
+    .meta-ad-social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #65676b;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .meta-ad-social-btn:hover {
+      background-color: #f2f2f2;
+    }
+
+    .meta-ad-social-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .meta-ad-preview-subcaption {
+      font-size: 12px;
+      color: #65676b;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      font-weight: 500;
     }
 
     /* ==========================================================================
@@ -1321,19 +1461,8 @@
     }
 
     @media (max-width: 1023px) {
-      .creative-showcase-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .creative-video-column {
-        max-width: 100%;
-        align-items: center;
-      }
-
-      .creative-video-box {
-        width: 360px;
-        max-width: 100%;
+      .meta-feed-ad-card {
+        max-width: 520px;
       }
 
       .meta-manager-body {
@@ -1425,22 +1554,27 @@
         font-size: 0.75rem;
       }
 
-      .creative-showcase-grid {
-        grid-template-columns: 1fr;
-        padding: 20px 16px;
-        gap: 20px;
+      .meta-feed-ad-card {
+        max-width: 100%;
+        border-radius: 6px;
       }
 
-      .creative-video-column {
-        width: 100%;
-        align-items: center;
+      .meta-ad-primary-copy {
+        padding: 6px 12px 12px;
       }
 
-      .creative-video-box {
-        width: 100%;
-        max-width: 360px;
-        height: auto;
-        aspect-ratio: 1 / 1;
+      .meta-ad-bottom-bar {
+        padding: 10px 12px;
+      }
+
+      .meta-ad-social-bar {
+        padding: 4px;
+      }
+
+      .meta-ad-social-btn {
+        padding: 6px 4px;
+        font-size: 13px;
+        gap: 6px;
       }
 
       .meta-manager-body {
@@ -1592,80 +1726,126 @@
         </div>
       </div>
 
-      <!-- Real 1:1 Video Creative Showcase in Yellow Paper Frame -->
-      <div class="creative-showcase-grid">
-        <!-- Left: 1:1 Square Video Player (360px x 360px) & CTA Bar -->
-        <div class="creative-video-column" contenteditable="false">
-          <div class="creative-video-box" contenteditable="false">
+      <!-- Authentic Meta Feed Ad Showcase Matching media_1790729028482.png EXACTLY -->
+      <div class="meta-ad-showcase-wrapper" contenteditable="false">
+        <div class="meta-feed-ad-card" contenteditable="false">
+          <!-- Card Header -->
+          <div class="meta-ad-header">
+            <div class="meta-ad-author-group">
+              <div class="meta-ad-bullseye-avatar" aria-label="Octane Logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="20" r="17.5" fill="#ffffff" stroke="#1c1e21" stroke-width="4.5"/>
+                  <circle cx="20" cy="20" r="8" fill="#1c1e21"/>
+                </svg>
+              </div>
+              <div class="meta-ad-author-meta">
+                <div class="meta-ad-author-name" contenteditable="true" data-persist-id="meta-author-name">Octane Software Solutions</div>
+                <div class="meta-ad-sponsor-sub">
+                  <span>Ad</span>
+                  <span>&middot;</span>
+                  <svg class="meta-ad-globe-icon" viewBox="0 0 16 16" width="12" height="12" aria-label="Public">
+                    <path fill="#65676b" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm5.93 7h-2.18a12.8 12.8 0 0 0-.96-3.87A6.99 6.99 0 0 1 13.93 7zm-5.93 7c-.77 0-1.74-1.72-2.02-5h4.04c-.28 3.28-1.25 5-2.02 5zm-2.02-7c.28-3.28 1.25-5 2.02-5s1.74 1.72 2.02 5H5.98zm-1.77 0H2.07a6.99 6.99 0 0 1 3.14-3.87A12.8 12.8 0 0 0 4.21 7zm-2.14 2h2.14c.2 1.45.54 2.76.96 3.87A6.99 6.99 0 0 1 2.07 9zm8.71 3.87c.42-1.11.76-2.42.96-3.87h2.18a6.99 6.99 0 0 1-3.14 3.87z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="meta-ad-actions-top" contenteditable="false">
+              <button type="button" class="meta-ad-action-btn" title="More options" aria-label="More options">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#65676b">
+                  <circle cx="5" cy="12" r="2"/>
+                  <circle cx="12" cy="12" r="2"/>
+                  <circle cx="19" cy="12" r="2"/>
+                </svg>
+              </button>
+              <button type="button" class="meta-ad-action-btn" title="Close" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#65676b">
+                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Exact Primary Copy -->
+          <div class="meta-ad-primary-copy">
+            <p contenteditable="true" data-persist-id="meta-post-p1">Still exporting TM1 views to CSV just to get data into Power BI? If your month-end close involves manually cleaning up, re-formatting, and uploading flat files, there is a better way.</p>
+            <p contenteditable="true" data-persist-id="meta-post-p2">DataFusion connects IBM Planning Analytics directly to Microsoft Power BI via REST API.</p>
+            <p contenteditable="true" data-persist-id="meta-post-p3">With zero data stored, no complex staging databases, and automated scheduled syncs, you eliminate manual reconciliations and report TM1 data like a pro.</p>
+            <p contenteditable="true" data-persist-id="meta-post-p4">Start your 60-day free trial with unlimited users and data today.</p>
+          </div>
+
+          <!-- Featured 1080x1080 Crisp Video Player -->
+          <div class="meta-ad-media-wrapper" id="metaVideoWrapper" contenteditable="false">
             <video 
-              controls 
-              muted 
+              id="metaAdVideo" 
               playsinline 
               preload="metadata"
-              poster="/media/real_campaign_creative_graphic_2x.png"
-              contenteditable="false"
-            >
-              <source src="/media/real_campaign_creative_player.mp4" type="video/mp4">
-              <source src="/media/real_campaign_creative.mp4" type="video/mp4">
-              <img src="/media/real_campaign_creative_with_cta.png" alt="Creative fallback poster">
-            </video>
-          </div>
-          <div class="creative-cta-bar" contenteditable="false">
-            <div class="creative-cta-text" contenteditable="false">
-              <span class="creative-site-url" contenteditable="true" data-persist-id="mock-site-url">OCTANESOLUTIONS.COM.AU</span>
-              <span class="creative-cta-headline" contenteditable="true" data-persist-id="mock-cta-headline">Automate TM1 to Power BI in 5 Minutes</span>
+              poster="/media/real_campaign_creative_hd_poster.png"
+              src="/media/real_campaign_creative_hd.mp4"
+            ></video>
+
+            <!-- Centered Circular Play Button Overlay -->
+            <button type="button" class="meta-center-play-button" id="metaCenterPlayBtn" aria-label="Play video">
+              <svg viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+            </button>
+
+            <!-- Video Bottom Bar Controls Overlay -->
+            <div class="meta-video-control-bar" id="metaVideoControlBar">
+              <button type="button" class="meta-video-btn" id="metaBottomPlayBtn" aria-label="Play/Pause">
+                <svg id="metaPlayPauseIcon" viewBox="0 0 24 24" width="16" height="16" fill="#ffffff">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <span class="meta-video-time" id="metaVideoTime">0:00 / 0:28</span>
+              <div class="meta-video-scrub-container" id="metaScrubContainer">
+                <div class="meta-video-scrub-track">
+                  <div class="meta-video-scrub-progress" id="metaScrubProgress"></div>
+                </div>
+              </div>
+              <button type="button" class="meta-video-btn" id="metaMuteBtn" aria-label="Toggle mute">
+                <svg id="metaVolumeIcon" viewBox="0 0 24 24" width="18" height="18" fill="#ffffff">
+                  <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                </svg>
+              </button>
             </div>
-            <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="creative-cta-btn" contenteditable="false">
-              Book Live Demo
+          </div>
+
+          <!-- Bottom Link Bar & CTA -->
+          <div class="meta-ad-bottom-bar" contenteditable="false">
+            <div class="meta-ad-bottom-headline" contenteditable="true" data-persist-id="meta-headline">
+              Connect TM1 directly to Power BI in 5 Min
+            </div>
+            <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="meta-ad-cta-btn" contenteditable="false">
+              Learn more
             </a>
           </div>
-        </div>
 
-        <!-- Right: Ad Text, Headlines, and Metrics with comfortable font and line height -->
-        <div class="creative-notes-pane">
-          <div class="creative-account-bar" contenteditable="false">
-            <div class="creative-avatar" contenteditable="false">
-              <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Icon" contenteditable="false">
-            </div>
-            <div class="creative-account-info" contenteditable="false">
-              <span class="creative-brand-name" contenteditable="true" data-persist-id="mock-brand-name">Octane Software Solutions</span>
-              <span class="creative-sub-label" contenteditable="true" data-persist-id="mock-sub-label">Sponsored &bull; Meta Feed Ad &bull; 1:1 Creative</span>
-            </div>
-          </div>
-
-          <div class="creative-post-text" contenteditable="true" data-persist-id="mock-post-text">
-            <p>Five steps to eliminate manual TM1-to-Power BI data pipelines:</p>
-            <ol class="creative-steps-ol">
-              <li>Download and authorize DataFusion</li>
-              <li>Select your TM1 dataset</li>
-              <li>Generate a secure connection code</li>
-              <li>Paste directly into Power BI</li>
-              <li>Scheduled sync begins automatically</li>
-            </ol>
-          </div>
-
-          <div class="creative-meta-details">
-            <span class="creative-badge-tag" contenteditable="true" data-persist-id="creative-badge-tag">Verified Campaign Creative</span>
-            <h4 contenteditable="true" data-persist-id="creative-notes-title">Production 1:1 Creative Delivered to Target Persona</h4>
-            <p contenteditable="true" data-persist-id="creative-notes-p1">
-              The video creative directly visualizes the five-step setup for DataFusion, contrasting the pain of manual TM1 spreadsheet exports against real-time Power BI automated synchronization.
-            </p>
-            <ul class="creative-feature-list">
-              <li>
-                <span class="bullet-icon" contenteditable="false">&#10003;</span>
-                <div contenteditable="true" data-persist-id="creative-feature-1"><strong>Square 1:1 Aspect Ratio:</strong> Maximizes mobile screen share across Facebook and Instagram feeds (360px &times; 360px).</div>
-              </li>
-              <li>
-                <span class="bullet-icon" contenteditable="false">&#10003;</span>
-                <div contenteditable="true" data-persist-id="creative-feature-2"><strong>High-Intent Hook:</strong> Directly addresses the manual reporting burden faced by financial controllers.</div>
-              </li>
-              <li>
-                <span class="bullet-icon" contenteditable="false">&#10003;</span>
-                <div contenteditable="true" data-persist-id="creative-feature-3"><strong>Clear Call-to-Action:</strong> Direct button driving to the dedicated DataFusion product landing page.</div>
-              </li>
-            </ul>
+          <!-- Social Action Bar -->
+          <div class="meta-ad-social-bar" contenteditable="false">
+            <button type="button" class="meta-ad-social-btn" title="Like">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#65676b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+              </svg>
+              <span>Like</span>
+            </button>
+            <button type="button" class="meta-ad-social-btn" title="Comment">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#65676b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+              <span>Comment</span>
+            </button>
+            <button type="button" class="meta-ad-social-btn" title="Share">
+              <svg viewBox="0 0 24 24" fill="#65676b">
+                <path d="M4 17c0-5 3.5-9 10-9V4l8 8-8 8v-4c-6.5 0-9.5 2-10 5z"/>
+              </svg>
+              <span>Share</span>
+            </button>
           </div>
         </div>
+
+        <!-- Sub-caption -->
+        <div class="meta-ad-preview-subcaption" contenteditable="false">Full size preview</div>
       </div>
     </section>
 
@@ -2126,8 +2306,139 @@
         }
       }
 
+      function initMetaAdPlayer() {
+        var video = document.getElementById('metaAdVideo');
+        if (!video) return;
+
+        var centerPlayBtn = document.getElementById('metaCenterPlayBtn');
+        var bottomPlayBtn = document.getElementById('metaBottomPlayBtn');
+        var playPauseIcon = document.getElementById('metaPlayPauseIcon');
+        var timeDisplay = document.getElementById('metaVideoTime');
+        var scrubContainer = document.getElementById('metaScrubContainer');
+        var scrubProgress = document.getElementById('metaScrubProgress');
+        var muteBtn = document.getElementById('metaMuteBtn');
+        var volumeIcon = document.getElementById('metaVolumeIcon');
+
+        var totalDuration = 28;
+
+        function formatTime(s) {
+          if (isNaN(s) || s < 0) return '0:00';
+          var m = Math.floor(s / 60);
+          var sec = Math.floor(s % 60);
+          return m + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+
+        function updatePlayState(isPlaying) {
+          if (centerPlayBtn) {
+            if (isPlaying) {
+              centerPlayBtn.classList.add('hidden');
+            } else {
+              centerPlayBtn.classList.remove('hidden');
+            }
+          }
+          if (playPauseIcon) {
+            if (isPlaying) {
+              playPauseIcon.innerHTML = '<rect x="6" y="4" width="4" height="16" fill="#ffffff"/><rect x="14" y="4" width="4" height="16" fill="#ffffff"/>';
+            } else {
+              playPauseIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="#ffffff"/>';
+            }
+          }
+        }
+
+        function togglePlay() {
+          if (video.paused || video.ended) {
+            video.play().catch(function(err) {
+              console.log('Playback error:', err);
+            });
+          } else {
+            video.pause();
+          }
+        }
+
+        if (centerPlayBtn) {
+          centerPlayBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            togglePlay();
+          });
+        }
+
+        if (bottomPlayBtn) {
+          bottomPlayBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            togglePlay();
+          });
+        }
+
+        video.addEventListener('click', function() {
+          togglePlay();
+        });
+
+        video.addEventListener('play', function() {
+          updatePlayState(true);
+        });
+
+        video.addEventListener('pause', function() {
+          updatePlayState(false);
+        });
+
+        video.addEventListener('ended', function() {
+          updatePlayState(false);
+          if (scrubProgress) scrubProgress.style.width = '100%';
+        });
+
+        video.addEventListener('loadedmetadata', function() {
+          if (video.duration && !isNaN(video.duration)) {
+            totalDuration = video.duration;
+          }
+          if (timeDisplay) {
+            timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(totalDuration);
+          }
+        });
+
+        video.addEventListener('timeupdate', function() {
+          var dur = (video.duration && !isNaN(video.duration)) ? video.duration : totalDuration;
+          var cur = video.currentTime || 0;
+          if (timeDisplay) {
+            timeDisplay.textContent = formatTime(cur) + ' / ' + formatTime(dur);
+          }
+          if (scrubProgress && dur > 0) {
+            var pct = Math.min(100, Math.max(0, (cur / dur) * 100));
+            scrubProgress.style.width = pct + '%';
+          }
+        });
+
+        if (scrubContainer) {
+          scrubContainer.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var rect = scrubContainer.getBoundingClientRect();
+            var clickX = e.clientX - rect.left;
+            var width = rect.width;
+            if (width > 0) {
+              var dur = (video.duration && !isNaN(video.duration)) ? video.duration : totalDuration;
+              var targetTime = (clickX / width) * dur;
+              video.currentTime = targetTime;
+            }
+          });
+        }
+
+        if (muteBtn) {
+          muteBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            video.muted = !video.muted;
+            if (volumeIcon) {
+              if (video.muted) {
+                volumeIcon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+              } else {
+                volumeIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+              }
+            }
+          });
+        }
+      }
+
       document.addEventListener('DOMContentLoaded', function() {
         restoreBoardState();
+        initMetaAdPlayer();
 
         document.addEventListener('input', function(e) {
           if (e.target && e.target.isContentEditable) {

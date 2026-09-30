@@ -219,6 +219,37 @@ const server = http.createServer(async (req, res) => {
       else if (ext === '.jpg' || ext === '.jpeg') mime = 'image/jpeg';
       else if (ext === '.mp4') mime = 'video/mp4';
       else if (ext === '.webm') mime = 'video/webm';
+
+      if (ext === '.mp4' || ext === '.webm') {
+        const stat = fs.statSync(filePath);
+        const fileSize = stat.size;
+        const range = req.headers.range;
+
+        if (range) {
+          const parts = range.replace(/bytes=/, "").split("-");
+          const start = parseInt(parts[0], 10);
+          const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+          const chunksize = (end - start) + 1;
+          const file = fs.createReadStream(filePath, { start, end });
+          const head = {
+            'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+            'Accept-Ranges': 'bytes',
+            'Content-Length': chunksize,
+            'Content-Type': mime,
+          };
+          res.writeHead(206, head);
+          return file.pipe(res);
+        } else {
+          const head = {
+            'Content-Length': fileSize,
+            'Accept-Ranges': 'bytes',
+            'Content-Type': mime,
+          };
+          res.writeHead(200, head);
+          return fs.createReadStream(filePath).pipe(res);
+        }
+      }
+
       res.writeHead(200, { 'Content-Type': mime });
       return fs.createReadStream(filePath).pipe(res);
     }
