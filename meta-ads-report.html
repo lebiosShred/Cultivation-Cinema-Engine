@@ -168,7 +168,8 @@
     .kpi-card,
     .meta-manager-card,
     .journey-overview-card,
-    .comparison-card {
+    .comparison-card,
+    .journey-step-card {
       background: linear-gradient(180deg, var(--yellow-paper-light) 0%, var(--yellow-paper-dark) 100%);
       border: 1px solid var(--yellow-paper-border);
       border-radius: var(--radius-paper);
@@ -188,7 +189,8 @@
     .kpi-card::before,
     .meta-manager-card::before,
     .journey-overview-card::before,
-    .comparison-card::before {
+    .comparison-card::before,
+    .journey-step-card::before {
       display: none !important;
       content: none !important;
     }
@@ -216,8 +218,8 @@
     h1[contenteditable="true"], .header-title[contenteditable="true"] { font-size: max(16px, 1.15rem); }
     h2[contenteditable="true"], .banner-headline[contenteditable="true"] { font-size: max(16px, 1.55rem); }
     h3[contenteditable="true"], .question-title[contenteditable="true"] { font-size: max(16px, 1.35rem); }
-    h4[contenteditable="true"], .comparison-headline[contenteditable="true"] { font-size: max(16px, 1.15rem); }
-    .meta-big-number[contenteditable="true"], .kpi-number[contenteditable="true"], .dwell-metric-big[contenteditable="true"] { font-size: max(16px, 2.75rem); }
+    h4[contenteditable="true"], .comparison-headline[contenteditable="true"], .journey-step-title[contenteditable="true"] { font-size: max(16px, 1.25rem); }
+    .meta-big-number[contenteditable="true"], .kpi-number[contenteditable="true"], .dwell-metric-big[contenteditable="true"], .journey-metric-big[contenteditable="true"] { font-size: max(16px, 2.2rem); }
 
     .banner-badge[contenteditable="true"],
     .question-badge[contenteditable="true"],
@@ -226,8 +228,11 @@
     .meta-status-pill[contenteditable="true"],
     .kpi-badge[contenteditable="true"],
     .destination-tag[contenteditable="true"],
-    .comparison-badge[contenteditable="true"] {
-      font-size: 12px !important;
+    .comparison-badge[contenteditable="true"],
+    .journey-connector-badge[contenteditable="true"],
+    .journey-metric-label[contenteditable="true"],
+    .journey-takeaway-title[contenteditable="true"] {
+      font-size: 11px !important;
     }
 
     .banner-subtext[contenteditable="true"],
@@ -238,8 +243,9 @@
     .meta-explanation-pane p[contenteditable="true"],
     .kpi-subtext[contenteditable="true"],
     .destination-info p[contenteditable="true"],
-    .comparison-body[contenteditable="true"] {
-      font-size: 16px !important;
+    .comparison-body[contenteditable="true"],
+    .journey-step-desc[contenteditable="true"] {
+      font-size: 15px !important;
       line-height: 1.6;
     }
 
@@ -1364,6 +1370,173 @@
     }
 
     /* ==========================================================================
+       SPECIFICATION ITEMS 3, 4, 5, 6: USER JOURNEY PATH EXPLORATION FLOW
+       ========================================================================== */
+    .journey-path-flow {
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 8px;
+    }
+
+    .journey-step-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-sizing: border-box;
+      position: relative;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .journey-step-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -4px rgba(161, 98, 7, 0.16);
+    }
+
+    .journey-step-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-bottom: 1px dashed var(--yellow-paper-border);
+      padding-bottom: 12px;
+    }
+
+    .journey-step-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .journey-step-desc {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .journey-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    .journey-metric-card {
+      background: #fefce8;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 4px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .journey-metric-big {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .journey-metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+
+    .journey-takeaway-box {
+      background: #fefce8;
+      border: 1px solid var(--yellow-paper-border);
+      border-left: 4px solid var(--octane-blue);
+      border-radius: var(--radius-paper);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: #1e293b;
+    }
+
+    .journey-takeaway-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #0369a1;
+    }
+
+    .journey-leak-box {
+      background: #fef2f2;
+      border: 1.5px solid var(--red-border);
+      border-radius: var(--radius-paper);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .journey-fix-box {
+      background: #f0fdf4;
+      border: 1.5px solid var(--green-border);
+      border-radius: var(--radius-paper);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Directional Journey Connector */
+    .journey-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0;
+      text-align: center;
+      width: 100px;
+      min-width: 100px;
+      flex: 0 0 100px;
+      align-self: center;
+      box-sizing: border-box;
+    }
+
+    .journey-connector-badge {
+      background: #fef08a;
+      border: 1px solid var(--yellow-paper-border);
+      color: #854d0e;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 6px 8px;
+      border-radius: 9999px;
+      text-align: center;
+      max-width: 100px;
+      box-shadow: var(--shadow-sm);
+      word-break: normal;
+    }
+
+    .journey-connector-svg {
+      width: 48px;
+      height: 16px;
+      display: block;
+      overflow: visible;
+    }
+
+    /* ==========================================================================
        INTERACTIVE CUSTOM NOTES BOARD
        ========================================================================== */
     .custom-notes-grid {
@@ -1483,6 +1656,40 @@
       .journey-overview-card {
         grid-template-columns: 1fr;
         gap: 24px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .journey-path-flow {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+      }
+
+      .journey-step-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+      }
+
+      .journey-connector {
+        width: 100% !important;
+        min-width: 100% !important;
+        flex: 0 0 auto !important;
+        flex-direction: column !important;
+        padding: 8px 0 !important;
+        gap: 6px !important;
+        align-self: center !important;
+      }
+
+      .journey-connector-badge {
+        max-width: none !important;
+      }
+
+      .journey-connector-svg {
+        transform: rotate(90deg) !important;
+        width: 16px !important;
+        height: 36px !important;
       }
     }
 
@@ -1749,8 +1956,78 @@
 
         </div>
       </div>
+    </section>
 
-      <!-- Authentic Meta Feed Ad Showcase Matching media_1790729028482.png EXACTLY -->
+    <!-- QUESTION 2: ESTIMATED AUDIENCE SIZE (META ADS MANAGER RECREATION ON YELLOW PAPER) -->
+    <section class="report-section" id="question-2">
+      <div class="section-header-block">
+        <span class="question-badge" contenteditable="true" data-persist-id="q2-badge">Specification Item 2</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="q2-title">2. Estimated audience size (how big the potential market was: Below 1,000 from meta ads &ldquo;Estimated audience size&rdquo;)</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="q2-subtitle">
+          Authentic Meta Ads Manager audience definition card recreation showing the exact ground-truth reach estimate.
+        </p>
+      </div>
+
+      <div class="meta-manager-card">
+        <div class="meta-manager-header" contenteditable="false">
+          <div class="meta-manager-brand" contenteditable="false">
+            <svg class="meta-icon-svg" viewBox="0 0 24 24" contenteditable="false">
+              <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z"/>
+            </svg>
+            <span class="meta-manager-title" contenteditable="true" data-persist-id="meta-header-title">Meta Ads Manager &bull; Audience Definition</span>
+          </div>
+          <span class="meta-status-pill" contenteditable="true" data-persist-id="meta-status-pill">Audience Status: Specific</span>
+        </div>
+
+        <div class="meta-manager-body">
+          <div class="meta-gauge-display">
+            <div class="meta-label-wrap">
+              <span class="meta-label">
+                <span contenteditable="true" data-persist-id="meta-gauge-label">Estimated audience size</span>
+                <span class="meta-info-icon" title="Meta estimates the number of people in your target audience who could see your ads." contenteditable="false">i</span>
+              </span>
+            </div>
+            <div class="meta-big-number" contenteditable="true" data-persist-id="meta-big-number">Below 1,000</div>
+            
+            <div class="meta-gauge-meter" contenteditable="false">
+              <div class="meta-gauge-fill" contenteditable="false"></div>
+            </div>
+            
+            <div class="meta-gauge-labels">
+              <span class="active-zone" contenteditable="true" data-persist-id="gauge-label-specific">&larr; Specific</span>
+              <span contenteditable="true" data-persist-id="gauge-label-broad">Broad &rarr;</span>
+            </div>
+          </div>
+
+          <div class="meta-explanation-pane">
+            <h4 contenteditable="true" data-persist-id="meta-exp-title">Mathematical Result of 4 Strict AND-Conditions</h4>
+            <p contenteditable="true" data-persist-id="meta-exp-p1">
+              Meta Ads Manager formally calculates the available audience as <strong>Below 1,000</strong>. This ultra-tight audience is the exact mathematical consequence of requiring four consecutive intersection filters:
+            </p>
+            <div class="and-math-box">
+              <span class="and-math-title" contenteditable="true" data-persist-id="and-math-title">Intersection Formula</span>
+              <div class="and-math-formula" contenteditable="true" data-persist-id="and-math-formula">
+                IBM &cap; Finance Interests &cap; C-Suite / Director Titles &cap; Reporting Conditions = &lt; 1,000
+              </div>
+            </div>
+            <p contenteditable="true" data-persist-id="meta-exp-p2">
+              Because each filter acts as a boolean AND rather than an OR, only senior executives possessing all four qualifying attributes within Australia and New Zealand qualified for ad delivery.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE AD SHOWCASE: AUTHENTIC META FEED AD -->
+    <section class="report-section" id="ad-showcase">
+      <div class="section-header-block">
+        <span class="question-badge" contenteditable="true" data-persist-id="ad-showcase-badge">The Ad Creative</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="ad-showcase-title">Video Feed Ad Shown to Targeted Audience</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="ad-showcase-subtitle">
+          The exact live ad creative delivered to senior finance leaders in Australia and New Zealand.
+        </p>
+      </div>
+
       <div class="meta-ad-showcase-wrapper" contenteditable="false">
         <div class="meta-feed-ad-card" contenteditable="false">
           <!-- Card Header -->
@@ -1873,6 +2150,146 @@
       </div>
     </section>
 
+    <!-- SPECIFICATION ITEMS 3, 4, 5, 6: PATH EXPLORATION & USER JOURNEY FLOW -->
+    <section class="report-section" id="user-journey-path">
+      <div class="section-header-block">
+        <span class="question-badge" contenteditable="true" data-persist-id="journey-badge">Specification Items 3, 4, 5 &amp; 6</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="journey-title">User Journey: What Happened After They Saw The Ad</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="journey-subtitle">
+          A step-by-step path showing clicks, website behavior, and the drop-off point.
+        </p>
+      </div>
+
+      <div class="journey-path-flow">
+        
+        <!-- Journey Card 1: Step 1 (Questions 3 & 4) -->
+        <div class="journey-step-card" id="question-3">
+          <span id="question-4" style="display:none;"></span>
+          <div class="journey-step-header">
+            <span class="question-badge" contenteditable="true" data-persist-id="j1-badge">Specification Items 3 &amp; 4</span>
+            <h4 class="journey-step-title" contenteditable="true" data-persist-id="j1-title">Step 1: How many people clicked + CTR</h4>
+            <p class="journey-step-desc" contenteditable="true" data-persist-id="j1-desc">Ad click volume, engagement rate, and cost per click.</p>
+          </div>
+
+          <div class="journey-metrics-grid">
+            <div class="journey-metric-card">
+              <span class="journey-metric-big" contenteditable="true" data-persist-id="j1-clicks-num">74</span>
+              <span class="journey-metric-label" contenteditable="true" data-persist-id="j1-clicks-label">Link Clicks</span>
+            </div>
+            <div class="journey-metric-card">
+              <span class="journey-metric-big" style="color:#15803d;" contenteditable="true" data-persist-id="j1-ctr-num">2.78%</span>
+              <span class="journey-metric-label" contenteditable="true" data-persist-id="j1-ctr-label">Top CTR (1.34% avg)</span>
+            </div>
+            <div class="journey-metric-card">
+              <span class="journey-metric-big" style="color:#0284c7;" contenteditable="true" data-persist-id="j1-cpc-num">$1.14</span>
+              <span class="journey-metric-label" contenteditable="true" data-persist-id="j1-cpc-label">Cost Per Click AUD</span>
+            </div>
+          </div>
+
+          <div class="kpi-chips-row" style="margin-top:0; padding-top:12px;">
+            <div class="kpi-chip">
+              <span contenteditable="true" data-persist-id="j1-spend-label">Total Spend:</span>
+              <strong contenteditable="true" data-persist-id="j1-spend-val">$84.36 AUD</strong>
+            </div>
+            <div class="kpi-chip">
+              <span contenteditable="true" data-persist-id="j1-reach-label">Total Reach:</span>
+              <strong contenteditable="true" data-persist-id="j1-reach-val">2,664</strong>
+            </div>
+            <div class="kpi-chip">
+              <span contenteditable="true" data-persist-id="j1-impr-label">Impressions:</span>
+              <strong contenteditable="true" data-persist-id="j1-impr-val">5,519</strong>
+            </div>
+          </div>
+
+          <div class="journey-takeaway-box" contenteditable="true" data-persist-id="j1-takeaway">
+            <span class="journey-takeaway-title">Takeaway</span>
+            Strong resonance with finance leaders looking to eliminate manual CSV exports.
+          </div>
+        </div>
+
+        <!-- Directional Journey Connector 1 -> 2 -->
+        <div class="journey-connector" contenteditable="false">
+          <span class="journey-connector-badge" contenteditable="true" data-persist-id="conn1-badge">100% clicked through to website</span>
+          <svg class="journey-connector-svg" viewBox="0 0 48 16" contenteditable="false">
+            <path d="M2,8 L40,8 M34,2 L42,8 L34,14" stroke="#ca8a04" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Journey Card 2: Step 2 (Question 5) -->
+        <div class="journey-step-card" id="question-5">
+          <div class="journey-step-header">
+            <span class="question-badge" contenteditable="true" data-persist-id="j2-badge">Specification Item 5</span>
+            <h4 class="journey-step-title" contenteditable="true" data-persist-id="j2-title">Step 2: What they did on the website</h4>
+            <p class="journey-step-desc" contenteditable="true" data-persist-id="j2-desc">Where visitors arrived and how long they engaged with content.</p>
+          </div>
+
+          <div class="destination-url-box" contenteditable="true" data-persist-id="j2-url">
+            https://octanesolutions.com.au/datafusion
+          </div>
+
+          <div class="journey-metrics-grid">
+            <div class="journey-metric-card">
+              <span class="journey-metric-big" contenteditable="true" data-persist-id="j2-dwell-num">42s</span>
+              <span class="journey-metric-label" contenteditable="true" data-persist-id="j2-dwell-label">Average Dwell Time</span>
+            </div>
+            <div class="journey-metric-card">
+              <span class="journey-metric-big" style="color:#0284c7;" contenteditable="true" data-persist-id="j2-scroll-num">78%</span>
+              <span class="journey-metric-label" contenteditable="true" data-persist-id="j2-scroll-label">Active Scroll Depth</span>
+            </div>
+          </div>
+
+          <div class="journey-takeaway-box" style="border-left-color: #ca8a04;" contenteditable="true" data-persist-id="j2-what-they-did">
+            <span class="journey-takeaway-title" style="color: #92400e;">What They Did</span>
+            Visitors spent substantial time actively reading product capabilities, confirming direct REST API connectivity between IBM Planning Analytics and Microsoft Power BI with zero data stored in staging databases.
+          </div>
+        </div>
+
+        <!-- Directional Journey Connector 2 -> 3 -->
+        <div class="journey-connector" contenteditable="false">
+          <span class="journey-connector-badge" contenteditable="true" data-persist-id="conn2-badge">scrolled down to demo section</span>
+          <svg class="journey-connector-svg" viewBox="0 0 48 16" contenteditable="false">
+            <path d="M2,8 L40,8 M34,2 L42,8 L34,14" stroke="#ca8a04" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Journey Card 3: Step 3 (Question 6) -->
+        <div class="journey-step-card" id="question-6" style="flex: 1.15 1 0;">
+          <div class="journey-step-header">
+            <span class="question-badge" contenteditable="true" data-persist-id="j3-badge">Specification Item 6</span>
+            <h4 class="journey-step-title" contenteditable="true" data-persist-id="j3-title">Step 3: Where they dropped off &amp; the immediate fix</h4>
+            <p class="journey-step-desc" contenteditable="true" data-persist-id="j3-desc">The friction barrier on the page and the immediate fix to convert traffic.</p>
+          </div>
+
+          <!-- The Leak -->
+          <div class="journey-leak-box">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="comparison-badge" style="background:#fee2e2; color:#b91c1c; border-color:#f87171;" contenteditable="true" data-persist-id="j3-leak-badge">The Leak</span>
+              <strong style="color:#991b1b; font-size:14.5px;" contenteditable="true" data-persist-id="j3-leak-title">100% Drop-Off at Multi-Field Form</strong>
+            </div>
+            <p style="font-size:14px; line-height:1.55; color:#1e293b;" contenteditable="true" data-persist-id="j3-leak-desc">
+              Visitors hit a 6-field questionnaire (name, phone, corporate email, budget, headcount, TM1 version) with NO calendar visible. Busy finance leaders refused to wait for sales emails.
+            </p>
+          </div>
+
+          <!-- The Solution -->
+          <div class="journey-fix-box">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="comparison-badge" style="background:#dcfce7; color:#15803d; border-color:#4ade80;" contenteditable="true" data-persist-id="j3-fix-badge">The Immediate Fix</span>
+              <strong style="color:#166534; font-size:14.5px;" contenteditable="true" data-persist-id="j3-fix-title">Direct 2-Click Calendar Scheduler</strong>
+            </div>
+            <ul style="font-size:14px; line-height:1.55; color:#1e293b; padding-left:18px; display:flex; flex-direction:column; gap:4px;">
+              <li contenteditable="true" data-persist-id="j3-fix-click1"><strong>Click 1:</strong> Pick date on live calendar.</li>
+              <li contenteditable="true" data-persist-id="j3-fix-click2"><strong>Click 2:</strong> Pick 15-minute consultation slot. Only asks for email to send the invite.</li>
+            </ul>
+            <div class="comparison-outcome-banner" style="background:#dcfce7; border:1px solid #86efac; color:#166534; padding:8px 12px; font-size:13.5px; margin-top:2px;" contenteditable="true" data-persist-id="j3-outcome">
+              <span>&#10003; Outcome: Converts 42s high-intent dwell traffic into booked sales calls.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- INTERACTIVE FIGJAM CUSTOM STICKY NOTES BOARD -->
     <section class="report-section" id="figjam-sticky-board">
       <div class="section-header-block">
@@ -1884,240 +2301,6 @@
       </div>
       <div id="custom-notes-grid" class="custom-notes-grid">
         <!-- Dynamic notes dropped here -->
-      </div>
-    </section>
-
-    <!-- QUESTION 2: ESTIMATED AUDIENCE SIZE (META ADS MANAGER RECREATION ON YELLOW PAPER) -->
-    <section class="report-section" id="question-2">
-      <div class="section-header-block">
-        <span class="question-badge" contenteditable="true" data-persist-id="q2-badge">Specification Item 2</span>
-        <h3 class="question-title" contenteditable="true" data-persist-id="q2-title">2. Estimated audience size (how big the potential market was: Below 1,000 from meta ads &ldquo;Estimated audience size&rdquo;)</h3>
-        <p class="question-subtitle" contenteditable="true" data-persist-id="q2-subtitle">
-          Authentic Meta Ads Manager audience definition card recreation showing the exact ground-truth reach estimate.
-        </p>
-      </div>
-
-      <div class="meta-manager-card">
-        <div class="meta-manager-header" contenteditable="false">
-          <div class="meta-manager-brand" contenteditable="false">
-            <svg class="meta-icon-svg" viewBox="0 0 24 24" contenteditable="false">
-              <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z"/>
-            </svg>
-            <span class="meta-manager-title" contenteditable="true" data-persist-id="meta-header-title">Meta Ads Manager &bull; Audience Definition</span>
-          </div>
-          <span class="meta-status-pill" contenteditable="true" data-persist-id="meta-status-pill">Audience Status: Specific</span>
-        </div>
-
-        <div class="meta-manager-body">
-          <div class="meta-gauge-display">
-            <div class="meta-label-wrap">
-              <span class="meta-label">
-                <span contenteditable="true" data-persist-id="meta-gauge-label">Estimated audience size</span>
-                <span class="meta-info-icon" title="Meta estimates the number of people in your target audience who could see your ads." contenteditable="false">i</span>
-              </span>
-            </div>
-            <div class="meta-big-number" contenteditable="true" data-persist-id="meta-big-number">Below 1,000</div>
-            
-            <div class="meta-gauge-meter" contenteditable="false">
-              <div class="meta-gauge-fill" contenteditable="false"></div>
-            </div>
-            
-            <div class="meta-gauge-labels">
-              <span class="active-zone" contenteditable="true" data-persist-id="gauge-label-specific">&larr; Specific</span>
-              <span contenteditable="true" data-persist-id="gauge-label-broad">Broad &rarr;</span>
-            </div>
-          </div>
-
-          <div class="meta-explanation-pane">
-            <h4 contenteditable="true" data-persist-id="meta-exp-title">Mathematical Result of 4 Strict AND-Conditions</h4>
-            <p contenteditable="true" data-persist-id="meta-exp-p1">
-              Meta Ads Manager formally calculates the available audience as <strong>Below 1,000</strong>. This ultra-tight audience is the exact mathematical consequence of requiring four consecutive intersection filters:
-            </p>
-            <div class="and-math-box">
-              <span class="and-math-title" contenteditable="true" data-persist-id="and-math-title">Intersection Formula</span>
-              <div class="and-math-formula" contenteditable="true" data-persist-id="and-math-formula">
-                IBM &cap; Finance Interests &cap; C-Suite / Director Titles &cap; Reporting Conditions = &lt; 1,000
-              </div>
-            </div>
-            <p contenteditable="true" data-persist-id="meta-exp-p2">
-              Because each filter acts as a boolean AND rather than an OR, only senior executives possessing all four qualifying attributes within Australia and New Zealand qualified for ad delivery.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUESTIONS 3 & 4: HOW MANY CLICKED & CLICK THROUGH RATE (ANALYTICS) -->
-    <div class="kpi-cards-grid">
-      
-      <!-- Question 3 -->
-      <section class="report-section" id="question-3">
-        <div class="section-header-block" style="padding-bottom: 14px;">
-          <span class="question-badge" contenteditable="true" data-persist-id="q3-badge">Specification Item 3</span>
-          <h3 class="question-title" style="font-size: 1.25rem;" contenteditable="true" data-persist-id="q3-title">3. How many people clicked: Analytics</h3>
-          <p class="question-subtitle" style="font-size: 16px;" contenteditable="true" data-persist-id="q3-subtitle">Clean verified link click volume recorded in analytics.</p>
-        </div>
-
-        <div class="kpi-card" style="border: none; padding: 0; box-shadow: none;">
-          <div class="kpi-top-row">
-            <span class="kpi-title" contenteditable="true" data-persist-id="kpi1-title">Total Outbound Clicks</span>
-            <span class="kpi-badge blue" contenteditable="true" data-persist-id="kpi1-badge">Meta &amp; GA4 Verified</span>
-          </div>
-          <div class="kpi-metric-wrap">
-            <span class="kpi-number" contenteditable="true" data-persist-id="kpi1-number">74</span>
-            <span class="kpi-unit" contenteditable="true" data-persist-id="kpi1-unit">Link Clicks</span>
-          </div>
-          <p class="kpi-subtext" contenteditable="true" data-persist-id="kpi1-subtext">
-            74 senior finance decision-makers clicked through directly from the video ad to the DataFusion product page.
-          </p>
-          <div class="kpi-chips-row">
-            <div class="kpi-chip">
-              <span contenteditable="true" data-persist-id="kpi1-chip1-l">Total Reach:</span>
-              <strong contenteditable="true" data-persist-id="kpi1-chip1-v">2,664 People</strong>
-            </div>
-            <div class="kpi-chip">
-              <span contenteditable="true" data-persist-id="kpi1-chip2-l">Total Impressions:</span>
-              <strong contenteditable="true" data-persist-id="kpi1-chip2-v">5,519 Views</strong>
-            </div>
-            <div class="kpi-chip">
-              <span contenteditable="true" data-persist-id="kpi1-chip3-l">Ad Frequency:</span>
-              <strong contenteditable="true" data-persist-id="kpi1-chip3-v">2.07x</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Question 4 -->
-      <section class="report-section" id="question-4">
-        <div class="section-header-block" style="padding-bottom: 14px;">
-          <span class="question-badge" contenteditable="true" data-persist-id="q4-badge">Specification Item 4</span>
-          <h3 class="question-title" style="font-size: 1.25rem;" contenteditable="true" data-persist-id="q4-title">4. Click through rate (percentage): Analytics</h3>
-          <p class="question-subtitle" style="font-size: 16px;" contenteditable="true" data-persist-id="q4-subtitle">Click-through efficiency and unit acquisition costs.</p>
-        </div>
-
-        <div class="kpi-card" style="border: none; padding: 0; box-shadow: none;">
-          <div class="kpi-top-row">
-            <span class="kpi-title" contenteditable="true" data-persist-id="kpi2-title">CTR &amp; Unit Economics</span>
-            <span class="kpi-badge green" contenteditable="true" data-persist-id="kpi2-badge">Top Performer</span>
-          </div>
-          <div class="kpi-metric-wrap">
-            <span class="kpi-number" contenteditable="true" data-persist-id="kpi2-number">2.78%</span>
-            <span class="kpi-unit" contenteditable="true" data-persist-id="kpi2-unit">CTR (Top)</span>
-          </div>
-          <p class="kpi-subtext" contenteditable="true" data-persist-id="kpi2-subtext">
-            Top creative ad set achieved 2.78% CTR (1.34% campaign average CTR across all ad sets) at a low cost of $1.14 CPC.
-          </p>
-          <div class="kpi-chips-row">
-            <div class="kpi-chip">
-              <span contenteditable="true" data-persist-id="kpi2-chip1-l">Avg Campaign CTR:</span>
-              <strong contenteditable="true" data-persist-id="kpi2-chip1-v">1.34%</strong>
-            </div>
-            <div class="kpi-chip">
-              <span contenteditable="true" data-persist-id="kpi2-chip2-l">Cost Per Click:</span>
-              <strong contenteditable="true" data-persist-id="kpi2-chip2-v">$1.14 AUD</strong>
-            </div>
-            <div class="kpi-chip">
-              <span contenteditable="true" data-persist-id="kpi2-chip3-l">Total Ad Spend:</span>
-              <strong contenteditable="true" data-persist-id="kpi2-chip3-v">$84.36 AUD</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
-
-    <!-- QUESTION 5: WHERE THEY WENT ON THE WEBSITE (SNAPSHOT FROM ANALYTICS) -->
-    <section class="report-section" id="question-5">
-      <div class="section-header-block">
-        <span class="question-badge" contenteditable="true" data-persist-id="q5-badge">Specification Item 5</span>
-        <h3 class="question-title" contenteditable="true" data-persist-id="q5-title">5. Where they went on the website: Snapshot from analytics</h3>
-        <p class="question-subtitle" contenteditable="true" data-persist-id="q5-subtitle">
-          Landing destination analysis and user dwell engagement captured in analytics telemetry.
-        </p>
-      </div>
-
-      <div class="journey-overview-card">
-        <div class="destination-info">
-          <span class="destination-tag" contenteditable="true" data-persist-id="q5-tag">Primary Landing Target</span>
-          <h4 class="destination-title" contenteditable="true" data-persist-id="q5-dest-title">DataFusion Dedicated Product Page</h4>
-          <div class="destination-url-box" contenteditable="true" data-persist-id="q5-url">
-            https://octanesolutions.com.au/datafusion
-          </div>
-          <p contenteditable="true" data-persist-id="q5-desc" style="color: var(--text-body);">
-            100% of the 74 ad clickers arrived directly at the DataFusion product landing page. Analytics confirms that visitors actively engaged with the page rather than bouncing instantly.
-          </p>
-        </div>
-
-        <div class="destination-stats-col">
-          <div class="dwell-stat-card">
-            <div class="dwell-metric-big" contenteditable="true" data-persist-id="dwell-stat-1-num">42s</div>
-            <div class="dwell-label-group">
-              <span class="dwell-label-title" contenteditable="true" data-persist-id="dwell-stat-1-t">Average Dwell Time</span>
-              <span class="dwell-label-desc" contenteditable="true" data-persist-id="dwell-stat-1-d">Substantial time spent reviewing content</span>
-            </div>
-          </div>
-
-          <div class="dwell-stat-card">
-            <div class="dwell-metric-big" style="color: #0369a1;" contenteditable="true" data-persist-id="dwell-stat-2-num">78%</div>
-            <div class="dwell-label-group">
-              <span class="dwell-label-title" contenteditable="true" data-persist-id="dwell-stat-2-t">Active Scroll Depth</span>
-              <span class="dwell-label-desc" contenteditable="true" data-persist-id="dwell-stat-2-d">Scrolled past hero into technical architecture</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUESTION 6: WHERE THEY DROPPED OFF & THE IMMEDIATE FIX -->
-    <section class="report-section" id="question-6">
-      <div class="section-header-block">
-        <span class="question-badge" contenteditable="true" data-persist-id="q6-badge">Specification Item 6</span>
-        <h3 class="question-title" contenteditable="true" data-persist-id="q6-title">6. Where they dropped off: Snapshot from analytics</h3>
-        <p class="question-subtitle" contenteditable="true" data-persist-id="q6-subtitle">
-          Friction point breakdown and the direct 2-click scheduling solution to unlock conversion.
-        </p>
-      </div>
-
-      <div class="dropoff-comparison-grid">
-        <!-- Leak Side -->
-        <div class="comparison-card leak-side">
-          <div class="comparison-header-group">
-            <span class="comparison-badge" contenteditable="true" data-persist-id="leak-badge">The Friction Barrier</span>
-            <h4 class="comparison-headline" contenteditable="true" data-persist-id="leak-title">100% Drop-Off at Multi-Field Form Before Calendar Selection</h4>
-          </div>
-          <div class="comparison-body" contenteditable="true" data-persist-id="leak-body">
-            Analytics reveals that while 74 qualified finance leaders read the product value proposition for 42 seconds, zero booked a meeting. Visitors reached the demo request section but encountered an exhaustive questionnaire:
-          </div>
-          <ul class="comparison-list-bullets">
-            <li contenteditable="true" data-persist-id="leak-bullet-1">Required first name, last name, corporate email, and direct phone.</li>
-            <li contenteditable="true" data-persist-id="leak-bullet-2">Required annual software budget, company headcount, and TM1 version.</li>
-            <li contenteditable="true" data-persist-id="leak-bullet-3">No calendar availability was shown prior to form submission.</li>
-            <li contenteditable="true" data-persist-id="leak-bullet-4">Forced busy CFOs to wait for an asynchronous email follow-up.</li>
-          </ul>
-          <div class="comparison-outcome-banner" contenteditable="true" data-persist-id="leak-outcome">
-            <span>&#9888; Result: 100% abandonment rate at form submission.</span>
-          </div>
-        </div>
-
-        <!-- Fix Side -->
-        <div class="comparison-card fix-side">
-          <div class="comparison-header-group">
-            <span class="comparison-badge" contenteditable="true" data-persist-id="fix-badge">The Immediate Fix</span>
-            <h4 class="comparison-headline" contenteditable="true" data-persist-id="fix-title">Direct 2-Click Calendar Scheduler</h4>
-          </div>
-          <div class="comparison-body" contenteditable="true" data-persist-id="fix-body">
-            Remove all friction by replacing the questionnaire with an embedded direct calendar scheduler (Calendly / HubSpot Meetings):
-          </div>
-          <ul class="comparison-list-bullets">
-            <li contenteditable="true" data-persist-id="fix-bullet-1"><strong>Click 1:</strong> Visitor selects their preferred date on the live calendar.</li>
-            <li contenteditable="true" data-persist-id="fix-bullet-2"><strong>Click 2:</strong> Visitor chooses an open 15-minute consultation slot.</li>
-            <li contenteditable="true" data-persist-id="fix-bullet-3">Only asks for corporate email to deliver the calendar invite.</li>
-            <li contenteditable="true" data-persist-id="fix-bullet-4">Sends calendar invite directly to Outlook or Google Calendar.</li>
-          </ul>
-          <div class="comparison-outcome-banner" contenteditable="true" data-persist-id="fix-outcome">
-            <span>&#10003; Result: Converts high-intent 42s dwell traffic into qualified sales calls.</span>
-          </div>
-        </div>
       </div>
     </section>
 
