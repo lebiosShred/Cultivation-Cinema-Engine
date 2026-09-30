@@ -8,34 +8,28 @@
   <style>
     :root {
       --bg-page: #f8fafc;
-      --bg-card: #ffffff;
-      --text-dark: #0f172a;
-      --text-secondary: #334155;
-      --text-muted: #64748b;
-      --octane-blue: #4daeeb;
-      --octane-blue-dark: #0284c7;
-      --octane-blue-hover: #2ba0e3;
-      --octane-blue-subtle: #f0f9ff;
-      --octane-blue-border: #bae6fd;
-      --border: #e2e8f0;
-      --border-card: #e2e8f0;
-      --green: #10b981;
-      --green-dark: #047857;
-      --green-bg: #ecfdf5;
-      --green-border: #a7f3d0;
-      --red: #ef4444;
-      --red-dark: #b91c1c;
-      --red-bg: #fef2f2;
-      --red-border: #fecaca;
-      --yellow-sticky: #fef9c3;
-      --yellow-sticky-accent: #fef08a;
-      --yellow-border: #facc15;
-      --yellow-text-dark: #713f12;
-      --yellow-text-body: #854d0e;
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-      --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
-      --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
-      --shadow-sticky: 0 6px 16px rgba(161, 98, 7, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+      --yellow-paper-light: #fef9c3;
+      --yellow-paper-dark: #fef08a;
+      --yellow-paper-border: #facc15;
+      --yellow-paper-accent: #eab308;
+      --yellow-tape-bg: rgba(255, 255, 255, 0.65);
+      --yellow-tape-border: rgba(202, 138, 4, 0.35);
+      --text-dark: #1e293b;
+      --text-heading: #713f12;
+      --text-body: #854d0e;
+      --text-muted: #a16207;
+      --octane-blue: #0284c7;
+      --octane-blue-subtle: #e0f2fe;
+      --octane-blue-border: #7dd3fc;
+      --green-accent: #15803d;
+      --green-border: #4ade80;
+      --green-bg: #dcfce7;
+      --red-accent: #b91c1c;
+      --red-border: #f87171;
+      --red-bg: #fee2e2;
+      --shadow-paper: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      --shadow-sm: 0 2px 6px rgba(161, 98, 7, 0.08);
+      --radius-paper: 6px;
     }
 
     * {
@@ -44,35 +38,59 @@
       padding: 0;
     }
 
-    html, body {
+    html, body, .figjam-canvas, .page-wrapper {
       overflow-x: hidden;
       width: 100%;
       max-width: 100vw;
     }
 
+    /* FigJam dot-grid canvas */
     body {
-      background-color: var(--bg-page);
+      background-color: #f8fafc;
+      background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
       color: var(--text-dark);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Custom smooth scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(254, 240, 138, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ca8a04;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a16207;
     }
 
     /* HEADER */
     .executive-header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--yellow-paper-border);
       position: sticky;
       top: 0;
       z-index: 50;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
       width: 100%;
     }
 
     .header-container {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 16px 24px;
+      padding: 14px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -96,7 +114,7 @@
     .header-divider {
       width: 1px;
       height: 24px;
-      background-color: var(--border);
+      background-color: var(--yellow-paper-border);
     }
 
     .header-title {
@@ -110,28 +128,29 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--octane-blue-subtle);
-      border: 1px solid var(--octane-blue-border);
-      color: var(--octane-blue-dark);
+      background: #fef08a;
+      border: 1px solid var(--yellow-paper-border);
+      color: var(--text-heading);
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       padding: 6px 14px;
       border-radius: 9999px;
       white-space: nowrap;
+      box-shadow: var(--shadow-sm);
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: var(--octane-blue);
+      background-color: #ca8a04;
     }
 
     /* MAIN CONTAINER */
     .page-wrapper {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 40px 24px 130px; /* Extra bottom clearance for floating dock */
       display: flex;
       flex-direction: column;
       gap: 48px;
@@ -139,26 +158,130 @@
       box-sizing: border-box;
     }
 
+    /* ==========================================================================
+       ALL-YELLOW PAPER CARDS, SECTIONS, & NOTES
+       ========================================================================== */
+    .summary-banner,
+    .report-section,
+    .sticky-note,
+    .custom-sticky-note,
+    .kpi-card,
+    .meta-manager-card,
+    .journey-overview-card,
+    .comparison-card {
+      background: linear-gradient(180deg, var(--yellow-paper-light) 0%, var(--yellow-paper-dark) 100%);
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
+      box-shadow: var(--shadow-paper);
+      position: relative;
+      max-height: 80vh;
+      overflow-y: auto;
+      word-break: break-word;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Subtle Tape Accent */
+    .summary-banner::before,
+    .report-section::before,
+    .sticky-note::before,
+    .custom-sticky-note::before,
+    .kpi-card::before,
+    .meta-manager-card::before,
+    .journey-overview-card::before,
+    .comparison-card::before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 16px;
+      background: var(--yellow-tape-bg);
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(202, 138, 4, 0.12) 5px, rgba(202, 138, 4, 0.12) 10px);
+      border-left: 1.5px dashed var(--yellow-tape-border);
+      border-right: 1.5px dashed var(--yellow-tape-border);
+      border-bottom: 1px solid rgba(202, 138, 4, 0.18);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+      border-radius: 0 0 2px 2px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Contenteditable Universal Rules */
+    [contenteditable="true"] {
+      outline: none;
+      font-size: 16px;
+      min-height: 1.2em;
+      word-break: break-word;
+      border-radius: 4px;
+      transition: background-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    [contenteditable="true"]:hover {
+      background-color: rgba(254, 240, 138, 0.45);
+    }
+
+    [contenteditable="true"]:focus {
+      background-color: rgba(254, 240, 138, 0.75);
+      box-shadow: 0 0 0 2px #ca8a04;
+    }
+
+    /* Enforce 16px floor to prevent mobile auto-zoom while scaling titles */
+    h1[contenteditable="true"], .header-title[contenteditable="true"] { font-size: max(16px, 1.15rem); }
+    h2[contenteditable="true"], .banner-headline[contenteditable="true"] { font-size: max(16px, 1.55rem); }
+    h3[contenteditable="true"], .question-title[contenteditable="true"] { font-size: max(16px, 1.35rem); }
+    h4[contenteditable="true"], .sticky-header[contenteditable="true"], .comparison-headline[contenteditable="true"] { font-size: max(16px, 1.15rem); }
+    .meta-big-number[contenteditable="true"], .kpi-number[contenteditable="true"], .dwell-metric-big[contenteditable="true"] { font-size: max(16px, 2.5rem); }
+
+    .banner-badge[contenteditable="true"],
+    .question-badge[contenteditable="true"],
+    .sticky-super-header[contenteditable="true"],
+    .connector-badge[contenteditable="true"],
+    .creative-badge-tag[contenteditable="true"],
+    .meta-status-pill[contenteditable="true"],
+    .kpi-badge[contenteditable="true"],
+    .destination-tag[contenteditable="true"],
+    .comparison-badge[contenteditable="true"] {
+      font-size: 16px !important;
+    }
+
+    .banner-subtext[contenteditable="true"],
+    .question-subtitle[contenteditable="true"],
+    .sticky-body[contenteditable="true"],
+    .ibm-subtext[contenteditable="true"],
+    .creative-post-text[contenteditable="true"],
+    .creative-steps-ol[contenteditable="true"],
+    .creative-notes-pane p[contenteditable="true"],
+    .meta-explanation-pane p[contenteditable="true"],
+    .kpi-subtext[contenteditable="true"],
+    .destination-info p[contenteditable="true"],
+    .comparison-body[contenteditable="true"] {
+      font-size: 16px !important;
+      line-height: 1.6;
+    }
+
+    /* Media isolation on interactive controls */
+    [contenteditable="false"] {
+      user-select: auto;
+    }
+
     /* EXECUTIVE SUMMARY BANNER */
     .summary-banner {
-      background: #ffffff;
-      border: 1px solid var(--octane-blue-border);
-      border-left: 6px solid var(--octane-blue);
-      border-radius: 16px;
+      border-left: 6px solid var(--yellow-paper-accent);
       padding: 32px 28px;
-      box-shadow: var(--shadow-card);
     }
 
     .banner-badge {
       display: inline-block;
       text-transform: uppercase;
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 800;
       letter-spacing: 0.08em;
-      color: var(--octane-blue-dark);
-      background: var(--octane-blue-subtle);
-      padding: 4px 10px;
-      border-radius: 6px;
+      color: var(--text-heading);
+      background: #fde68a;
+      border: 1px solid var(--yellow-paper-accent);
+      padding: 4px 12px;
+      border-radius: 4px;
       margin-bottom: 14px;
     }
 
@@ -166,24 +289,20 @@
       font-size: 1.55rem;
       font-weight: 800;
       line-height: 1.35;
-      color: var(--text-dark);
+      color: var(--text-heading);
       letter-spacing: -0.02em;
       margin-bottom: 12px;
     }
 
     .banner-subtext {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.65;
     }
 
-    /* SECTION CONTAINERS */
+    /* REPORT SECTION CONTAINERS */
     .report-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 16px;
       padding: 32px;
-      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 24px;
@@ -194,8 +313,8 @@
     .section-header-block {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      border-bottom: 1px solid var(--border);
+      gap: 8px;
+      border-bottom: 1px dashed var(--yellow-paper-border);
       padding-bottom: 18px;
     }
 
@@ -203,29 +322,29 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--octane-blue-dark);
-      background: var(--octane-blue-subtle);
-      border: 1px solid var(--octane-blue-border);
-      padding: 3px 10px;
-      border-radius: 6px;
+      color: var(--text-heading);
+      background: #fde68a;
+      border: 1px solid var(--yellow-paper-accent);
+      padding: 4px 12px;
+      border-radius: 4px;
       align-self: flex-start;
     }
 
     .question-title {
       font-size: 1.35rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--text-heading);
       letter-spacing: -0.015em;
       line-height: 1.3;
     }
 
     .question-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--text-body);
       line-height: 1.5;
     }
 
@@ -246,12 +365,8 @@
     }
 
     .sticky-note {
-      background: linear-gradient(145deg, #fef9c3 0%, #fef08a 100%);
-      border: 1px solid #fde047;
-      border-top: 5px solid #eab308;
-      border-radius: 10px;
-      padding: 20px 16px;
-      box-shadow: var(--shadow-sticky);
+      border-top: 5px solid var(--yellow-paper-accent);
+      padding: 22px 18px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -259,17 +374,15 @@
       height: 100%;
       min-height: 220px;
       box-sizing: border-box;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
     }
 
     .sticky-note:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 22px rgba(161, 98, 7, 0.18);
+      box-shadow: 0 14px 28px -4px rgba(161, 98, 7, 0.18);
     }
 
     .sticky-super-header {
-      font-size: 0.68rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -285,7 +398,7 @@
     .sticky-header {
       font-size: 1.15rem;
       font-weight: 800;
-      color: var(--yellow-text-dark);
+      color: var(--text-heading);
       letter-spacing: -0.01em;
       line-height: 1.25;
       border-bottom: 1px dashed #ca8a04;
@@ -293,19 +406,18 @@
     }
 
     .sticky-body {
-      font-size: 0.88rem;
-      color: var(--yellow-text-body);
-      line-height: 1.5;
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.55;
       font-weight: 500;
       word-break: break-word;
     }
 
     .sticky-body strong {
-      color: var(--yellow-text-dark);
+      color: var(--text-heading);
       font-weight: 700;
     }
 
-    /* Note 1 specific */
     .note-ibm {
       display: flex;
       flex-direction: column;
@@ -322,10 +434,10 @@
     }
 
     .ibm-subtext {
-      font-size: 0.85rem;
-      color: var(--yellow-text-body);
+      font-size: 16px;
+      color: var(--text-body);
       margin-top: 8px;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     /* CONNECTING ARROWS WITH TEXT 'and must also match' */
@@ -344,7 +456,7 @@
       background: #ffffff;
       border: 1.5px solid #ca8a04;
       color: #854d0e;
-      font-size: 0.65rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -353,7 +465,7 @@
       box-shadow: 0 2px 6px rgba(161, 98, 7, 0.1);
       white-space: normal;
       line-height: 1.2;
-      max-width: 96px;
+      max-width: 104px;
     }
 
     .connector-arrow-svg {
@@ -362,26 +474,26 @@
       overflow: visible;
     }
 
-    /* ==========================================================================
-       REAL 1:1 VIDEO CREATIVE SHOWCASE
-       ========================================================================== */
+    /* REAL 1:1 VIDEO CREATIVE SHOWCASE IN YELLOW PAPER FRAME */
     .creative-showcase-grid {
       display: grid;
       grid-template-columns: 1fr 1.1fr;
       gap: 28px;
       align-items: center;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: #fef08a;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
+      box-shadow: var(--shadow-paper);
       padding: 24px;
+      position: relative;
     }
 
     .creative-mockup {
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 2px solid #eab308;
+      border-radius: var(--radius-paper);
       overflow: hidden;
-      background: #ffffff;
-      box-shadow: var(--shadow-sm);
+      background: var(--yellow-paper-light);
+      box-shadow: var(--shadow-paper);
       max-width: 480px;
       margin: 0 auto;
       width: 100%;
@@ -392,15 +504,16 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      border-bottom: 1px solid #f1f5f9;
+      background: #fef08a;
+      border-bottom: 1px solid var(--yellow-paper-border);
     }
 
     .creative-avatar {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #f8fafc;
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid var(--yellow-paper-border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -420,36 +533,37 @@
     }
 
     .creative-brand-name {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--text-heading);
     }
 
     .creative-sub-label {
-      font-size: 0.72rem;
+      font-size: 16px;
       color: var(--text-muted);
     }
 
     .creative-post-text {
       padding: 14px 16px;
-      font-size: 0.88rem;
+      font-size: 16px;
       color: var(--text-dark);
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .creative-post-text p {
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 6px;
+      color: var(--text-heading);
     }
 
     .creative-steps-ol {
-      padding-left: 18px;
-      color: var(--text-secondary);
-      font-size: 0.82rem;
+      padding-left: 20px;
+      color: var(--text-body);
+      font-size: 16px;
     }
 
     .creative-steps-ol li {
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     .creative-video-box {
@@ -471,8 +585,8 @@
 
     .creative-cta-bar {
       padding: 12px 16px;
-      background: #f8fafc;
-      border-top: 1px solid var(--border);
+      background: #fef08a;
+      border-top: 1px solid var(--yellow-paper-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -486,16 +600,16 @@
     }
 
     .creative-site-url {
-      font-size: 0.7rem;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-muted);
       letter-spacing: 0.04em;
     }
 
     .creative-cta-headline {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-dark);
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-heading);
     }
 
     .creative-cta-btn {
@@ -504,17 +618,19 @@
       justify-content: center;
       background-color: var(--octane-blue);
       color: #ffffff;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 6px;
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .creative-cta-btn:hover {
-      background-color: var(--octane-blue-hover);
+      background-color: #0369a1;
+      transform: translateY(-1px);
     }
 
     .creative-notes-pane {
@@ -525,66 +641,62 @@
 
     .creative-badge-tag {
       display: inline-block;
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--octane-blue-dark);
-      background: var(--octane-blue-subtle);
-      border: 1px solid var(--octane-blue-border);
+      color: var(--text-heading);
+      background: #fde68a;
+      border: 1px solid var(--yellow-paper-accent);
       padding: 4px 10px;
-      border-radius: 6px;
+      border-radius: 4px;
       align-self: flex-start;
     }
 
     .creative-notes-pane h4 {
       font-size: 1.25rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--text-heading);
       line-height: 1.3;
     }
 
     .creative-notes-pane p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.6;
     }
 
     .creative-feature-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .creative-feature-list li {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 0.88rem;
+      font-size: 16px;
       color: var(--text-dark);
     }
 
     .creative-feature-list li span.bullet-icon {
-      color: var(--green-dark);
+      color: #15803d;
       font-weight: 800;
     }
 
     /* ==========================================================================
-       QUESTION 2: META ADS MANAGER AUDIENCE SIZE CARD
+       QUESTION 2: META ADS MANAGER AUDIENCE SIZE CARD (ON YELLOW PAPER)
        ========================================================================== */
     .meta-manager-card {
-      background: #ffffff;
-      border: 1px solid #dadde1;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
       overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     .meta-manager-header {
-      background: #f0f2f5;
-      border-bottom: 1px solid #dadde1;
+      background: #fef08a;
+      border-bottom: 1px solid var(--yellow-paper-border);
       padding: 14px 20px;
       display: flex;
       align-items: center;
@@ -605,18 +717,18 @@
     }
 
     .meta-manager-title {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #1c1e21;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
     }
 
     .meta-status-pill {
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 700;
-      background: #e7f3ff;
+      background: #ffffff;
       color: #1877f2;
-      border: 1px solid #cce4ff;
-      padding: 4px 10px;
+      border: 1px solid #93c5fd;
+      padding: 4px 12px;
       border-radius: 9999px;
     }
 
@@ -629,13 +741,14 @@
     }
 
     .meta-gauge-display {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
+      background: #fefce8;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
       padding: 24px;
       display: flex;
       flex-direction: column;
       gap: 14px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .meta-label-wrap {
@@ -645,9 +758,9 @@
     }
 
     .meta-label {
-      font-size: 0.85rem;
+      font-size: 16px;
       font-weight: 700;
-      color: #65676b;
+      color: var(--text-body);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -657,12 +770,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      background: #dadde1;
-      color: #606770;
-      font-size: 0.7rem;
+      background: #fef08a;
+      border: 1px solid var(--yellow-paper-border);
+      color: var(--text-heading);
+      font-size: 0.75rem;
       font-weight: bold;
       cursor: help;
     }
@@ -670,14 +784,14 @@
     .meta-big-number {
       font-size: 2.5rem;
       font-weight: 800;
-      color: #1c1e21;
+      color: var(--text-heading);
       letter-spacing: -0.03em;
       line-height: 1.1;
     }
 
     .meta-gauge-meter {
       height: 10px;
-      background: #e4e6eb;
+      background: #e2e8f0;
       border-radius: 9999px;
       overflow: hidden;
       position: relative;
@@ -693,13 +807,13 @@
     .meta-gauge-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 700;
-      color: #8a8d91;
+      color: var(--text-muted);
     }
 
     .meta-gauge-labels span.active-zone {
-      color: #1c1e21;
+      color: var(--text-heading);
       font-weight: 800;
     }
 
@@ -712,20 +826,20 @@
     .meta-explanation-pane h4 {
       font-size: 1.15rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--text-heading);
       line-height: 1.35;
     }
 
     .meta-explanation-pane p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--text-body);
       line-height: 1.6;
     }
 
     .and-math-box {
-      background: #f0f9ff;
-      border: 1px solid var(--octane-blue-border);
-      border-radius: 8px;
+      background: #fefce8;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
       padding: 14px 16px;
       display: flex;
       flex-direction: column;
@@ -733,19 +847,19 @@
     }
 
     .and-math-title {
-      font-size: 0.75rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #0369a1;
+      color: #92400e;
     }
 
     .and-math-formula {
-      font-size: 0.85rem;
+      font-size: 16px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      color: #0c4a6e;
+      color: #713f12;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     /* ==========================================================================
@@ -759,20 +873,15 @@
     }
 
     .kpi-card {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 14px;
       padding: 24px;
-      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
       gap: 16px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .kpi-card:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 14px 28px -4px rgba(161, 98, 7, 0.16);
     }
 
     .kpi-top-row {
@@ -783,30 +892,30 @@
     }
 
     .kpi-badge {
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 4px 10px;
+      border-radius: 4px;
     }
 
     .kpi-badge.blue {
-      background: var(--octane-blue-subtle);
-      border: 1px solid var(--octane-blue-border);
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
       color: #0369a1;
     }
 
     .kpi-badge.green {
-      background: var(--green-bg);
-      border: 1px solid var(--green-border);
-      color: var(--green-dark);
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      color: #15803d;
     }
 
     .kpi-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--text-heading);
     }
 
     .kpi-metric-wrap {
@@ -818,46 +927,46 @@
     .kpi-number {
       font-size: 2.85rem;
       font-weight: 900;
-      color: var(--text-dark);
+      color: var(--text-heading);
       letter-spacing: -0.03em;
       line-height: 1;
     }
 
     .kpi-unit {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--text-secondary);
+      color: var(--text-body);
     }
 
     .kpi-subtext {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.55;
     }
 
     .kpi-chips-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      border-top: 1px solid var(--border);
+      border-top: 1px dashed var(--yellow-paper-border);
       padding-top: 14px;
       margin-top: 4px;
     }
 
     .kpi-chip {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      background: #fefce8;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: 4px;
       padding: 6px 10px;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--text-body);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
     .kpi-chip strong {
-      color: var(--text-dark);
+      color: var(--text-heading);
       font-weight: 700;
     }
 
@@ -865,9 +974,6 @@
        QUESTION 5: WEBSITE DESTINATION & ENGAGEMENT SNAPSHOT
        ========================================================================== */
     .journey-overview-card {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 24px;
       display: grid;
       grid-template-columns: 1.2fr 1fr;
@@ -882,33 +988,33 @@
     }
 
     .destination-tag {
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #0369a1;
-      background: var(--octane-blue-subtle);
-      border: 1px solid var(--octane-blue-border);
-      padding: 3px 10px;
-      border-radius: 6px;
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      padding: 4px 10px;
+      border-radius: 4px;
       align-self: flex-start;
     }
 
     .destination-title {
       font-size: 1.35rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--text-heading);
     }
 
     .destination-url-box {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: #fefce8;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
       padding: 10px 14px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.85rem;
+      font-size: 16px;
       color: #0284c7;
-      font-weight: 600;
+      font-weight: 700;
       word-break: break-all;
     }
 
@@ -919,20 +1025,21 @@
     }
 
     .dwell-stat-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      background: #fef08a;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: var(--radius-paper);
       padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
+      box-shadow: var(--shadow-sm);
     }
 
     .dwell-metric-big {
       font-size: 2.2rem;
       font-weight: 900;
-      color: var(--text-dark);
+      color: var(--text-heading);
       letter-spacing: -0.02em;
       line-height: 1;
     }
@@ -943,13 +1050,13 @@
     }
 
     .dwell-label-title {
-      font-size: 0.95rem;
+      font-size: 16px;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--text-heading);
     }
 
     .dwell-label-desc {
-      font-size: 0.8rem;
+      font-size: 16px;
       color: var(--text-muted);
     }
 
@@ -964,7 +1071,6 @@
     }
 
     .comparison-card {
-      border-radius: 14px;
       padding: 24px;
       display: flex;
       flex-direction: column;
@@ -974,13 +1080,11 @@
     }
 
     .comparison-card.leak-side {
-      background: #fffafa;
-      border: 2px solid #fca5a5;
+      border: 2px solid var(--red-border);
     }
 
     .comparison-card.fix-side {
-      background: #f0fdf4;
-      border: 2px solid #86efac;
+      border: 2px solid var(--green-border);
     }
 
     .comparison-header-group {
@@ -990,23 +1094,25 @@
     }
 
     .comparison-badge {
-      font-size: 0.72rem;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       padding: 4px 10px;
-      border-radius: 6px;
+      border-radius: 4px;
       align-self: flex-start;
     }
 
     .leak-side .comparison-badge {
-      background: #fee2e2;
-      color: var(--red-dark);
+      background: var(--red-bg);
+      color: var(--red-accent);
+      border: 1px solid var(--red-border);
     }
 
     .fix-side .comparison-badge {
-      background: #dcfce7;
-      color: #15803d;
+      background: var(--green-bg);
+      color: var(--green-accent);
+      border: 1px solid var(--green-border);
     }
 
     .comparison-headline {
@@ -1024,15 +1130,15 @@
     }
 
     .comparison-body {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--text-body);
       line-height: 1.6;
     }
 
     .comparison-list-bullets {
       padding-left: 20px;
-      font-size: 0.88rem;
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--text-body);
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -1040,8 +1146,8 @@
 
     .comparison-outcome-banner {
       padding: 12px 16px;
-      border-radius: 8px;
-      font-size: 0.88rem;
+      border-radius: 6px;
+      font-size: 16px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -1049,68 +1155,107 @@
     }
 
     .leak-side .comparison-outcome-banner {
-      background: #ffffff;
+      background: #fef2f2;
       border: 1px solid #fecaca;
-      color: var(--red-dark);
+      color: #991b1b;
     }
 
     .fix-side .comparison-outcome-banner {
-      background: #ffffff;
+      background: #f0fdf4;
       border: 1px solid #bbf7d0;
-      color: #15803d;
+      color: #166534;
     }
 
-    /* FOOTER */
-    .executive-footer {
-      background: #ffffff;
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      margin-top: 20px;
+    /* ==========================================================================
+       INTERACTIVE CUSTOM NOTES BOARD
+       ========================================================================== */
+    .custom-notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
       width: 100%;
     }
 
-    .footer-container {
-      max-width: 1120px;
-      margin: 0 auto;
+    .custom-sticky-note {
+      border-top: 5px solid #d97706;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 180px;
+    }
+
+    .custom-note-top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
+      width: 100%;
     }
 
-    .footer-brand {
+    .remove-note-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.35rem;
+      line-height: 1;
+      color: #92400e;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .remove-note-btn:hover {
+      background: #fde68a;
+      color: #b91c1c;
+    }
+
+    /* ==========================================================================
+       FLOATING FIGJAM ACTION DOCK (GLASSMORPHISM PILL DOCK)
+       ========================================================================== */
+    .figjam-dock-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(250, 204, 21, 0.7);
+      border-radius: 9999px;
+      box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(161, 98, 7, 0.12);
     }
 
-    .footer-logo {
-      height: 26px;
-      width: auto;
-    }
-
-    .footer-copy {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .footer-links {
-      display: flex;
+    .dock-btn {
+      display: inline-flex;
       align-items: center;
-      gap: 20px;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid var(--yellow-paper-border);
+      border-radius: 9999px;
+      min-height: 44px;
+      padding: 10px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-heading);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
     }
 
-    .footer-link {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s ease;
+    .dock-btn:hover {
+      background: #fef9c3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(161, 98, 7, 0.18);
     }
 
-    .footer-link:hover {
-      color: var(--octane-blue-dark);
+    .dock-btn:active {
+      transform: translateY(0);
     }
 
     /* ==========================================================================
@@ -1169,14 +1314,18 @@
     }
 
     @media (max-width: 768px) {
+      body, .figjam-canvas, .page-wrapper {
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+
       .page-wrapper {
-        padding: 24px 16px 60px;
+        padding: 24px 16px 140px;
         gap: 36px;
       }
 
       .report-section {
         padding: 22px 18px;
-        border-radius: 12px;
       }
 
       .header-container {
@@ -1184,60 +1333,62 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      .header-brand {
+        max-width: 100%;
+        flex-wrap: wrap;
       }
 
       .header-title {
-        font-size: 1.05rem;
+        font-size: 0.95rem;
       }
 
       .status-badge {
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        white-space: normal;
         max-width: 100%;
+        white-space: normal;
+        font-size: 0.75rem;
       }
 
-      .banner-headline {
-        font-size: 1.3rem;
+      .figjam-dock-container {
+        bottom: 16px;
+        max-width: calc(100vw - 24px);
+        width: calc(100vw - 24px);
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 6px 12px;
+        gap: 8px;
       }
 
-      .question-title {
-        font-size: 1.2rem;
-      }
-
-      .kpi-number {
-        font-size: 2.3rem;
-      }
-
-      .meta-big-number {
-        font-size: 2.1rem;
+      .dock-btn {
+        min-height: 44px;
+        padding: 10px 14px;
+        font-size: 14px;
       }
 
       .dwell-stat-card {
         flex-direction: column;
         align-items: flex-start;
       }
-
-      .footer-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
-<body>
+<body class="figjam-canvas">
 
   <!-- EXECUTIVE HEADER -->
-  <header class="executive-header">
-    <div class="header-container">
-      <div class="header-brand">
-        <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Logo" class="header-logo">
-        <div class="header-divider"></div>
-        <h1 class="header-title">Meta Ads Executive Report</h1>
+  <header class="executive-header" contenteditable="false">
+    <div class="header-container" contenteditable="false">
+      <div class="header-brand" contenteditable="false">
+        <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Logo" class="header-logo" contenteditable="false">
+        <div class="header-divider" contenteditable="false"></div>
+        <h1 class="header-title" contenteditable="true" data-persist-id="header-title">Meta Ads Executive Report</h1>
       </div>
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        <span>Campaign Complete &bull; Executive Performance Audit</span>
+      <div class="status-badge" contenteditable="false">
+        <span class="status-dot" contenteditable="false"></span>
+        <span contenteditable="true" data-persist-id="header-status-badge">Campaign Complete &bull; Executive Performance Audit</span>
       </div>
     </div>
   </header>
@@ -1246,12 +1397,12 @@
   <main class="page-wrapper">
 
     <!-- EXECUTIVE SUMMARY BANNER -->
-    <section class="summary-banner">
-      <div class="banner-badge">Executive Summary</div>
-      <h2 class="banner-headline">
+    <section class="summary-banner" id="executive-summary">
+      <div class="banner-badge" contenteditable="true" data-persist-id="banner-badge">Executive Summary</div>
+      <h2 class="banner-headline" contenteditable="true" data-persist-id="banner-headline">
         We deployed $84 AUD into our DataFusion campaign, reaching senior finance leaders across Australia and New Zealand with precision targeting.
       </h2>
-      <p class="banner-subtext">
+      <p class="banner-subtext" contenteditable="true" data-persist-id="banner-subtext">
         Due to 4 strict mathematical AND-targeting rules, Meta estimated the total qualified market size at Below 1,000. The campaign generated 74 high-intent link clicks (2.78% CTR, $1.14 CPC) with a 42-second average website dwell time. However, a multi-field demo request form caused a 100% drop-off barrier before visitors could access the calendar. Deploying an immediate 2-click calendar scheduler directly unblocks sales pipeline.
       </p>
     </section>
@@ -1259,9 +1410,9 @@
     <!-- QUESTION 1: TARGETING FLOW (4 YELLOW STICKY NOTES WITH CONNECTING ARROWS) -->
     <section class="report-section" id="question-1">
       <div class="section-header-block">
-        <span class="question-badge">Specification Item 1</span>
-        <h3 class="question-title">1. How the targeting works for datafusion campaign</h3>
-        <p class="question-subtitle">
+        <span class="question-badge" contenteditable="true" data-persist-id="q1-badge">Specification Item 1</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="q1-title">1. How the targeting works for datafusion campaign</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="q1-subtitle">
           Four distinct yellow sticky notes representing the strict narrowing cascade. Every user had to satisfy all four criteria simultaneously.
         </p>
       </div>
@@ -1271,58 +1422,58 @@
           
           <!-- Sticky Note 1: IBM -->
           <div class="sticky-note note-ibm">
-            <div class="sticky-header">IBM</div>
-            <span class="ibm-badge">IBM</span>
-            <p class="ibm-subtext">
+            <div class="sticky-header" contenteditable="true" data-persist-id="sticky-1-header">IBM</div>
+            <span class="ibm-badge" contenteditable="true" data-persist-id="sticky-1-badge">IBM</span>
+            <p class="ibm-subtext" contenteditable="true" data-persist-id="sticky-1-body">
               Target ecosystem base: Organizations using IBM enterprise software, specifically IBM Planning Analytics and TM1 solutions.
             </p>
           </div>
 
           <!-- Arrow Connector 1 -> 2 -->
-          <div class="sticky-connector">
-            <span class="connector-badge">and must also match</span>
-            <svg class="connector-arrow-svg" viewBox="0 0 32 14">
+          <div class="sticky-connector" contenteditable="false">
+            <span class="connector-badge" contenteditable="true" data-persist-id="connector-1-text">and must also match</span>
+            <svg class="connector-arrow-svg" viewBox="0 0 32 14" contenteditable="false">
               <path d="M0,7 L26,7 M20,2 L27,7 L20,12" stroke="#ca8a04" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
 
           <!-- Sticky Note 2: Interest -->
           <div class="sticky-note">
-            <div class="sticky-header">Interest</div>
-            <div class="sticky-body">
+            <div class="sticky-header" contenteditable="true" data-persist-id="sticky-2-header">Interest</div>
+            <div class="sticky-body" contenteditable="true" data-persist-id="sticky-2-body">
               Planning, Data Analysis, business analytics, business intelligence, Tableau software, Business and finance, free software.
             </div>
           </div>
 
           <!-- Arrow Connector 2 -> 3 -->
-          <div class="sticky-connector">
-            <span class="connector-badge">and must also match</span>
-            <svg class="connector-arrow-svg" viewBox="0 0 32 14">
+          <div class="sticky-connector" contenteditable="false">
+            <span class="connector-badge" contenteditable="true" data-persist-id="connector-2-text">and must also match</span>
+            <svg class="connector-arrow-svg" viewBox="0 0 32 14" contenteditable="false">
               <path d="M0,7 L26,7 M20,2 L27,7 L20,12" stroke="#ca8a04" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
 
           <!-- Sticky Note 3: Role/Job title -->
           <div class="sticky-note">
-            <span class="sticky-super-header">Who you targeted metrics</span>
-            <div class="sticky-header">Role/Job title</div>
-            <div class="sticky-body">
+            <span class="sticky-super-header" contenteditable="true" data-persist-id="sticky-3-super">Who you targeted metrics</span>
+            <div class="sticky-header" contenteditable="true" data-persist-id="sticky-3-header">Role/Job title</div>
+            <div class="sticky-body" contenteditable="true" data-persist-id="sticky-3-body">
               CFO, CTO, CIO, Finance Manager, Finance Director, Head of Finance, Financial controller, Senior Financial Analyst, Commercial Finance &amp; Insights Manager
             </div>
           </div>
 
           <!-- Arrow Connector 3 -> 4 -->
-          <div class="sticky-connector">
-            <span class="connector-badge">and must also match</span>
-            <svg class="connector-arrow-svg" viewBox="0 0 32 14">
+          <div class="sticky-connector" contenteditable="false">
+            <span class="connector-badge" contenteditable="true" data-persist-id="connector-3-text">and must also match</span>
+            <svg class="connector-arrow-svg" viewBox="0 0 32 14" contenteditable="false">
               <path d="M0,7 L26,7 M20,2 L27,7 L20,12" stroke="#ca8a04" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
 
           <!-- Sticky Note 4: Condition -->
           <div class="sticky-note">
-            <div class="sticky-header">Condition</div>
-            <div class="sticky-body">
+            <div class="sticky-header" contenteditable="true" data-persist-id="sticky-4-header">Condition</div>
+            <div class="sticky-body" contenteditable="true" data-persist-id="sticky-4-body">
               Data modeling, software, database management, Data visualization, Business Planning and Reporting department
             </div>
           </div>
@@ -1330,19 +1481,19 @@
         </div>
       </div>
 
-      <!-- Real 1:1 Video Creative Showcase -->
+      <!-- Real 1:1 Video Creative Showcase in Yellow Paper Frame -->
       <div class="creative-showcase-grid">
-        <div class="creative-mockup">
-          <div class="creative-account-bar">
-            <div class="creative-avatar">
-              <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Icon">
+        <div class="creative-mockup" contenteditable="false">
+          <div class="creative-account-bar" contenteditable="false">
+            <div class="creative-avatar" contenteditable="false">
+              <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Icon" contenteditable="false">
             </div>
-            <div class="creative-account-info">
-              <span class="creative-brand-name">Octane Software Solutions</span>
-              <span class="creative-sub-label">Sponsored &bull; Meta Feed Ad</span>
+            <div class="creative-account-info" contenteditable="false">
+              <span class="creative-brand-name" contenteditable="true" data-persist-id="mock-brand-name">Octane Software Solutions</span>
+              <span class="creative-sub-label" contenteditable="true" data-persist-id="mock-sub-label">Sponsored &bull; Meta Feed Ad</span>
             </div>
           </div>
-          <div class="creative-post-text">
+          <div class="creative-post-text" contenteditable="true" data-persist-id="mock-post-text">
             <p>Five steps to eliminate manual TM1-to-Power BI data pipelines:</p>
             <ol class="creative-steps-ol">
               <li>Download and authorize DataFusion</li>
@@ -1352,107 +1503,122 @@
               <li>Scheduled sync begins automatically</li>
             </ol>
           </div>
-          <div class="creative-video-box">
+          <div class="creative-video-box" contenteditable="false">
             <video 
               controls 
               muted 
               playsinline 
               preload="metadata"
               poster="/media/real_campaign_creative_graphic_2x.png"
+              contenteditable="false"
             >
               <source src="/media/real_campaign_creative_player.mp4" type="video/mp4">
               <source src="/media/real_campaign_creative.mp4" type="video/mp4">
               <img src="/media/real_campaign_creative_with_cta.png" alt="Creative fallback poster">
             </video>
           </div>
-          <div class="creative-cta-bar">
-            <div class="creative-cta-text">
-              <span class="creative-site-url">OCTANESOLUTIONS.COM.AU</span>
-              <span class="creative-cta-headline">Automate TM1 to Power BI in 5 Minutes</span>
+          <div class="creative-cta-bar" contenteditable="false">
+            <div class="creative-cta-text" contenteditable="false">
+              <span class="creative-site-url" contenteditable="true" data-persist-id="mock-site-url">OCTANESOLUTIONS.COM.AU</span>
+              <span class="creative-cta-headline" contenteditable="true" data-persist-id="mock-cta-headline">Automate TM1 to Power BI in 5 Minutes</span>
             </div>
-            <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="creative-cta-btn">
+            <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="creative-cta-btn" contenteditable="false">
               Book Live Demo
             </a>
           </div>
         </div>
 
         <div class="creative-notes-pane">
-          <span class="creative-badge-tag">Verified Campaign Creative</span>
-          <h4>Production 1:1 Creative Delivered to Target Persona</h4>
-          <p>
+          <span class="creative-badge-tag" contenteditable="true" data-persist-id="creative-badge-tag">Verified Campaign Creative</span>
+          <h4 contenteditable="true" data-persist-id="creative-notes-title">Production 1:1 Creative Delivered to Target Persona</h4>
+          <p contenteditable="true" data-persist-id="creative-notes-p1">
             The video creative directly visualizes the five-step setup for DataFusion, contrasting the pain of manual TM1 spreadsheet exports against real-time Power BI automated synchronization.
           </p>
           <ul class="creative-feature-list">
             <li>
-              <span class="bullet-icon">&#10003;</span>
-              <div><strong>Square 1:1 Aspect Ratio:</strong> Maximizes mobile screen share across Facebook and Instagram feeds.</div>
+              <span class="bullet-icon" contenteditable="false">&#10003;</span>
+              <div contenteditable="true" data-persist-id="creative-feature-1"><strong>Square 1:1 Aspect Ratio:</strong> Maximizes mobile screen share across Facebook and Instagram feeds.</div>
             </li>
             <li>
-              <span class="bullet-icon">&#10003;</span>
-              <div><strong>High-Intent Hook:</strong> Directly addresses the manual reporting burden faced by financial controllers.</div>
+              <span class="bullet-icon" contenteditable="false">&#10003;</span>
+              <div contenteditable="true" data-persist-id="creative-feature-2"><strong>High-Intent Hook:</strong> Directly addresses the manual reporting burden faced by financial controllers.</div>
             </li>
             <li>
-              <span class="bullet-icon">&#10003;</span>
-              <div><strong>Clear Call-to-Action:</strong> Direct button driving to the dedicated DataFusion product landing page.</div>
+              <span class="bullet-icon" contenteditable="false">&#10003;</span>
+              <div contenteditable="true" data-persist-id="creative-feature-3"><strong>Clear Call-to-Action:</strong> Direct button driving to the dedicated DataFusion product landing page.</div>
             </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- QUESTION 2: ESTIMATED AUDIENCE SIZE (META ADS MANAGER RECREATION) -->
+    <!-- INTERACTIVE FIGJAM CUSTOM STICKY NOTES BOARD -->
+    <section class="report-section" id="figjam-sticky-board">
+      <div class="section-header-block">
+        <span class="question-badge" contenteditable="true" data-persist-id="board-badge">FigJam Collaborative Notes</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="board-title">Interactive Sticky Notes &amp; Observations</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="board-subtitle">
+          Pin quick thoughts, strategic annotations, or client remarks directly to this canvas. Use the bottom dock to add notes.
+        </p>
+      </div>
+      <div id="custom-notes-grid" class="custom-notes-grid">
+        <!-- Dynamic notes dropped here -->
+      </div>
+    </section>
+
+    <!-- QUESTION 2: ESTIMATED AUDIENCE SIZE (META ADS MANAGER RECREATION ON YELLOW PAPER) -->
     <section class="report-section" id="question-2">
       <div class="section-header-block">
-        <span class="question-badge">Specification Item 2</span>
-        <h3 class="question-title">2. Estimated audience size (how big the potential market was: Below 1,000 from meta ads &ldquo;Estimated audience size&rdquo;)</h3>
-        <p class="question-subtitle">
+        <span class="question-badge" contenteditable="true" data-persist-id="q2-badge">Specification Item 2</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="q2-title">2. Estimated audience size (how big the potential market was: Below 1,000 from meta ads &ldquo;Estimated audience size&rdquo;)</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="q2-subtitle">
           Authentic Meta Ads Manager audience definition card recreation showing the exact ground-truth reach estimate.
         </p>
       </div>
 
       <div class="meta-manager-card">
-        <div class="meta-manager-header">
-          <div class="meta-manager-brand">
-            <svg class="meta-icon-svg" viewBox="0 0 24 24">
+        <div class="meta-manager-header" contenteditable="false">
+          <div class="meta-manager-brand" contenteditable="false">
+            <svg class="meta-icon-svg" viewBox="0 0 24 24" contenteditable="false">
               <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z"/>
             </svg>
-            <span class="meta-manager-title">Meta Ads Manager &bull; Audience Definition</span>
+            <span class="meta-manager-title" contenteditable="true" data-persist-id="meta-header-title">Meta Ads Manager &bull; Audience Definition</span>
           </div>
-          <span class="meta-status-pill">Audience Status: Specific</span>
+          <span class="meta-status-pill" contenteditable="true" data-persist-id="meta-status-pill">Audience Status: Specific</span>
         </div>
 
         <div class="meta-manager-body">
           <div class="meta-gauge-display">
             <div class="meta-label-wrap">
               <span class="meta-label">
-                Estimated audience size
-                <span class="meta-info-icon" title="Meta estimates the number of people in your target audience who could see your ads.">i</span>
+                <span contenteditable="true" data-persist-id="meta-gauge-label">Estimated audience size</span>
+                <span class="meta-info-icon" title="Meta estimates the number of people in your target audience who could see your ads." contenteditable="false">i</span>
               </span>
             </div>
-            <div class="meta-big-number">Below 1,000</div>
+            <div class="meta-big-number" contenteditable="true" data-persist-id="meta-big-number">Below 1,000</div>
             
-            <div class="meta-gauge-meter">
-              <div class="meta-gauge-fill"></div>
+            <div class="meta-gauge-meter" contenteditable="false">
+              <div class="meta-gauge-fill" contenteditable="false"></div>
             </div>
             
             <div class="meta-gauge-labels">
-              <span class="active-zone">&larr; Specific</span>
-              <span>Broad &rarr;</span>
+              <span class="active-zone" contenteditable="true" data-persist-id="gauge-label-specific">&larr; Specific</span>
+              <span contenteditable="true" data-persist-id="gauge-label-broad">Broad &rarr;</span>
             </div>
           </div>
 
           <div class="meta-explanation-pane">
-            <h4>Mathematical Result of 4 Strict AND-Conditions</h4>
-            <p>
+            <h4 contenteditable="true" data-persist-id="meta-exp-title">Mathematical Result of 4 Strict AND-Conditions</h4>
+            <p contenteditable="true" data-persist-id="meta-exp-p1">
               Meta Ads Manager formally calculates the available audience as <strong>Below 1,000</strong>. This ultra-tight audience is the exact mathematical consequence of requiring four consecutive intersection filters:
             </p>
             <div class="and-math-box">
-              <span class="and-math-title">Intersection Formula</span>
-              <div class="and-math-formula">
+              <span class="and-math-title" contenteditable="true" data-persist-id="and-math-title">Intersection Formula</span>
+              <div class="and-math-formula" contenteditable="true" data-persist-id="and-math-formula">
                 IBM &cap; Finance Interests &cap; C-Suite / Director Titles &cap; Reporting Conditions = &lt; 1,000
               </div>
             </div>
-            <p>
+            <p contenteditable="true" data-persist-id="meta-exp-p2">
               Because each filter acts as a boolean AND rather than an OR, only senior executives possessing all four qualifying attributes within Australia and New Zealand qualified for ad delivery.
             </p>
           </div>
@@ -1466,35 +1632,35 @@
       <!-- Question 3 -->
       <section class="report-section" id="question-3" style="padding: 24px;">
         <div class="section-header-block" style="padding-bottom: 14px;">
-          <span class="question-badge">Specification Item 3</span>
-          <h3 class="question-title" style="font-size: 1.25rem;">3. How many people clicked: Analytics</h3>
-          <p class="question-subtitle" style="font-size: 0.88rem;">Clean verified link click volume recorded in analytics.</p>
+          <span class="question-badge" contenteditable="true" data-persist-id="q3-badge">Specification Item 3</span>
+          <h3 class="question-title" style="font-size: 1.25rem;" contenteditable="true" data-persist-id="q3-title">3. How many people clicked: Analytics</h3>
+          <p class="question-subtitle" style="font-size: 16px;" contenteditable="true" data-persist-id="q3-subtitle">Clean verified link click volume recorded in analytics.</p>
         </div>
 
         <div class="kpi-card" style="border: none; padding: 0; box-shadow: none;">
           <div class="kpi-top-row">
-            <span class="kpi-title">Total Outbound Clicks</span>
-            <span class="kpi-badge blue">Meta &amp; GA4 Verified</span>
+            <span class="kpi-title" contenteditable="true" data-persist-id="kpi1-title">Total Outbound Clicks</span>
+            <span class="kpi-badge blue" contenteditable="true" data-persist-id="kpi1-badge">Meta &amp; GA4 Verified</span>
           </div>
           <div class="kpi-metric-wrap">
-            <span class="kpi-number">74</span>
-            <span class="kpi-unit">Link Clicks</span>
+            <span class="kpi-number" contenteditable="true" data-persist-id="kpi1-number">74</span>
+            <span class="kpi-unit" contenteditable="true" data-persist-id="kpi1-unit">Link Clicks</span>
           </div>
-          <p class="kpi-subtext">
+          <p class="kpi-subtext" contenteditable="true" data-persist-id="kpi1-subtext">
             74 senior finance decision-makers clicked through directly from the video ad to the DataFusion product page.
           </p>
           <div class="kpi-chips-row">
             <div class="kpi-chip">
-              <span>Total Reach:</span>
-              <strong>2,664 People</strong>
+              <span contenteditable="true" data-persist-id="kpi1-chip1-l">Total Reach:</span>
+              <strong contenteditable="true" data-persist-id="kpi1-chip1-v">2,664 People</strong>
             </div>
             <div class="kpi-chip">
-              <span>Total Impressions:</span>
-              <strong>5,519 Views</strong>
+              <span contenteditable="true" data-persist-id="kpi1-chip2-l">Total Impressions:</span>
+              <strong contenteditable="true" data-persist-id="kpi1-chip2-v">5,519 Views</strong>
             </div>
             <div class="kpi-chip">
-              <span>Ad Frequency:</span>
-              <strong>2.07x</strong>
+              <span contenteditable="true" data-persist-id="kpi1-chip3-l">Ad Frequency:</span>
+              <strong contenteditable="true" data-persist-id="kpi1-chip3-v">2.07x</strong>
             </div>
           </div>
         </div>
@@ -1503,35 +1669,35 @@
       <!-- Question 4 -->
       <section class="report-section" id="question-4" style="padding: 24px;">
         <div class="section-header-block" style="padding-bottom: 14px;">
-          <span class="question-badge">Specification Item 4</span>
-          <h3 class="question-title" style="font-size: 1.25rem;">4. Click through rate (percentage): Analytics</h3>
-          <p class="question-subtitle" style="font-size: 0.88rem;">Click-through efficiency and unit acquisition costs.</p>
+          <span class="question-badge" contenteditable="true" data-persist-id="q4-badge">Specification Item 4</span>
+          <h3 class="question-title" style="font-size: 1.25rem;" contenteditable="true" data-persist-id="q4-title">4. Click through rate (percentage): Analytics</h3>
+          <p class="question-subtitle" style="font-size: 16px;" contenteditable="true" data-persist-id="q4-subtitle">Click-through efficiency and unit acquisition costs.</p>
         </div>
 
         <div class="kpi-card" style="border: none; padding: 0; box-shadow: none;">
           <div class="kpi-top-row">
-            <span class="kpi-title">CTR &amp; Unit Economics</span>
-            <span class="kpi-badge green">Top Performer</span>
+            <span class="kpi-title" contenteditable="true" data-persist-id="kpi2-title">CTR &amp; Unit Economics</span>
+            <span class="kpi-badge green" contenteditable="true" data-persist-id="kpi2-badge">Top Performer</span>
           </div>
           <div class="kpi-metric-wrap">
-            <span class="kpi-number">2.78%</span>
-            <span class="kpi-unit">CTR (Top)</span>
+            <span class="kpi-number" contenteditable="true" data-persist-id="kpi2-number">2.78%</span>
+            <span class="kpi-unit" contenteditable="true" data-persist-id="kpi2-unit">CTR (Top)</span>
           </div>
-          <p class="kpi-subtext">
+          <p class="kpi-subtext" contenteditable="true" data-persist-id="kpi2-subtext">
             Top creative ad set achieved 2.78% CTR (1.34% campaign average CTR across all ad sets) at a low cost of $1.14 CPC.
           </p>
           <div class="kpi-chips-row">
             <div class="kpi-chip">
-              <span>Avg Campaign CTR:</span>
-              <strong>1.34%</strong>
+              <span contenteditable="true" data-persist-id="kpi2-chip1-l">Avg Campaign CTR:</span>
+              <strong contenteditable="true" data-persist-id="kpi2-chip1-v">1.34%</strong>
             </div>
             <div class="kpi-chip">
-              <span>Cost Per Click:</span>
-              <strong>$1.14 AUD</strong>
+              <span contenteditable="true" data-persist-id="kpi2-chip2-l">Cost Per Click:</span>
+              <strong contenteditable="true" data-persist-id="kpi2-chip2-v">$1.14 AUD</strong>
             </div>
             <div class="kpi-chip">
-              <span>Total Ad Spend:</span>
-              <strong>$84.36 AUD</strong>
+              <span contenteditable="true" data-persist-id="kpi2-chip3-l">Total Ad Spend:</span>
+              <strong contenteditable="true" data-persist-id="kpi2-chip3-v">$84.36 AUD</strong>
             </div>
           </div>
         </div>
@@ -1542,39 +1708,39 @@
     <!-- QUESTION 5: WHERE THEY WENT ON THE WEBSITE (SNAPSHOT FROM ANALYTICS) -->
     <section class="report-section" id="question-5">
       <div class="section-header-block">
-        <span class="question-badge">Specification Item 5</span>
-        <h3 class="question-title">5. Where they went on the website: Snapshot from analytics</h3>
-        <p class="question-subtitle">
+        <span class="question-badge" contenteditable="true" data-persist-id="q5-badge">Specification Item 5</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="q5-title">5. Where they went on the website: Snapshot from analytics</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="q5-subtitle">
           Landing destination analysis and user dwell engagement captured in analytics telemetry.
         </p>
       </div>
 
       <div class="journey-overview-card">
         <div class="destination-info">
-          <span class="destination-tag">Primary Landing Target</span>
-          <h4 class="destination-title">DataFusion Dedicated Product Page</h4>
-          <div class="destination-url-box">
+          <span class="destination-tag" contenteditable="true" data-persist-id="q5-tag">Primary Landing Target</span>
+          <h4 class="destination-title" contenteditable="true" data-persist-id="q5-dest-title">DataFusion Dedicated Product Page</h4>
+          <div class="destination-url-box" contenteditable="true" data-persist-id="q5-url">
             https://octanesolutions.com.au/datafusion
           </div>
-          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.55;">
+          <p contenteditable="true" data-persist-id="q5-desc" style="color: var(--text-body);">
             100% of the 74 ad clickers arrived directly at the DataFusion product landing page. Analytics confirms that visitors actively engaged with the page rather than bouncing instantly.
           </p>
         </div>
 
         <div class="destination-stats-col">
           <div class="dwell-stat-card">
-            <div class="dwell-metric-big">42s</div>
+            <div class="dwell-metric-big" contenteditable="true" data-persist-id="dwell-stat-1-num">42s</div>
             <div class="dwell-label-group">
-              <span class="dwell-label-title">Average Dwell Time</span>
-              <span class="dwell-label-desc">Substantial time spent reviewing content</span>
+              <span class="dwell-label-title" contenteditable="true" data-persist-id="dwell-stat-1-t">Average Dwell Time</span>
+              <span class="dwell-label-desc" contenteditable="true" data-persist-id="dwell-stat-1-d">Substantial time spent reviewing content</span>
             </div>
           </div>
 
           <div class="dwell-stat-card">
-            <div class="dwell-metric-big" style="color: var(--octane-blue-dark);">78%</div>
+            <div class="dwell-metric-big" style="color: #0369a1;" contenteditable="true" data-persist-id="dwell-stat-2-num">78%</div>
             <div class="dwell-label-group">
-              <span class="dwell-label-title">Active Scroll Depth</span>
-              <span class="dwell-label-desc">Scrolled past hero into technical architecture</span>
+              <span class="dwell-label-title" contenteditable="true" data-persist-id="dwell-stat-2-t">Active Scroll Depth</span>
+              <span class="dwell-label-desc" contenteditable="true" data-persist-id="dwell-stat-2-d">Scrolled past hero into technical architecture</span>
             </div>
           </div>
         </div>
@@ -1584,9 +1750,9 @@
     <!-- QUESTION 6: WHERE THEY DROPPED OFF & THE IMMEDIATE FIX -->
     <section class="report-section" id="question-6">
       <div class="section-header-block">
-        <span class="question-badge">Specification Item 6</span>
-        <h3 class="question-title">6. Where they dropped off: Snapshot from analytics</h3>
-        <p class="question-subtitle">
+        <span class="question-badge" contenteditable="true" data-persist-id="q6-badge">Specification Item 6</span>
+        <h3 class="question-title" contenteditable="true" data-persist-id="q6-title">6. Where they dropped off: Snapshot from analytics</h3>
+        <p class="question-subtitle" contenteditable="true" data-persist-id="q6-subtitle">
           Friction point breakdown and the direct 2-click scheduling solution to unlock conversion.
         </p>
       </div>
@@ -1595,19 +1761,19 @@
         <!-- Leak Side -->
         <div class="comparison-card leak-side">
           <div class="comparison-header-group">
-            <span class="comparison-badge">The Friction Barrier</span>
-            <h4 class="comparison-headline">100% Drop-Off at Multi-Field Form Before Calendar Selection</h4>
+            <span class="comparison-badge" contenteditable="true" data-persist-id="leak-badge">The Friction Barrier</span>
+            <h4 class="comparison-headline" contenteditable="true" data-persist-id="leak-title">100% Drop-Off at Multi-Field Form Before Calendar Selection</h4>
           </div>
-          <div class="comparison-body">
+          <div class="comparison-body" contenteditable="true" data-persist-id="leak-body">
             Analytics reveals that while 74 qualified finance leaders read the product value proposition for 42 seconds, zero booked a meeting. Visitors reached the demo request section but encountered an exhaustive questionnaire:
           </div>
           <ul class="comparison-list-bullets">
-            <li>Required first name, last name, corporate email, and direct phone.</li>
-            <li>Required annual software budget, company headcount, and TM1 version.</li>
-            <li>No calendar availability was shown prior to form submission.</li>
-            <li>Forced busy CFOs to wait for an asynchronous email follow-up.</li>
+            <li contenteditable="true" data-persist-id="leak-bullet-1">Required first name, last name, corporate email, and direct phone.</li>
+            <li contenteditable="true" data-persist-id="leak-bullet-2">Required annual software budget, company headcount, and TM1 version.</li>
+            <li contenteditable="true" data-persist-id="leak-bullet-3">No calendar availability was shown prior to form submission.</li>
+            <li contenteditable="true" data-persist-id="leak-bullet-4">Forced busy CFOs to wait for an asynchronous email follow-up.</li>
           </ul>
-          <div class="comparison-outcome-banner">
+          <div class="comparison-outcome-banner" contenteditable="true" data-persist-id="leak-outcome">
             <span>&#9888; Result: 100% abandonment rate at form submission.</span>
           </div>
         </div>
@@ -1615,19 +1781,19 @@
         <!-- Fix Side -->
         <div class="comparison-card fix-side">
           <div class="comparison-header-group">
-            <span class="comparison-badge">The Immediate Fix</span>
-            <h4 class="comparison-headline">Direct 2-Click Calendar Scheduler</h4>
+            <span class="comparison-badge" contenteditable="true" data-persist-id="fix-badge">The Immediate Fix</span>
+            <h4 class="comparison-headline" contenteditable="true" data-persist-id="fix-title">Direct 2-Click Calendar Scheduler</h4>
           </div>
-          <div class="comparison-body">
+          <div class="comparison-body" contenteditable="true" data-persist-id="fix-body">
             Remove all friction by replacing the questionnaire with an embedded direct calendar scheduler (Calendly / HubSpot Meetings):
           </div>
           <ul class="comparison-list-bullets">
-            <li><strong>Click 1:</strong> Visitor selects their preferred date on the live calendar.</li>
-            <li><strong>Click 2:</strong> Visitor chooses an open 15-minute consultation slot.</li>
-            <li>Only asks for corporate email to deliver the calendar invite.</li>
-            <li>Sends calendar invite directly to Outlook or Google Calendar.</li>
+            <li contenteditable="true" data-persist-id="fix-bullet-1"><strong>Click 1:</strong> Visitor selects their preferred date on the live calendar.</li>
+            <li contenteditable="true" data-persist-id="fix-bullet-2"><strong>Click 2:</strong> Visitor chooses an open 15-minute consultation slot.</li>
+            <li contenteditable="true" data-persist-id="fix-bullet-3">Only asks for corporate email to deliver the calendar invite.</li>
+            <li contenteditable="true" data-persist-id="fix-bullet-4">Sends calendar invite directly to Outlook or Google Calendar.</li>
           </ul>
-          <div class="comparison-outcome-banner">
+          <div class="comparison-outcome-banner" contenteditable="true" data-persist-id="fix-outcome">
             <span>&#10003; Result: Converts high-intent 42s dwell traffic into qualified sales calls.</span>
           </div>
         </div>
@@ -1636,19 +1802,232 @@
 
   </main>
 
-  <!-- CLEAN EXECUTIVE FOOTER -->
-  <footer class="executive-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <img src="https://files.catbox.moe/iaauu1.svg" alt="Octane Logo" class="footer-logo">
-        <span class="footer-copy">&copy; 2026 Octane Software Solutions Pty Ltd. All rights reserved.</span>
-      </div>
-      <div class="footer-links">
-        <a href="https://octanesolutions.com.au" target="_blank" rel="noopener noreferrer" class="footer-link">Octane Solutions</a>
-        <a href="https://octanesolutions.com.au/tm1-support" target="_blank" rel="noopener noreferrer" class="footer-link">TM1 Support</a>
-      </div>
-    </div>
-  </footer>
+  <!-- FLOATING FIGJAM ACTION DOCK -->
+  <div class="figjam-dock-container" contenteditable="false">
+    <button type="button" class="dock-btn" id="btn-add-note" contenteditable="false">
+      <span>➕</span>
+      <span>Add Note</span>
+    </button>
+    <button type="button" class="dock-btn" id="btn-reset-board" contenteditable="false">
+      <span>↺</span>
+      <span>Reset Board</span>
+    </button>
+    <button type="button" class="dock-btn" id="btn-copy-link" contenteditable="false">
+      <span>📋</span>
+      <span>Copy Link</span>
+    </button>
+  </div>
 
+  <!-- SCRIPT: CONTENTEDITABLE PERSISTENCE & FIGJAM DOCK INTERACTIVITY -->
+  <script>
+    (function() {
+      'use strict';
+
+      var STORAGE_KEY = 'figjam_meta_ads_board_v1';
+      var inMemoryFallback = {};
+      var debounceTimer = null;
+
+      function storageSet(key, val) {
+        try {
+          localStorage.setItem(key, val);
+        } catch (e) {
+          inMemoryFallback[key] = val;
+        }
+      }
+
+      function storageGet(key) {
+        try {
+          var item = localStorage.getItem(key);
+          if (item !== null) return item;
+        } catch (e) {
+          // ignore
+        }
+        return inMemoryFallback[key] || null;
+      }
+
+      function storageRemove(key) {
+        try {
+          localStorage.removeItem(key);
+        } catch (e) {
+          // ignore
+        }
+        delete inMemoryFallback[key];
+      }
+
+      function saveBoardState() {
+        var state = {
+          elements: {},
+          customNotes: []
+        };
+
+        var editables = document.querySelectorAll('[contenteditable="true"]');
+        editables.forEach(function(el, index) {
+          if (el.closest('.custom-sticky-note')) return;
+          var pid = el.getAttribute('data-persist-id') || ('editable_' + index);
+          state.elements[pid] = el.innerHTML;
+        });
+
+        var customNotes = document.querySelectorAll('.custom-sticky-note');
+        customNotes.forEach(function(note) {
+          var titleEl = note.querySelector('.sticky-header');
+          var bodyEl = note.querySelector('.sticky-body');
+          state.customNotes.push({
+            id: note.getAttribute('data-note-id') || ('note_' + Date.now()),
+            title: titleEl ? titleEl.innerHTML : '',
+            body: bodyEl ? bodyEl.innerHTML : ''
+          });
+        });
+
+        storageSet(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function queueSave() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(saveBoardState, 300);
+      }
+
+      function restoreBoardState() {
+        var serialized = storageGet(STORAGE_KEY);
+        if (!serialized) return;
+
+        try {
+          var state = JSON.parse(serialized);
+          if (state && state.elements) {
+            var editables = document.querySelectorAll('[contenteditable="true"]');
+            editables.forEach(function(el, index) {
+              if (el.closest('.custom-sticky-note')) return;
+              var pid = el.getAttribute('data-persist-id') || ('editable_' + index);
+              if (state.elements[pid] !== undefined) {
+                el.innerHTML = state.elements[pid];
+              }
+            });
+          }
+
+          if (state && Array.isArray(state.customNotes)) {
+            var container = document.getElementById('custom-notes-grid');
+            if (container) {
+              container.innerHTML = '';
+              state.customNotes.forEach(function(noteData) {
+                createStickyNoteElement(noteData.id, noteData.title, noteData.body);
+              });
+            }
+          }
+        } catch (e) {
+          console.error('Failed to parse saved board state:', e);
+        }
+      }
+
+      function createStickyNoteElement(id, titleText, bodyText) {
+        var container = document.getElementById('custom-notes-grid');
+        if (!container) return null;
+
+        var noteId = id || ('note_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5));
+        var note = document.createElement('div');
+        note.className = 'sticky-note custom-sticky-note';
+        note.setAttribute('data-note-id', noteId);
+
+        note.innerHTML = 
+          '<div class="custom-note-top-bar" contenteditable="false">' +
+            '<span class="sticky-super-header" style="margin-bottom:0;" contenteditable="false">Executive Remark</span>' +
+            '<button type="button" class="remove-note-btn" title="Delete Note" contenteditable="false">&times;</button>' +
+          '</div>' +
+          '<div class="sticky-header" contenteditable="true">' + (titleText !== undefined ? titleText : 'New Observation') + '</div>' +
+          '<div class="sticky-body" contenteditable="true">' + (bodyText !== undefined ? bodyText : 'Type your notes or insights here...') + '</div>';
+
+        var removeBtn = note.querySelector('.remove-note-btn');
+        if (removeBtn) {
+          removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            note.remove();
+            saveBoardState();
+          });
+        }
+
+        container.appendChild(note);
+        return note;
+      }
+
+      function handleAddNote() {
+        var note = createStickyNoteElement();
+        if (note) {
+          saveBoardState();
+          note.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          var title = note.querySelector('.sticky-header');
+          if (title) {
+            title.focus();
+          }
+        }
+      }
+
+      function handleResetBoard() {
+        if (confirm('Reset board to default state? All text edits and custom sticky notes will be restored.')) {
+          storageRemove(STORAGE_KEY);
+          window.location.reload();
+        }
+      }
+
+      function handleCopyLink() {
+        var url = window.location.href;
+        var btn = document.getElementById('btn-copy-link');
+        var originalHTML = btn ? btn.innerHTML : '<span>📋</span><span>Copy Link</span>';
+
+        function flash(success) {
+          if (btn) {
+            btn.innerHTML = success ? '<span>✓</span><span>Link Copied!</span>' : '<span>✕</span><span>Failed</span>';
+            btn.style.background = success ? '#dcfce7' : '#fee2e2';
+            setTimeout(function() {
+              btn.innerHTML = originalHTML;
+              btn.style.background = '';
+            }, 2000);
+          }
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function() {
+            flash(true);
+          }).catch(function() {
+            fallbackCopy();
+          });
+        } else {
+          fallbackCopy();
+        }
+
+        function fallbackCopy() {
+          var ta = document.createElement('textarea');
+          ta.value = url;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            var ok = document.execCommand('copy');
+            flash(ok);
+          } catch (e) {
+            flash(false);
+          }
+          document.body.removeChild(ta);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        restoreBoardState();
+
+        document.addEventListener('input', function(e) {
+          if (e.target && e.target.isContentEditable) {
+            queueSave();
+          }
+        });
+
+        var btnAdd = document.getElementById('btn-add-note');
+        if (btnAdd) btnAdd.addEventListener('click', handleAddNote);
+
+        var btnReset = document.getElementById('btn-reset-board');
+        if (btnReset) btnReset.addEventListener('click', handleResetBoard);
+
+        var btnCopy = document.getElementById('btn-copy-link');
+        if (btnCopy) btnCopy.addEventListener('click', handleCopyLink);
+      });
+    })();
+  </script>
 </body>
 </html>
